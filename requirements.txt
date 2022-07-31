@@ -19,7 +19,6 @@ requests
 speedtest-cli
 spotipy
 tgcrypto
-wget
 numpy
 youtube-search
 youtube-search-python
