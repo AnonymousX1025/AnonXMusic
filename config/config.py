@@ -179,6 +179,8 @@ SONG_DOWNLOAD_DURATION_LIMIT = int(
     time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00")
 )
 
+SUPPORT_HEHE = SUPPORT_GROUP.split("me/")[1]
+
 if UPSTREAM_REPO:
     if not re.match("(?:http|https)://", UPSTREAM_REPO):
         print(
@@ -262,9 +264,3 @@ if TELEGRAM_VIDEO_URL:
                 "[ERROR] - Your TELEGRAM_VIDEO_URL url is wrong. Please ensure that it starts with https://"
             )
             sys.exit()
-
-
-if not MUSIC_BOT_NAME.isascii():
-    print(
-        "[KYA RE LAVDE] - BOHOT FONT LAGANE KA SHAUKH HAI. JAA PHIR ANONYMOUS KO APNI CHUMT DEKE AA"
-    )
