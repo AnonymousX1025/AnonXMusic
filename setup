@@ -1,5 +1,4 @@
 #!/bin/bash
-### Ramdi Music Bot Installer
 
 pprint (){
 	cred='\033[0;31m'
@@ -66,7 +65,7 @@ packages(){
 node(){
 	command -v npm &>/dev/null && return
 	pprint "Installing Nodejs and Npm..  "
-	curl -fssL https://deb.nodesource.com/setup_17.x | sudo -E bash - &>nodelog.txt &&
+	curl -fssL https://deb.nodesource.com/setup_18.x | sudo -E bash - &>nodelog.txt &&
 	sudo apt install nodejs -y &>>nodelog.txt &&
 	sudo npm i -g npm &>>nodelog.txt &&
 	pprint "SUCCESS!\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
@@ -75,8 +74,7 @@ node(){
 
 repo(){
 	# Get git repo if the installer is runned standalone
-	[[ ! "AnonXMusic" == $(basename -s .git `git config --get remote.origin.url`) ]] &&
-	git clone https://github.com/AnonymousR1025/AnonXMusic &&  cd AnonXMusic
+	[[ ! "AnonXMusic" == $(basename -s .git `git config --get remote.origin.url`) ]]
 }
 
 
@@ -94,7 +92,7 @@ pprint "Welcome to AnonXMusic Setup Installer\n\n"
 pprint "If you see any error during Installation Process, Please refer to these files for logs: "
 pprint "\nFor node js errors , Checkout nodelog.txt"
 pprint "\nFor pypi packages errors , Checkout pypilog.txt"
-sleep 2
+sleep 1
 pprint "\n\nScript needs sudo privileges in order to update & install packages.\n"
 sudo test
 
@@ -104,7 +102,7 @@ node
 repo
 installation
 pprint "\n\n\n\n\nAnonX Music Installation Completed!" "cgreen"
-sleep 4
+sleep 1
 clear
 
 pprint "\nEnter Your Values Below\n\n\n"
