@@ -98,7 +98,7 @@ def help_back_markup(_):
                     text=_["CLOSE_BUTTON"], callback_data=f"close"
                 ),
                 InlineKeyboardButton(
-                    text="• sᴜᴩᴩᴏʀᴛ •", url=f"{SUPPORT_GROUP}"
+                    text="• sᴜᴩᴩᴏʀᴛ •", url=SUPPORT_GROUP
                 ),
             ]
         ]
