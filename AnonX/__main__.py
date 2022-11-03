@@ -32,7 +32,7 @@ async def init():
         and not config.SPOTIFY_CLIENT_SECRET
     ):
         LOGGER("AnonX").warning(
-            "Spotify Client Id & Secret not added, Chutiya Saala ek itni simple cheej nahi laa paaya."
+            "Sur spotify id aur secret toh daala hi nahi aapne ab toh spotify se nahi chala paaoge gaane."
         )
     try:
         users = await get_gbanned()
@@ -53,7 +53,7 @@ async def init():
     await Anon.start()
     try:
         await Anon.stream_call(
-            "https://telegra.ph/file/8d5db123638c2f6bb6ce4.mp4"
+            "https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4"
         )
     except NoActiveGroupCall:
         LOGGER("AnonX").error(
