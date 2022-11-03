@@ -4,16 +4,12 @@ from pyrogram import filters
 from pyrogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    CallbackQuery,
     Message,
 )
 
-from AnonX import app as Client
-from config import (
-    OWNER_ID as owner_id,
-)
+from AnonX import app
+from config import OWNER_ID, START_IMG_URL, SUPPORT_HEHE
 
-SUPPORT = "DevilsHeavenMF"
 
 def content(msg: Message) -> [None, str]:
     text_to_return = msg.text
@@ -29,7 +25,7 @@ def content(msg: Message) -> [None, str]:
         return None
 
 
-@Client.on_message(filters.command("bug"))
+@app.on_message(filters.command("bug") & ~filters.private)
 async def bug(_, msg: Message):
     if msg.chat.username:
         chat_username = (f"@{msg.chat.username}/`{msg.chat.id}`")
@@ -41,26 +37,19 @@ async def bug(_, msg: Message):
     mention = "["+msg.from_user.first_name+"](tg://user?id="+str(msg.from_user.id)+")"
     datetimes_fmt = "%d-%m-%Y"
     datetimes = datetime.utcnow().strftime(datetimes_fmt)
-
-    thumb = "https://telegra.ph/file/56d1760224589ee370186.jpg"
     
     bug_report = f"""
-**#ʙᴜɢ :** **@anonymous_was_bot**
+**#ʙᴜɢ ʀᴇᴩᴏʀᴛ**
 
-**ʀᴇᴩᴏʀᴛᴇᴅ ʙʏ :** **{mention}**
-**ᴜsᴇʀ ɪᴅ :** **{user_id}**
-**ᴄʜᴀᴛ :** **{chat_username}**
+**ʀᴇᴩᴏʀᴛᴇᴅ ʙʏ :** `{mention}`
+**ᴜsᴇʀ ɪᴅ :** `{user_id}`
+**ᴄʜᴀᴛ :** {chat_username}
 
-**ʙᴜɢ :** **{bugs}**
+**ʙᴜɢ :** {bugs}
 
-**ᴇᴠᴇɴᴛ sᴛᴀᴍᴩ :** **{datetimes}**"""
+**ᴇᴠᴇɴᴛ sᴛᴀᴍᴩ :** {datetimes}"""
 
-    
-    if msg.chat.type == "private":
-        await msg.reply_text("<b>» ᴛʜɪs ᴄᴏᴍᴍᴀɴᴅ ɪs ᴏɴʟʏ ғᴏʀ ɢʀᴏᴜᴩs.</b>")
-        return
-
-    if user_id == owner_id:
+    if user_id == OWNER_ID:
         if bugs:
             await msg.reply_text(
                 "<b>» ᴀʀᴇ ʏᴏᴜ ᴄᴏᴍᴇᴅʏ ᴍᴇ 🤣, ʏᴏᴜ'ʀᴇ ᴛʜᴇ ᴏᴡɴᴇʀ ᴏғ ᴛʜᴇ ʙᴏᴛ.</b>",
@@ -70,7 +59,7 @@ async def bug(_, msg: Message):
             await msg.reply_text(
                 "ᴄʜᴜᴍᴛɪʏᴀ ᴏᴡɴᴇʀ!"
             )
-    elif user_id != owner_id:
+    elif user_id != OWNER_ID:
         if bugs:
             await msg.reply_text(
                 f"<b>ʙᴜɢ ʀᴇᴩᴏʀᴛ : {bugs}</b>\n\n"
@@ -79,22 +68,20 @@ async def bug(_, msg: Message):
                     [
                         [
                             InlineKeyboardButton(
-                                "• ᴄʟᴏsᴇ •", callback_data=f"close_reply")
+                                "• ᴄʟᴏsᴇ •", callback_data=f"close")
                         ]
                     ]
                 )
             )
-            await Client.send_photo(
-                SUPPORT,
-                photo=thumb,
-                caption=f"{bug_report}",
+            await app.send_photo(
+                SUPPORT_HEHE,
+                photo=config.START_IMG_URL,
+                caption=bug_report,
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                "• ᴠɪᴇᴡ ʙᴜɢ •", url=f"{msg.link}"),
-                            InlineKeyboardButton(
-                                "• ᴄʟᴏsᴇ •", callback_data="close_send_photo")
+                                "• ᴠɪᴇᴡ ʙᴜɢ •", url=msg.link)
                         ]
                     ]
                 )
@@ -103,20 +90,3 @@ async def bug(_, msg: Message):
             await msg.reply_text(
                 f"<b>» ɴᴏ ʙᴜɢ ᴛᴏ ʀᴇᴩᴏʀᴛ !</b>",
             )
-        
-
-@Client.on_callback_query(filters.regex("close_reply"))
-async def close_reply(msg, CallbackQuery):
-    await CallbackQuery.message.delete()
-
-@Client.on_callback_query(filters.regex("close_send_photo"))
-async def close_send_photo(_, CallbackQuery):
-    is_Admin = await Client.get_chat_member(
-        CallbackQuery.message.chat.id, CallbackQuery.from_user.id
-    )
-    if not is_Admin.can_delete_messages:
-        return await CallbackQuery.answer(
-            "ʏᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ʀɪɢʜᴛs ᴛᴏ ᴄʟᴏsᴇ ᴛʜɪs.", show_alert=True
-        )
-    else:
-        await CallbackQuery.message.delete()
