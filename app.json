@@ -23,44 +23,19 @@
         "value": "",
         "required": true
       },
-      "AUTO_LEAVING_ASSISTANT": {
-        "description": "If you want your assistant to leave all chats automatically after some time.",
-        "value": "False",
-        "required": true
-      },
       "BOT_TOKEN": {
         "description": "A Bot's token from Botfather",
         "value": "",
         "required": true
       },
-      "DURATION_LIMIT_MIN": {
-        "description": "Maximum duration that your bot can play in minutes.",
-        "value": "90",
-        "required": true
-      },
       "MONGO_DB_URI": {
         "description": "Get a mongodb url from https://cloud.mongodb.com.",
         "value": "",
-        "required": false
-      },
-      "AUTO_DOWNLOADS_CLEAR": {
-        "description": "Fill True if you want to automatically clear the downloaded files after playing.",
-        "value": "True",
         "required": true
       },
       "MUSIC_BOT_NAME": {
         "description": "A name for your Music Bot. You can use special characters bot ko jhaat farak ni padega",
         "value": "ᴀɴᴏɴ ダ ᴍᴜsɪᴄ",
-        "required": false
-      },
-      "SPOTIFY_CLIENT_ID": {
-        "description": "Spotify Client Id",
-        "value": "",
-        "required": false
-      },
-      "SPOTIFY_CLIENT_SECRET": {
-        "description": "Spotify client secret",
-        "value": "",
         "required": false
       },
       "OWNER_ID": {
@@ -72,16 +47,6 @@
         "description": "A Pyrogram String Session. One Assistant is Compulsory.",
         "value": "",
         "required": true
-      },
-      "PING_IMG_URL": {
-        "description": "The pic which will be shown when you give the /ping cmd to the bot.",
-        "value": "",
-        "required": false
-      },
-      "START_IMG_URL": {
-        "description": "The pic which will be shown when you /start the bot in private.",
-        "value": "",
-        "required": false
       },
       "HEROKU_API_KEY": {
         "description": "Your Heroku account's API key",
@@ -105,7 +70,7 @@
       },
       "SUPPORT_CHANNEL": {
         "description": "Link of your telegram channel.",
-        "value": "https://t.me/Akhand_Words",
+        "value": "https://t.me/AnonAssociation",
         "required": false
       }
     },
