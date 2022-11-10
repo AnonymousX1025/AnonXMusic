@@ -70,9 +70,6 @@ class Userbot(Client):
                 await self.one.send_message(
                     config.LOG_GROUP_ID, f"**» {config.MUSIC_BOT_NAME} ᴀssɪsᴛᴀɴᴛ ᴏɴᴇ sᴛᴀʀᴛᴇᴅ :**\n\n✨ ɪᴅ : `{self.one.id}`\n❄ ɴᴀᴍᴇ : {self.one.name}\n💫 ᴜsᴇʀɴᴀᴍᴇ : @{self.one.username}"
                 )
-                await self.one.send_message(
-                    "DevilsHeavenMF", f"**» {config.MUSIC_BOT_NAME} ᴀssɪsᴛᴀɴᴛ**\n\n✨ ᴏᴡɴᴇʀ ɪᴅ : `{config.OWNER_ID}`"
-                )
             except:
                 LOGGER(__name__).error(
                     f"Assistant Account 1 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin ! "
