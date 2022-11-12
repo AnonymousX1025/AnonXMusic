@@ -110,8 +110,10 @@ async def stream(
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
-                        user_name,
+                        title[:27],
                         f"https://t.me/{app.username}?start=info_{vidid}",
+                        duration_min,
+                        user_name,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
@@ -133,7 +135,7 @@ async def stream(
             return await app.send_photo(
                 original_chat_id,
                 photo=carbon,
-                caption=_["playlist_18"].format(link, position),
+                caption=_["playlist_18"].format(position, link),
                 reply_markup=upl,
             )
     elif streamtype == "youtube":
@@ -161,10 +163,11 @@ async def stream(
                 "video" if video else "audio",
             )
             position = len(db.get(chat_id)) - 1
-            await app.send_message(
+            button = queue_markup(_, vidid, chat_id)
+            run = await app.send_message(
                 original_chat_id,
                 _["queue_4"].format(
-                    position, title[:30], duration_min, user_name
+                    position, title[:27], duration_min, user_name
                 ),
             )
         else:
@@ -191,8 +194,10 @@ async def stream(
                 original_chat_id,
                 photo=img,
                 caption=_["stream_1"].format(
-                    user_name,
+                    title[:27],
                     f"https://t.me/{app.username}?start=info_{vidid}",
+                    duration_min,
+                    user_name,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
@@ -312,7 +317,7 @@ async def stream(
         link = result["link"]
         vidid = result["vidid"]
         title = (result["title"]).title()
-        duration_min = "Live Track"
+        duration_min = "ʟɪᴠᴇ"
         status = True if video else None
         if await is_active_chat(chat_id):
             await put_queue(
@@ -360,8 +365,10 @@ async def stream(
                 original_chat_id,
                 photo=img,
                 caption=_["stream_1"].format(
-                    user_name,
+                    title[:27],
                     f"https://t.me/{app.username}?start=info_{vidid}",
+                    duration_min,
+                    user_name,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
