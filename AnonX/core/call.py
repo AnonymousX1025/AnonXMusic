@@ -37,7 +37,7 @@ from AnonX.utils.thumbnails import gen_thumb
 
 autoend = {}
 counter = {}
-AUTO_END_TIME = 1
+AUTO_END_TIME = 2
 
 
 async def _clear_(chat_id):
@@ -374,8 +374,10 @@ class Call(PyTgCalls):
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
-                        user,
+                        title[:27],
                         f"https://t.me/{app.username}?start=info_{videoid}",
+                        check[0]["dur"],
+                        user,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
@@ -424,8 +426,10 @@ class Call(PyTgCalls):
                     original_chat_id,
                     photo=img,
                     caption=_["stream_1"].format(
-                        user,
+                        title[:27],
                         f"https://t.me/{app.username}?start=info_{videoid}",
+                        check[0]["dur"],
+                        user,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
@@ -511,8 +515,10 @@ class Call(PyTgCalls):
                         original_chat_id,
                         photo=img,
                         caption=_["stream_1"].format(
-                            user,
+                            title[:27],
                             f"https://t.me/{app.username}?start=info_{videoid}",
+                            check[0]["dur"],
+                            user,
                         ),
                         reply_markup=InlineKeyboardMarkup(button),
                     )
