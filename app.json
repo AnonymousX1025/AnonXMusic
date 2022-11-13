@@ -1,5 +1,5 @@
 {
-    "name": "ᴀɴᴏɴダᴍᴜsɪᴄ",
+    "name": "ᴀɴᴏɴ ダ ᴍᴜsɪᴄ",
     "description": "A Telegram Music Player Bot, written in Python with Pyrogram and Py-Tgcalls.",
     "logo": "https://telegra.ph/file/56d1760224589ee370186.jpg",
     "keywords": [
@@ -11,7 +11,6 @@
     "telegram-bot",
     "pyrogram"
     ],
-    "stack": "container",
     "env": {
       "API_ID": {
         "description": "Get this value from https://my.telegram.org",
