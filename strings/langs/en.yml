@@ -2,28 +2,28 @@ name : English
 
 # General Strings
 general_1 : "ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴜsᴇʀ's ᴍᴇssᴀɢᴇ ᴏʀ ɢɪᴠᴇ ᴜsᴇʀɴᴀᴍᴇ/ᴜsᴇʀ_ɪᴅ."
-general_2 : "ᴇʀʀᴏʀ ! ᴡʀᴏɴɢ ᴜsᴀɢᴇ ᴏꜰ ᴄᴏᴍᴍᴀɴᴅ ʙᴀʙʏ​."
-general_3 : "sᴏᴍᴇ **ᴇxᴄᴇᴘᴛɪᴏɴ ᴏᴄᴄᴜʀᴇᴅ** ᴡʜɪʟᴇ ᴘʀᴏᴄᴇssɪɴɢ ʏᴏᴜʀ ǫᴜᴇʀʏ.\n\nᴇxᴄᴇᴘᴛɪᴏɴ ᴛʏᴘᴇ:- {0}"
+general_2 : "ᴇʀʀᴏʀ ! ᴡʀᴏɴɢ ᴜsᴀɢᴇ ᴏꜰ ᴄᴏᴍᴍᴀɴᴅ."
+general_3 : "sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ ᴡʜɪʟᴇ ᴘʀᴏᴄᴇssɪɴɢ ʏᴏᴜʀ ǫᴜᴇʀʏ.\n\n**ᴇxᴄᴇᴘᴛɪᴏɴ :** `{0}`"
 general_4 : "ʏᴏᴜ'ʀᴇ ᴀɴ ᴀɴᴏɴʏᴍᴏᴜs ᴀᴅᴍɪɴ ɪɴ ᴛʜɪs ᴄʜᴀᴛ ɢʀᴏᴜᴘ !\nʀᴇᴠᴇʀᴛ ʙᴀᴄᴋ ᴛᴏ ᴜsᴇʀ ᴀᴄᴄᴏᴜɴᴛ ꜰᴏʀ ᴀᴅᴍɪɴ ʀɪɢʜᴛs."
-general_5 : "ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ʙᴇ ᴀᴅᴍɪɴ ᴡɪᴛʜ **ᴍᴀɴᴀɢᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛ** ʀɪɢʜᴛs ᴛᴏ ᴘᴇʀꜰᴏʀᴍ ᴛʜɪs ᴀᴄᴛɪᴏɴ​."
+general_5 : "ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ʙᴇ ᴀᴅᴍɪɴ ᴡɪᴛʜ **ᴍᴀɴᴀɢᴇ ᴠɪᴅᴇᴏ ᴄʜᴀᴛ** ʀɪɢʜᴛs ᴛᴏ ᴘᴇʀꜰᴏʀᴍ ᴛʜɪs ᴀᴄᴛɪᴏɴ."
 general_6 : "ʙᴏᴛ ɪsɴ'ᴛ sᴛʀᴇᴀᴍɪɴɢ ᴏɴ ᴠɪᴅᴇᴏ ᴄʜᴀᴛ."
 
 # Classes - Telegram.py
-tg_1 : "ʙᴏᴛ ɪs **ᴏᴠᴇʀʟᴏᴀᴅᴇᴅ** ᴡɪᴛʜ ᴅᴏᴡɴʟᴏᴀᴅs ʀɪɢʜᴛ ɴᴏᴡ ʙᴀʙʏ​.\n\n**ᴛʀʏ ᴀꜰᴛᴇʀ:** {0} (__ᴇxᴘᴇᴄᴛᴇᴅ ᴛɪᴍᴇ__)"
-tg_2 : "ꜰᴀɪʟᴇᴅ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛʜᴇ ᴍᴇᴅɪᴀ ꜰʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ ʙᴀʙʏ​."
+tg_1 : "ʙᴏᴛ ɪs **ᴏᴠᴇʀʟᴏᴀᴅᴇᴅ** ᴡɪᴛʜ ᴅᴏᴡɴʟᴏᴀᴅs ʀɪɢʜᴛ ɴᴏᴡ.\n\n**ᴛʀʏ ᴀꜰᴛᴇʀ:** {0} (__ᴇxᴘᴇᴄᴛᴇᴅ ᴛɪᴍᴇ__)"
+tg_2 : "ꜰᴀɪʟᴇᴅ ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴛʜᴇ ᴍᴇᴅɪᴀ ꜰʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ."
 
 # Core - Call.py
-call_1 : "ʙᴏᴛ ʀᴇǫᴜɪʀᴇs **ᴀᴅᴍɪɴ** ᴘᴇʀᴍɪssɪᴏɴ ᴛᴏ ɪɴᴠɪᴛᴇ ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ ʙᴀʙʏ​.\n\nᴅɪsᴀʙʟᴇ ᴄʜᴀɴɴᴇʟ ᴘʟᴀʏᴍᴏᴅᴇ ᴠɪᴀ : /playmode"
-call_2 : "ᴀssɪsᴛᴀɴᴛ ɪs ʙᴀɴɴᴇᴅ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴏʀ ᴄʜᴀɴɴᴇʟ ʙᴀʙʏ​, ᴘʟᴇᴀsᴇ ᴜɴʙᴀɴ.\n\n**ᴀssɪsᴛᴀɴᴛ ᴜsᴇʀɴᴀᴍᴇ:** @{0}\n**ᴀssɪsᴛᴀɴᴛ ɪᴅ:** {1}"
-call_3 : "ᴇxᴄᴇᴘᴛɪᴏɴ ᴏᴄᴄᴜʀᴇᴅ ᴡʜɪʟᴇ ɪɴᴠɪᴛɪɴɢ ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ ʙᴀʙʏ​.\n\n**ʀᴇᴀsᴏɴ**: {0}"
-call_4 : "ʙᴏᴛ ʀᴇǫᴜɪʀᴇs **ɪɴᴠɪᴛᴇ ᴜsᴇʀs ᴠɪᴀ ʟɪɴᴋ** ᴘᴇʀᴍɪssɪᴏɴ ᴛᴏ ɪɴᴠɪᴛᴇ ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ ɢʀᴏᴜᴘ ʙᴀʙʏ​."
+call_1 : "ʙᴏᴛ ʀᴇǫᴜɪʀᴇs **ᴀᴅᴍɪɴ** ᴘᴇʀᴍɪssɪᴏɴ ᴛᴏ ɪɴᴠɪᴛᴇ ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ.\n\nᴅɪsᴀʙʟᴇ ᴄʜᴀɴɴᴇʟ ᴘʟᴀʏᴍᴏᴅᴇ ᴠɪᴀ : /playmode"
+call_2 : "ᴀssɪsᴛᴀɴᴛ ɪs ʙᴀɴɴᴇᴅ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴏʀ ᴄʜᴀɴɴᴇʟ, ᴘʟᴇᴀsᴇ ᴜɴʙᴀɴ.\n\n**ᴀssɪsᴛᴀɴᴛ ᴜsᴇʀɴᴀᴍᴇ :** @{0}\n**ᴀssɪsᴛᴀɴᴛ ɪᴅ :** {1}"
+call_3 : "ᴇxᴄᴇᴘᴛɪᴏɴ ᴏᴄᴄᴜʀᴇᴅ ᴡʜɪʟᴇ ɪɴᴠɪᴛɪɴɢ ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ.\n\n**ʀᴇᴀsᴏɴ :** {0}"
+call_4 : "ʙᴏᴛ ʀᴇǫᴜɪʀᴇs **ɪɴᴠɪᴛᴇ ᴜsᴇʀs ᴠɪᴀ ʟɪɴᴋ** ᴘᴇʀᴍɪssɪᴏɴ ᴛᴏ ɪɴᴠɪᴛᴇ ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ ɢʀᴏᴜᴘ."
 call_5 : "ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ ᴡɪʟʟ ʙᴇ ᴊᴏɪɴɪɴɢ ɪɴ 5 sᴇᴄᴏɴᴅs, ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ..."
-call_6 : "ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ [{0}] ᴊᴏɪɴᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ ʙᴀʙʏ​.\n\nsᴛᴀʀᴛɪɴɢ ᴍᴜsɪᴄ ɴᴏᴡ"
-call_7 : "**ʜᴀʀᴍꜰᴜʟ ᴀᴅᴍɪɴ ʀɪɢʜᴛ ɢɪᴠᴇɴ **\n\nᴘʟᴇᴀsᴇ ʀᴇᴍᴏᴠᴇ **ʙᴀɴ ᴜsᴇʀs** ʀɪɢʜᴛs ꜰʀᴏᴍ ᴛʜᴇ ʙᴏᴛ ʙᴀʙʏ​."
-call_8 : "**ʜᴀʀᴍꜰᴜʟ ᴀᴅᴍɪɴ ʀɪɢʜᴛ ɢɪᴠᴇɴ **\n\nᴘʟᴇᴀsᴇ ʀᴇᴍᴏᴠᴇ **ᴀᴅᴅ ɴᴇᴡ ᴀᴅᴍɪɴs** ʀɪɢʜᴛs ꜰʀᴏᴍ ᴛʜᴇ ʙᴏᴛ ʙᴀʙʏ​."
-call_9 : "**ꜰᴀɪʟᴇᴅ ᴛᴏ sᴡɪᴛᴄʜ sᴛʀᴇᴀᴍ**\nᴘʟᴇᴀsᴇ ᴜsᴇ /sᴋɪᴘ ᴛᴏ ᴄʜᴀɴɢᴇ ᴛʀᴀᴄᴋ ᴀɢᴀɪɴ ʙᴀʙʏ​."
-call_10 : "ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ɴᴇxᴛ ᴛʀᴀᴄᴋ ꜰʀᴏᴍ ᴘʟᴀʏʟɪsᴛ ʙᴀʙʏ​"
-call_11 : "ᴘʟᴇᴀsᴇ ᴀᴅᴅ @{0} ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ​[ ID: {1}].\n\nʙᴏᴛ ɪs ɴᴏᴛ ᴀʙʟᴇ ᴛᴏ ɢᴇᴛ ᴄʜᴀɴɴᴇʟ ᴅᴇᴛᴀɪʟs​."
+call_6 : "ᴀssɪsᴛᴀɴᴛ ᴀᴄᴄᴏᴜɴᴛ [{0}] ᴊᴏɪɴᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ.\n\nsᴛᴀʀᴛɪɴɢ ᴍᴜsɪᴄ ɴᴏᴡ"
+call_7 : "**ʜᴀʀᴍꜰᴜʟ ᴀᴅᴍɪɴ ʀɪɢʜᴛ ɢɪᴠᴇɴ **\n\nᴘʟᴇᴀsᴇ ʀᴇᴍᴏᴠᴇ **ʙᴀɴ ᴜsᴇʀs** ʀɪɢʜᴛs ꜰʀᴏᴍ ᴛʜᴇ ʙᴏᴛ."
+call_8 : "**ʜᴀʀᴍꜰᴜʟ ᴀᴅᴍɪɴ ʀɪɢʜᴛ ɢɪᴠᴇɴ **\n\nᴘʟᴇᴀsᴇ ʀᴇᴍᴏᴠᴇ **ᴀᴅᴅ ɴᴇᴡ ᴀᴅᴍɪɴs** ʀɪɢʜᴛs ꜰʀᴏᴍ ᴛʜᴇ ʙᴏᴛ."
+call_9 : "**ꜰᴀɪʟᴇᴅ ᴛᴏ sᴡɪᴛᴄʜ sᴛʀᴇᴀᴍ**\nᴘʟᴇᴀsᴇ ᴜsᴇ /sᴋɪᴘ ᴛᴏ ᴄʜᴀɴɢᴇ ᴛʀᴀᴄᴋ ᴀɢᴀɪɴ."
+call_10 : "ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ ɴᴇxᴛ ᴛʀᴀᴄᴋ ꜰʀᴏᴍ ᴘʟᴀʏʟɪsᴛ"
+call_11 : "ᴘʟᴇᴀsᴇ ᴀᴅᴅ @{0} ᴛᴏ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟ [ID: {1}].\n\nʙᴏᴛ ɪs ɴᴏᴛ ᴀʙʟᴇ ᴛᴏ ɢᴇᴛ ᴄʜᴀɴɴᴇʟ ᴅᴇᴛᴀɪʟs."
 
 # PLUGINS - Auth.py
 auth_1 : "ʏᴏᴜ ᴄᴀɴ ᴏɴʟʏ ʜᴀᴠᴇ 20 ᴜsᴇʀs ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ's ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ (ᴀᴜʟ) ʙᴀʙʏ​"
@@ -189,7 +189,7 @@ str_2 : "✅ ᴠᴀʟɪᴅ sᴛʀᴇᴀᴍ ᴠᴇʀɪꜰɪᴇᴅ\n\nᴘʟᴇᴀs
 str_3 : "ᴜɴᴀʙʟᴇ ᴛᴏ sᴛʀᴇᴀᴍ ʏᴏᴜᴛᴜʙᴇ ʟɪᴠᴇ sᴛʀᴇᴀᴍs. ɴᴏ ʟɪᴠᴇ ꜰᴏʀᴍᴀᴛ ꜰᴏᴜɴᴅ"
 
 #TopPlay
-tracks_1 : "**ᴘʀᴏᴄᴇssɪɴɢ {0} ᴛᴏᴘ 10 ᴘʟᴀʏʟɪsᴛ**\n\n💘**ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {1}"
+tracks_1 : "**ᴘʀᴏᴄᴇssɪɴɢ {0} ᴛᴏᴘ 10 ᴘʟᴀʏʟɪsᴛ**\n\n💘**ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {1}"
 tracks_2 : "**ᴇʀʀᴏʀ**\n\nᴛʜᴇʀᴇ's ɴᴏ **{0} ᴛᴏᴘ 10 ᴘʟᴀʏʟɪsᴛ** ᴏɴ ʙᴏᴛ's sᴇʀᴠᴇʀs. ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɴʏ ᴏᴛʜᴇʀ ᴘʟᴀʏʟɪsᴛ"
 
 # TOOLS
@@ -221,14 +221,14 @@ song_11 : "ᴜᴘʟᴏᴀᴅɪɴɢ sᴛᴀʀᴛᴇᴅ ʙᴀʙʏ\n\nᴘʟᴇᴀs�
 queue_1 : "» ᴩʟᴇᴀsᴇ ᴡᴀɪᴛ..."
 queue_2 : "Queued List is empty. No tracks found"
 queue_3 : "<u>**Queued Tracks:</u>**  [Checkout More Queued Tracks From Here]({0})"
-queue_4 : "**💘 ᴀᴅᴅᴇᴅ ᴛᴏ ǫᴜᴇᴜᴇ ᴀᴛ #{0}**\n\n**🍒 ᴛɪᴛʟᴇ :** {1}\n**⏱ ᴅᴜʀᴀᴛɪᴏɴ :** {2}\n🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {3}"
+queue_4 : "**💘 ᴀᴅᴅᴇᴅ ᴛᴏ ǫᴜᴇᴜᴇ ᴀᴛ {0}**\n\n✨ **ᴛɪᴛʟᴇ :** {1}\n**⏱ ᴅᴜʀᴀᴛɪᴏɴ :** {2}\n🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {3}"
 queue_5 : "ᴏɴʟʏ ᴏɴᴇ ᴛʀᴀᴄᴋ ɪs ɪɴ ǫᴜᴇᴜᴇ, ᴀᴅᴅ sᴏᴍᴇ ᴍᴏʀᴇ ᴛʀᴀᴄᴋs ɪɴ ǫᴜᴇᴜᴇ ᴛᴏ ᴄʜᴇᴄᴋ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇ."
 
 # All Streaming Lines
-stream_1 : "» **sᴛᴀʀᴛᴇᴅ ᴩʟᴀʏɪɴɢ:** «\n\n💖 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {0} \n🍒**ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ:** [ʜᴇʀᴇ]({1})"
-stream_2 : "» **ᴩʟᴀʏɪɴɢ ᴠɪᴀ ᴜʀʟ** «\n\n💖 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {0} "
-stream_3 : "» **sᴛᴀʀᴛᴇᴅ ᴩʟᴀʏɪɴɢ** «\n\n📌 **ᴛɪᴛʟᴇ:** {0}\n🕕 **ᴅᴜʀᴀᴛɪᴏɴ:** {1}\n💖 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {2} "
-stream_4 : "» **sᴛᴀʀᴛᴇᴅ ᴩʟᴀʏɪɴɢ** «\n\n📌 **ᴛɪᴛʟᴇ:** [{0}]({1})\n🕕 **ᴅᴜʀᴀᴛɪᴏɴ:** {2}\n💖 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {3} "
+stream_1 : "➻ **sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ**\n\n🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {0}\n**ɪɴғᴏ :** [ʜᴇʀᴇ]({1})"
+stream_2 : "➻ **sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ**\n\n❄ **sᴛʀᴇᴀᴍ ᴛʏᴘᴇ :** ʟɪᴠᴇ sᴛʀᴇᴀᴍ [ᴜʀʟ]\n🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {0}"
+stream_3 : "➻ **sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ**\n\n✨ **ᴛɪᴛʟᴇ:** {0}\n🕕 **ᴅᴜʀᴀᴛɪᴏɴ:** {1}\n🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {2}"
+stream_4 : "➻ **sᴛᴀʀᴛᴇᴅ sᴛʀᴇᴀᴍɪɴɢ**\n\n✨ **ᴛɪᴛʟᴇ :** [{0}]({1})\n🕕 **ᴅᴜʀᴀᴛɪᴏɴ :** {2}\n🥀 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ :** {3}"
 
 # Inline Buttons
 
@@ -436,33 +436,3 @@ gban_8 : "**ᴜɴɢʙᴀɴɴɪɴɢ {0}**\n\nᴇxᴩᴇᴄᴛᴇᴅ ᴛɪᴍᴇ :
 gban_9 : "**ᴜɴɢʙᴀɴɴᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ**\n\nᴜɴʙᴀɴɴᴇᴅ **{0}** ɪɴ **{1}** ᴄʜᴀᴛs."
 gban_10 : "ɴᴏ ᴏɴᴇ ɪs ɢʙᴀɴɴᴇᴅ."
 gban_11 : "ɢᴇᴛᴛɪɴɢ ɢʙᴀɴɴᴇᴅ ᴜsᴇʀs ʟɪsᴛ..."
-
-#Suggestions
-sug_0 : "❓**Do You Know?**\n\n✅ "
-sug_1 : "You can play music in two **search modes** i.e. Direct Mode and Inline Mode.\n\nChange modes via /playmode"
-sug_2 : "You can play music in two **play types** i.e. Everyone Mode and Admins Mode.\n\nChange modes via /playmode"
-sug_3 : "You can play music in **channels** too.\n\nSet channel_id via /channelplay and play via /cplay "
-sug_4 : "Non Admins can use admin commands too by adding them to** AUTH USERS LIST**. \nAdd any user to auth list by /auth , remove with /unauth and check auth users via /authusers"
-sug_5 : "Bot has a feature called **Clean Mode**.\nIt deletes the bot's messages after 5 Mins and ensures that  your chat remains clean.\n\nEnable or disable cleanmode from /settings [__Enabled by default__]"
-sug_6 : "You can play **Spotify** tracks and playlists too.\n\nStart playing now with /play [Spotify Link]"
-sug_7 : "You can play **Apple Music** tracks and playlists too.\n\nStart playing now with /play [Apple Link]"
-sug_8 : "You can play **Resso Music** tracks and playlists too.\n\nStart playing now with /play [Resso Link]"
-sug_9 : "You can play **Sound Cloud** tracks and playlists too.\n\nStart playing now with /play [SoundCloud Link]"
-sug_10 : "You can play **Videos** in voice chat via /vplay [Video Name] or /play -v [Video Name]"
-sug_11 : "You can set **Audio Quality** of voice chat to Low, Medium or High.\n\nSet quality via /settings"
-sug_12 : "You can set **Video Quality** of voice chat to Low, Medium or High.\n\nSet quality via /settings"
-sug_13 : "You can check your **Statistics** on bot like Top 10 Played Tracks.\n\nGet Stats: /gstats "
-sug_14 : "You can check **Group's Stats** on bot like Top 10 Played Tracks.\n\nGet Stats: /gstats "
-sug_15 : "You can check bot's **Global Stats** like top 10 users, top 10 chats, top 10 tracks etc etc.\n\nCheck Stats: /gstats "
-sug_16 : "You can now mute the music which is playing on voice chat.\n\nCommand: /mute"
-sug_17 : "You can now unmute and mute the music which is playing on voice chat.\n\nCommand: /mute and /unmute"
-sug_18 : "You can search the lyrics of musics with us too..\n\nCommand: /lyrics [Music Name]"
-sug_19 : "You can download the music or video from the bot through Youtube.\n\nCommand: /song [Music Name]"
-sug_20 : "You can get a complete list of my commands that i accept.\n\nCommand: /help"
-sug_21 : "Bot has server-sided playlist option.\n\nYou can add music in your playlist and play them all together via /play"
-sug_22 : "You can now shuffle the queued musics on the bot.\n\nCommand: /shuffle"
-sug_23 : "You can check the queue of the musics.\n\nCommand: /queue"
-sug_24 : "You can check my owner and sudo users who manage me.\n\nCommand: /sudolist"
-sug_25 : "Bot has a feature called **Commands Delete Mode**. It deletes its executed commands automatically.\n\nEnable or disable deletemode from /settings [__Enabled by default__]"
-sug_26 : "You can change language of the bot to available languages for easy understanding.\n\nCommand: /language"
-sug_27 : "Bot has a feature called **Force Play**.\n\n**Force Play** stops the playing track on voice chat and starts playing the searched track instantly without disturbing/clearing queue.\n\nCommand: /playforce"
