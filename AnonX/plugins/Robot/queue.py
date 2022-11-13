@@ -25,8 +25,8 @@ basic = {}
 
 
 def get_image(videoid):
-    if os.path.isfile(f"cache/{videoid}.png"):
-        return f"cache/{videoid}.png"
+    if os.path.isfile(f"cache/{videoid}.jpg"):
+        return f"cache/{videoid}.jpg"
     else:
         return config.YOUTUBE_IMG_URL
 
