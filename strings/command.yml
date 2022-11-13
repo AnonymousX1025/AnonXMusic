@@ -16,7 +16,7 @@ STREAM_COMMAND : ["stream", "cstream", "streamforce"]
 
 #Playlists Command
 PLAYLIST_COMMAND : ["playlist"]
-DELETEPLAYLIST_COMMAND : ["deleteplaylist", "delplaylist"]
+DELETEPLAYLIST_COMMAND : ["deleteplaylist", "delmyplaylist", "delplaylist"]
 
 
 # Tools
@@ -41,8 +41,8 @@ RESTART_COMMAND : ["reboot"]
 # Sudo Users Commaands
 
 # Sudo Command
-ADDSUDO_COMMAND : ["addsudo", "addrandi", "randi"]
-DELSUDO_COMMAND : ["delsudo", "rmsudo", "bsdk", "bhakkbsdk"]
+ADDSUDO_COMMAND : ["addsudo"]
+DELSUDO_COMMAND : ["delsudo", "rmsudo"]
 SUDOUSERS_COMMAND : ["sudolist", "listsudo", "sudoers", "sudo"]
 
 #Broadcast 
@@ -86,7 +86,7 @@ UNBLOCK_COMMAND : ["unblock"]
 BLOCKED_COMMAND : ["blockedusers", "blocked", "blusers"]
 
 #sPEEDTEST
-SPEEDTEST_COMMAND : ["speedtest", "spt", "stest", "speedt"]
+SPEEDTEST_COMMAND : ["speedtest", "spt"]
 
 #Voice chat commands
 ACTIVEVC_COMMAND : ["activevoice", "activevc"]
