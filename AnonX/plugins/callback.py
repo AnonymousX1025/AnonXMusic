@@ -171,6 +171,7 @@ async def del_back_playlist(client, CallbackQuery, _):
         queued = check[0]["file"]
         title = (check[0]["title"]).title()
         user = check[0]["by"]
+        duration_min = check[0]["dur"]
         streamtype = check[0]["streamtype"]
         videoid = check[0]["vidid"]
         status = True if str(streamtype) == "video" else None
@@ -192,8 +193,10 @@ async def del_back_playlist(client, CallbackQuery, _):
             run = await CallbackQuery.message.reply_photo(
                 photo=img,
                 caption=_["stream_1"].format(
-                    user,
+                    title[:27],
                     f"https://t.me/{app.username}?start=info_{videoid}",
+                    duration_min,
+                    user,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
@@ -224,8 +227,10 @@ async def del_back_playlist(client, CallbackQuery, _):
             run = await CallbackQuery.message.reply_photo(
                 photo=img,
                 caption=_["stream_1"].format(
-                    user,
+                    title[:27],
                     f"https://t.me/{app.username}?start=info_{videoid}",
+                    duration_min,
+                    user,
                 ),
                 reply_markup=InlineKeyboardMarkup(button),
             )
@@ -290,8 +295,10 @@ async def del_back_playlist(client, CallbackQuery, _):
                 run = await CallbackQuery.message.reply_photo(
                     photo=img,
                     caption=_["stream_1"].format(
-                        user,
+                        title[:27],
                         f"https://t.me/{app.username}?start=info_{videoid}",
+                        duration_min,
+                        user,
                     ),
                     reply_markup=InlineKeyboardMarkup(button),
                 )
