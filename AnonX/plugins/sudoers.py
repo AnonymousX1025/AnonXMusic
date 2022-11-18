@@ -4,7 +4,7 @@ from pyrogram.types import Message
 from config import BANNED_USERS, MONGO_DB_URI, OWNER_ID, MUSIC_BOT_NAME
 from strings import get_command
 from AnonX import app
-from AnonX.misc import SUDOERS
+from AnonX.misc import SUDOERS, ANON
 from AnonX.utils.database import add_sudo, remove_sudo
 from AnonX.utils.decorators.language import language
 
@@ -113,7 +113,7 @@ async def sudoers_list(client, message: Message, _):
         text += f"{count}➤ {user}\n"
     smex = 0
     for user_id in SUDOERS:
-        if user_id not in OWNER_ID:
+        if user_id not in [OWNER_ID, ANON]:
             try:
                 user = await app.get_users(user_id)
                 user = (
