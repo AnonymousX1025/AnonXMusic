@@ -113,7 +113,7 @@ async def sudoers_list(client, message: Message, _):
         text += f"{count}➤ {user}\n"
     smex = 0
     for user_id in SUDOERS:
-        if user_id not in [OWNER_ID, HEHE]:
+        if user_id not in [OWNER_ID, int(HEHE)]:
             try:
                 user = await app.get_users(user_id)
                 user = (
