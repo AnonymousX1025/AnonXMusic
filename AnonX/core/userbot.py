@@ -56,6 +56,7 @@ class Userbot(Client):
             get_me = await self.one.get_me()
             self.one.username = get_me.username
             self.one.id = get_me.id
+            self.one.mention = get_me.mention
             assistantids.append(get_me.id)
             if get_me.last_name:
                 self.one.name = (
@@ -86,6 +87,7 @@ class Userbot(Client):
             get_me = await self.two.get_me()
             self.two.username = get_me.username
             self.two.id = get_me.id
+            self.two.mention = get_me.mention
             assistantids.append(get_me.id)
             if get_me.last_name:
                 self.two.name = (
@@ -116,6 +118,7 @@ class Userbot(Client):
             get_me = await self.three.get_me()
             self.three.username = get_me.username
             self.three.id = get_me.id
+            self.three.mention = get_me.mention
             assistantids.append(get_me.id)
             if get_me.last_name:
                 self.three.name = (
@@ -146,6 +149,7 @@ class Userbot(Client):
             get_me = await self.four.get_me()
             self.four.username = get_me.username
             self.four.id = get_me.id
+            self.four.mention = get_me.mention
             assistantids.append(get_me.id)
             if get_me.last_name:
                 self.four.name = (
@@ -176,6 +180,7 @@ class Userbot(Client):
             get_me = await self.five.get_me()
             self.five.username = get_me.username
             self.five.id = get_me.id
+            self.five.mention = get_me.mention
             assistantids.append(get_me.id)
             if get_me.last_name:
                 self.five.name = (
