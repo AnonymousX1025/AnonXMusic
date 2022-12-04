@@ -67,6 +67,15 @@ class Userbot(Client):
             LOGGER(__name__).info(
                 f"Assistant Started as {self.one.name}"
             )
+            try:
+                await self.one.send_message(
+                    config.LOG_GROUP_ID, f"**» {config.MUSIC_BOT_NAME} ᴀssɪsᴛᴀɴᴛ ᴏɴᴇ sᴛᴀʀᴛᴇᴅ :**\n\n✨ ɪᴅ : `{self.one.id}`\n❄ ɴᴀᴍᴇ : {self.one.name}\n💫 ᴜsᴇʀɴᴀᴍᴇ : @{self.one.username}"
+                )
+            except:
+                LOGGER(__name__).error(
+                    f"Assistant Account 1 has failed to access the log Group. Make sure that you have added your assistant to your log group and promoted as admin ! "
+                )
+                sys.exit()
         if config.STRING2:
             await self.two.start()
             try:
