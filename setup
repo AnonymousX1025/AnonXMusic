@@ -72,12 +72,6 @@ node(){
 }
 
 
-repo(){
-	# Get git repo if the installer is runned standalone
-	[[ ! "AnonXMusic" == $(basename -s .git `git config --get remote.origin.url`) ]]
-}
-
-
 installation(){
 	pprint "\n\nUpgrading pip and installing dependency packages.. "
 	pip3 install -U pip &>>pypilog.txt &&
@@ -99,7 +93,6 @@ sudo test
 update
 packages
 node
-repo
 installation
 pprint "\n\n\n\n\nAnonX Music Installation Completed!" "cgreen"
 sleep 1
