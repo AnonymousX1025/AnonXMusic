@@ -6,7 +6,7 @@ from AnonX import app
 @app.on_message(filters.command(["github", "git"]))
 async def github(_, message):
     if len(message.command) != 2:
-        await message.reply_text("/git TheAnonymousX")
+        await message.reply_text("/git AnonymousX1025")
         return
     username = message.text.split(None, 1)[1]
     URL = f'https://api.github.com/users/{username}'
