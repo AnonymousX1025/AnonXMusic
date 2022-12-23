@@ -28,28 +28,31 @@
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʟᴏᴄᴀʟ ʜᴏsᴛ/ ᴠᴘs 」─
 </h3>
 
-- Get your [Necessary Variables](https://github.com/AnonymousX1025/AnonXMusic/blob/master/sample.env)
-- Upgrade and Update by :
+- ɢᴇᴛ ʏᴏᴜʀ [ɴᴇᴄᴇssᴀʀʏ ᴠᴀʀɪᴀʙʟᴇs](https://github.com/AnonymousX1025/AnonXMusic/blob/master/sample.env)
+- ᴜᴘɢʀᴀᴅᴇ ᴀɴᴅ ᴜᴘᴅᴀᴛᴇ ʙʏ :
 `sudo apt-get update && sudo apt-get upgrade -y`
-- Install required packages by :
+- ɪɴsᴛᴀʟʟ ғғᴍᴘᴇɢ ʙʏ :
+`sudo apt-get install python3-pip ffmpeg -y`
+- ɪɴsᴛᴀʟʟ ʀᴇǫᴜɪʀᴇᴅ ᴘᴀᴄᴋᴀɢᴇs ʙʏ :
 `sudo apt-get install python3-pip -y`
-- Install pip by :
+- ɪɴsᴛᴀʟʟ ᴘɪᴘ ʙʏ :
 `sudo pip3 install -U pip`
-- Clone the repository by :
+- ɪɴsᴛᴀʟʟ ɴᴏᴅᴇ ᴊs ʙʏ : 
+- `curl -fssL https://deb.nodesource.com/setup_17.x | sudo -E bash - && sudo apt-get install nodejs -y && npm i -g npm`
+- ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ ʙʏ :
 `git clone https://github.com/AnonymousX1025/AnonXMusic && cd AnonXMusic`
-- Install requirements by :
+- ɪɴsᴛᴀʟʟ ʀᴇǫᴜɪʀᴇᴍᴇɴᴛs ʙʏ :
 `pip3 install -U -r requirements.txt`
-- Fill your variables in the env by :
-`vi sample.env`<br>
-Press `I` on the keyboard for editing env<br>
-Press `Ctrl+C` when you're done with editing env and `:wq` to save the env<br>
-- Rename the env file by :
-`mv sample.env .env`
-- Install tmux to keep running your bot when you close the terminal by :
+- ғɪʟʟ ʏᴏᴜʀ ᴠᴀʀɪᴀʙʟᴇs ɪɴ ᴛʜᴇ ᴇɴᴠ ʙʏ :
+`cp sample.env .env`<br>
+- ᴇᴅɪᴛ ᴠᴇʀs ʙʏ :
+- `vi .env` ᴘʀᴇss `I` ᴏɴ ᴛʜᴇ ᴋᴇʏʙᴏᴀʀᴅ ғᴏʀ ᴇᴅɪᴛɪɴɢ ᴇɴᴠ<br> 
+ᴘʀᴇss `Ctrl+C` ᴡʜᴇɴ ʏᴏᴜ'ʀᴇ ᴅᴏɴᴇ ᴡɪᴛʜ ᴇᴅɪᴛɪɴɢ ᴇɴᴠ ᴀɴᴅ `:wq` ᴛᴏ sᴀᴠᴇ ᴛʜᴇ ᴇɴᴠ<br>
+- ɪɴsᴛᴀʟʟ ᴛᴍᴜx ᴛᴏ ᴋᴇᴇᴘ running ʏᴏᴜʀ ʙᴏᴛ ᴡʜᴇɴ ʏᴏᴜ ᴄʟᴏsᴇ ᴛʜᴇ ᴛᴇʀᴍɪɴᴀʟ ʙʏ :
 `sudo apt install tmux && tmux`
-- Finally run the bot by :
+- ғɪɴᴀʟʟʏ ʀᴜɴ ᴛʜᴇ ʙᴏᴛ ʙʏ :
 `bash start`
-- For getting out from tmux session : Press `Ctrl+b` and then `d`<br>
+- ғᴏʀ ɢᴇᴛᴛɪɴɢ ᴏᴜᴛ ғʀᴏᴍ tmux sᴇssɪᴏɴ : ᴘʀᴇss `Ctrl+b` ᴀɴᴅ ᴛʜᴇɴ `d`<br>
 ━━━━━━━━━━━━━━━━━━━━
 
 <h3 align="center">
