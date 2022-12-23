@@ -14,12 +14,12 @@ py-tgcalls==0.8.6
 pykeyboard
 pyrogram==1.4.16
 python-dotenv
-pyyaml
+pyyaml==5.4
 requests
 speedtest-cli
 spotipy
 tgcrypto
 numpy
-yt-dlp
 youtube-search
 youtube-search-python
+yt-dlp

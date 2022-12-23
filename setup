@@ -106,9 +106,9 @@ pprint "\nOWNER ID:"; color_reset; read ownid
 pprint "\nMUSIC BOT NAME: "; color_reset; read mbt
 pprint "\nMONGO DB URI: "; color_reset; read mongo_db
 pprint "\nLOG GROUP ID: "; color_reset; read logger
-pprint "\nSTRING SESSION: "; color_reset; read string_session
+pprint "\nPYROGRAM STRING SESSION OF ASSISTANT ACCOUNT: "; color_reset; read string_session
 
-pprint "\n\nProcessing your vars, wait a while !" "cgreen"
+pprint "\n\nProcessing your vars, wait a while!" "cgreen"
 
 if [ -f .env ]; then
 	rm .env

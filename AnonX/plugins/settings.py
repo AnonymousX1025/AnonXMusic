@@ -1,20 +1,12 @@
-import time
 from pyrogram import filters
 from pyrogram.errors import MessageNotModified
-from pyrogram.types import (
-    CallbackQuery,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    InputMediaPhoto,
-    InputMediaVideo,
-    Message,
-)
+from pyrogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup, Message)
 
 from config import (BANNED_USERS, CLEANMODE_DELETE_MINS,
-                    MUSIC_BOT_NAME, OWNER_ID, START_IMG_URL)
+                    MUSIC_BOT_NAME, OWNER_ID)
 from strings import get_command
 from AnonX import app
-from AnonX.misc import _boot_
 from AnonX.utils.database import (add_nonadmin_chat,
                                        cleanmode_off, cleanmode_on,
                                        commanddelete_off,
@@ -36,9 +28,7 @@ from AnonX.utils.inline.settings import (
     audio_quality_markup, auth_users_markup,
     cleanmode_settings_markup, playmode_users_markup, setting_markup,
     video_quality_markup)
-from AnonX.utils.formatters import get_readable_time
 from AnonX.utils.inline.start import private_panel
-from AnonX.utils.database import get_served_users, get_served_chats
 
 ### Command
 SETTINGS_COMMAND = get_command("SETTINGS_COMMAND")
@@ -56,17 +46,6 @@ async def settings_mar(client, message: Message, _):
     await message.reply_text(
         _["setting_1"].format(message.chat.title, message.chat.id),
         reply_markup=InlineKeyboardMarkup(buttons),
-    )
-
-
-@app.on_callback_query(filters.regex("gib_source") & ~BANNED_USERS)
-@languageCB
-async def gib_repo(client, CallbackQuery, _):
-    await CallbackQuery.edit_message_media(
-        InputMediaVideo("https://te.legra.ph/file/e6471d19bd04a5095436a.mp4"),
-        reply_markup=InlineKeyboardMarkup(
-            [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data=f"settingsback_helper")]]
-        ),
     )
 
 
@@ -107,13 +86,8 @@ async def settings_back_markup(
         except:
             OWNER = None
         buttons = private_panel(_, app.username, OWNER)
-        return await CallbackQuery.edit_message_media(
-            InputMediaPhoto(
-                media=START_IMG_URL,
-                caption=_["start_2"].format(
-                    CallbackQuery.from_user.first_name, MUSIC_BOT_NAME
-                ),
-            ),
+        return await CallbackQuery.edit_message_text(
+            _["start_2"].format(MUSIC_BOT_NAME),
             reply_markup=InlineKeyboardMarkup(buttons),
         )
     else:

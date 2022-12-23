@@ -90,7 +90,7 @@ async def stream(
                 except:
                     raise AssistantErr(_["play_16"])
                 await Anon.join_call(
-                    chat_id, original_chat_id, file_path, video=status, image=thumbnail
+                    chat_id, original_chat_id, file_path, video=status
                 )
                 await put_queue(
                     chat_id,
@@ -104,7 +104,7 @@ async def stream(
                     "video" if video else "audio",
                     forceplay=forceplay,
                 )
-                img = await gen_thumb(vidid, user_id)
+                img = await gen_thumb(vidid)
                 button = stream_markup(_, vidid, chat_id)
                 run = await app.send_photo(
                     original_chat_id,
@@ -143,7 +143,6 @@ async def stream(
         vidid = result["vidid"]
         title = (result["title"]).title()
         duration_min = result["duration_min"]
-        thumbnail = result["thumb"]
         status = True if video else None
         try:
             file_path, direct = await YouTube.download(
@@ -164,7 +163,7 @@ async def stream(
                 "video" if video else "audio",
             )
             position = len(db.get(chat_id)) - 1
-            qimg = await gen_qthumb(vidid, user_id)
+            qimg = await gen_qthumb(vidid)
             button = queue_markup(_, vidid, chat_id)
             run = await app.send_photo(
                 original_chat_id,
@@ -178,7 +177,7 @@ async def stream(
             if not forceplay:
                 db[chat_id] = []
             await Anon.join_call(
-                chat_id, original_chat_id, file_path, video=status, image=thumbnail
+                chat_id, original_chat_id, file_path, video=status
             )
             await put_queue(
                 chat_id,
@@ -192,24 +191,21 @@ async def stream(
                 "video" if video else "audio",
                 forceplay=forceplay,
             )
-            img = await gen_thumb(vidid, user_id)
+            img = await gen_thumb(vidid)
             button = stream_markup(_, vidid, chat_id)
-            try:
-                run = await app.send_photo(
-                    original_chat_id,
-                    photo=img,
-                    caption=_["stream_1"].format(
-                        title[:27],
-                        f"https://t.me/{app.username}?start=info_{vidid}",
-                        duration_min,
-                        user_name,
-                    ),
-                    reply_markup=InlineKeyboardMarkup(button),
-                )
-                db[chat_id][0]["mystic"] = run
-                db[chat_id][0]["markup"] = "stream"
-            except Exception as ex:
-                print(ex)
+            run = await app.send_photo(
+                original_chat_id,
+                photo=img,
+                caption=_["stream_1"].format(
+                    title[:27],
+                    f"https://t.me/{app.username}?start=info_{vidid}",
+                    duration_min,
+                    user_name,
+                ),
+                reply_markup=InlineKeyboardMarkup(button),
+            )
+            db[chat_id][0]["mystic"] = run
+            db[chat_id][0]["markup"] = "stream"
     elif streamtype == "soundcloud":
         file_path = result["filepath"]
         title = result["title"]
@@ -324,8 +320,7 @@ async def stream(
         link = result["link"]
         vidid = result["vidid"]
         title = (result["title"]).title()
-        thumbnail = result["thumb"]
-        duration_min = "00:00"
+        duration_min = "ʟɪᴠᴇ"
         status = True if video else None
         if await is_active_chat(chat_id):
             await put_queue(
@@ -353,7 +348,7 @@ async def stream(
             if n == 0:
                 raise AssistantErr(_["str_3"])
             await Anon.join_call(
-                chat_id, original_chat_id, file_path, video=status, image=thumbnail if thumbnail else None
+                chat_id, original_chat_id, file_path, video=status
             )
             await put_queue(
                 chat_id,
@@ -367,7 +362,7 @@ async def stream(
                 "video" if video else "audio",
                 forceplay=forceplay,
             )
-            img = await gen_thumb(vidid, user_id)
+            img = await gen_thumb(vidid)
             button = telegram_markup(_, chat_id)
             run = await app.send_photo(
                 original_chat_id,
