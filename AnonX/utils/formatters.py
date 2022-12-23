@@ -27,24 +27,6 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-def time_to_sec(time: str):
-    x = time.split(":")
-
-    if len(x) == 2:
-        min = int(x[0])
-        sec = int(x[1])
-
-        total_sec = (min*60) + sec
-    elif len(x) == 3:
-        hour = int(x[0])
-        min = int(x[1])
-        sec = int(x[2])
-
-        total_sec = (hour*60*60) + (min*60) + sec
-
-    return total_sec
-
-
 def convert_bytes(size: float) -> str:
     """humanize size"""
     if not size:

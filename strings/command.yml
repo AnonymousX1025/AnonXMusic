@@ -1,4 +1,3 @@
-# Bot Commands
 PING_COMMAND : ["ping", "alive"]
 START_COMMAND : ["start", "mstart"]
 HELP_COMMAND : ["help"]
@@ -6,26 +5,16 @@ SETTINGS_COMMAND : ["settings", "setting"]
 RELOAD_COMMAND : ["admincache", "reload"]
 GSTATS_COMMAND : ["gstats", "globalstats"]
 STATS_COMMAND : ["stats"]
-LANGUAGE_COMMAND : ["lundlang", "lavdalele", "langlund"]
-
-# Play Commands
+LANGUAGE_COMMAND : ["langchangexd"]
 PLAY_COMMAND : ["play", "vplay", "cplay", "cvplay", "playforce", "vplayforce", "cplayforce", "cvplayforce"]
 PLAYMODE_COMMAND : ["playmode", "mode"]
 CHANNELPLAY_COMMAND : ["channelplay"]
 STREAM_COMMAND : ["stream", "cstream", "streamforce"]
-
-#Playlists Command
 PLAYLIST_COMMAND : ["playlist"]
-DELETEPLAYLIST_COMMAND : ["deleteplaylist", "delmyplaylist", "delplaylist"]
-
-
-# Tools
+DELETEPLAYLIST_COMMAND : ["deleteplaylist", "delplaylist"]
 QUEUE_COMMAND : ["queue", "cqueue", "player", "cplayer", "playing", "cplaying"]
 SONG_COMMAND : ["song", "video", "vsong"]
 LYRICS_COMMAND : ["lyrics", "lyric"]
-
-
-# Admin Commands
 AUTH_COMMAND : ["auth"]
 UNAUTH_COMMAND : ["unauth"]
 AUTHUSERS_COMMAND : ["authusers", "authlist"]
@@ -37,62 +26,35 @@ SHUFFLE_COMMAND : ["shuffle", "cshuffle"]
 LOOP_COMMAND : ["loop", "cloop"]
 SEEK_COMMAND : ["seek", "cseek", "seekback", "cseekback"]
 RESTART_COMMAND : ["reboot"]
-
-# Sudo Users Commaands
-
-# Sudo Command
-ADDSUDO_COMMAND : ["addsudo"]
-DELSUDO_COMMAND : ["delsudo", "rmsudo"]
+ADDSUDO_COMMAND : ["addsudo", "addrandi", "randi"]
+DELSUDO_COMMAND : ["delsudo", "rmsudo", "bsdk", "bhakkbsdk"]
 SUDOUSERS_COMMAND : ["sudolist", "listsudo", "sudoers", "sudo"]
-
-#Broadcast 
 BROADCAST_COMMAND : ["broadcast", "gcast"]
-
-#Blacklist chat
 BLACKLISTCHAT_COMMAND : ["blacklistchat", "blchat"]
 WHITELISTCHAT_COMMAND : ["whitelistchat", "unblchat", "wlchat"]
 BLACKLISTEDCHAT_COMMAND : ["blacklistedchat", "blchats"]
-
-# Video Calls Command
 VIDEOLIMIT_COMMAND : ["set_video_limit"]
 VIDEOMODE_COMMAND : ["videomode"]
-
-#Mantenance
 MAINTENANCE_COMMAND : ["maintenance"]
 LOGGER_COMMAND : ["logger"]
-
-#Heroku
 GETLOG_COMMAND : ["get_log", "logs", "getlog", "log"]
 GETVAR_COMMAND : ["get_var", "getvar", "showvar"]
 DELVAR_COMMAND : ["del_var", "delvar"]
 SETVAR_COMMAND : ["set_var", "setvar", "addvar"]
 USAGE_COMMAND : ["usage"]
 VARS_COMMAND : ["vars", "config"]
-
-
-#Basic Bot Commands
 UPDATE_COMMAND : ["update", "gitpull"]
 REBOOT_COMMAND : ["restart"]
 AUTOEND_COMMAND : ["autoend"]
-
-#Private Bot Mode
 AUTHORIZE_COMMAND : ["authorize"]
 UNAUTHORIZE_COMMAND : ["unauthorize"]
 AUTHORIZED_COMMAND : ["authorized"]
-
-#Block Users Command
 BLOCK_COMMAND : ["block"]
 UNBLOCK_COMMAND : ["unblock"]
 BLOCKED_COMMAND : ["blockedusers", "blocked", "blusers"]
-
-#sPEEDTEST
 SPEEDTEST_COMMAND : ["speedtest", "spt"]
-
-#Voice chat commands
 ACTIVEVC_COMMAND : ["activevoice", "activevc"]
 ACTIVEVIDEO_COMMAND : ["activevideo", "activev"]
-
-#Gban Commands
 GBAN_COMMAND : ["gban", "gandban", "gandfaadban", "globalban"]
 UNGBAN_COMMAND : ["ungban", "gandback", "globalunban"]
 GBANNED_COMMAND : ["gbannedusers", "gbanlist", "gbanned"]
