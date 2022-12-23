@@ -134,11 +134,11 @@ async def unauthusers(client, message: Message, _):
 async def authusers(client, message: Message, _):
     _playlist = await get_authuser_names(message.chat.id)
     if not _playlist:
-        return await message.reply_text("**» ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ... ꜰᴇᴛᴄʜɪɴɢ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs !**")
+        return await message.reply_text(_["setting_5"])
     else:
         j = 0
-        mystic = await message.reply_text("**» ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ... \n\nꜰᴇᴛᴄʜɪɴɢ ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs...**")
-        text = "**ᴀᴜᴛʜᴏʀɪsᴇᴅ ᴜsᴇʀs ʟɪsᴛ :**\n\n"
+        mystic = await message.reply_text(_["auth_6"])
+        text = _["auth_7"]
         for note in _playlist:
             _note = await get_authuser(message.chat.id, note)
             user_id = _note["auth_user_id"]
@@ -151,6 +151,6 @@ async def authusers(client, message: Message, _):
             except Exception:
                 continue
             text += f"{j}➤ {user}[`{user_id}`]\n"
-            text += f"   {'┗ ᴀᴅᴅᴇᴅ ʙʏ :-'} {admin_name}[`{admin_id}`]\n\n"
+            text += f"   {_['auth_8']} {admin_name}[`{admin_id}`]\n\n"
         await mystic.delete()
         await message.reply_text(text)

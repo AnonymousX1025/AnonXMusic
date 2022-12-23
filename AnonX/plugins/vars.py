@@ -18,7 +18,7 @@ async def varsFunc(client, message):
         "ᴩʟᴇᴀsᴇ ᴡᴀɪᴛ... ɢᴇᴛᴛɪɴɢ ʏᴏᴜʀ ᴄᴏɴғɪɢ ᴠᴀʀɪᴀʙʟᴇs..."
     )
     v_limit = await get_video_limit()
-    bot_name = config.MUSIC_BOT_NAME
+    MUSIC_BOT_NAME = config.MUSIC_BOT_NAME
     up_r = f"[ʀᴇᴩᴏ]({config.UPSTREAM_REPO})"
     up_b = config.UPSTREAM_BRANCH
     auto_leave = config.AUTO_LEAVE_ASSISTANT_TIME
@@ -81,7 +81,7 @@ async def varsFunc(client, message):
     text = f"""**ᴍᴜsɪᴄ ʙᴏᴛ ᴄᴏɴғɪɢ ᴠᴀʀɪᴀʙʟᴇs:**
 
 **<u>ʙᴀsɪᴄ ᴠᴀʀɪᴀʙʟᴇs:</u>**
-**ᴍᴜsɪᴄ_ʙᴏᴛ_ɴᴀᴍᴇ** : `{bot_name}`
+**ᴍᴜsɪᴄ_ʙᴏᴛ_ɴᴀᴍᴇ** : `{MUSIC_BOT_NAME}`
 **ᴅᴜʀᴀᴛɪᴏɴ_ʟɪᴍɪᴛ** : `{play_duration} ᴍɪɴᴜᴛᴇs`
 **sᴏɴɢ_ᴅᴏᴡɴʟᴏᴀᴅ_ᴅᴜʀᴀᴛɪᴏɴ_ʟɪᴍɪᴛ** :` {song} ᴍɪɴᴜᴛᴇs`
 **ᴏᴡɴᴇʀ_ɪᴅ** : `{owner_id}`

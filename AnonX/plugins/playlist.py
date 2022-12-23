@@ -13,6 +13,7 @@ from AnonX.utils.database import (delete_playlist, get_playlist,
                                        get_playlist_names,
                                        save_playlist)
 from AnonX.utils.decorators.language import language, languageCB
+from AnonX.utils.inline.play import close_keyboard
 from AnonX.utils.inline.playlist import (botplaylist_markup,
                                               get_playlist_markup,
                                               warning_markup)
@@ -215,8 +216,9 @@ async def add_playlist(client, CallbackQuery, _):
     await save_playlist(user_id, videoid, plist)
     try:
         title = (title[:30]).title()
-        return await CallbackQuery.answer(
-            _["playlist_10"].format(title), show_alert=True
+        return await CallbackQuery.message.reply_text(
+            text="❄ sᴜᴄᴄᴇssғᴜʟʟʏ ᴀᴅᴅᴇᴅ ᴛᴏ ᴩʟᴀʏʟɪsᴛ.\n │\n └ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ : {0}".format(CallbackQuery.from_user.mention),
+            reply_markup=close_keyboard,
         )
     except:
         return

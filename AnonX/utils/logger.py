@@ -25,7 +25,7 @@ async def play_logs(message, streamtype):
             try:
                 await app.send_message(
                     LOG_GROUP_ID,
-                    f"{logger_text}",
+                    text=logger_text,
                     disable_web_page_preview=True,
                 )
             except:

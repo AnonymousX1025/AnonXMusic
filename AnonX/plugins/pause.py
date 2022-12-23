@@ -7,6 +7,7 @@ from AnonX import app
 from AnonX.core.call import Anon
 from AnonX.utils.database import is_music_playing, music_off
 from AnonX.utils.decorators import AdminRightsCheck
+from AnonX.utils.inline.play import close_keyboard
 
 # Commands
 PAUSE_COMMAND = get_command("PAUSE_COMMAND")
@@ -27,5 +28,6 @@ async def pause_admin(cli, message: Message, _, chat_id):
     await music_off(chat_id)
     await Anon.pause_stream(chat_id)
     await message.reply_text(
-        _["admin_2"].format(message.from_user.mention)
+        _["admin_2"].format(message.from_user.first_name),
+        reply_markup=close_keyboard
     )
