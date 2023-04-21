@@ -121,7 +121,7 @@ MONGO_DB_URI = $mongo_db
 LOG_GROUP_ID = $logger
 MUSIC_BOT_NAME = $mbt
 STRING_SESSION = $string_session
-OWNER_ID = $ownid""" > .env
+OWNER_ID = $ownid""" > .env 
 clear
 
 pprint "\n\n\nThanks for using AnonX Music installer, your vars have been saved successfully ! \nIf you wanna add more variables add them in your env by : vi .env"
