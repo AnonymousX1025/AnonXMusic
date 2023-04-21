@@ -68,7 +68,7 @@ def sudo():
 
 
 def heroku():
-    global HAPP
+    global HAPP 
     if is_heroku:
         if config.HEROKU_API_KEY and config.HEROKU_APP_NAME:
             try:
