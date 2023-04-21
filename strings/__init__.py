@@ -29,7 +29,7 @@ for filename in os.listdir(r"./strings/langs/"):
             open(r"./strings/langs/en.yml", encoding="utf8")
         )
     if filename.endswith(".yml"):
-        language_name = filename[:-4]
+        language_name = filename[:-4] 
         if language_name == "en":
             continue
         languages[language_name] = yaml.safe_load(
