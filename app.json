@@ -34,7 +34,7 @@
       },
       "MUSIC_BOT_NAME": {
         "description": "A name for your Music Bot. You can use special characters bot ko jhaat farak ni padega",
-        "value": "ᴀɴᴏɴ ダ ᴍᴜsɪᴄ",
+        "value": "⏤͟͞• 𝗔sʜɪsʜ 2ꭙ 𝙈𝙐𝙎𝙄𝘾˼ ",
         "required": true
       },
       "OWNER_ID": {
@@ -59,7 +59,7 @@
       },
       "LOG_GROUP_ID": {
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Channel ki id mat daal dena bsdk.",
-        "value": "",
+        "value": "https://t.me/Dost_support",
         "required": true
       }
     },
@@ -71,7 +71,7 @@
               "url": "heroku/nodejs"
           },
           {
-              "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+              "url"
           }
       ],
       "stack": "container"
