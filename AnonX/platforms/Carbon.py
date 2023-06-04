@@ -95,7 +95,7 @@ class CarbonAPI:
             params["widthAdjustment"] = self.width_adjustment
             try:
                 request = await ses.post(
-                    "https://carbonara.vercel.app/api/cook",
+                    "https://carbonara.solopov.dev/api/cook",
                     json=params,
                 )
             except client_exceptions.ClientConnectorError:
