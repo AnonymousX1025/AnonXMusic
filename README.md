@@ -1,5 +1,5 @@
 <h2 align="center">
-    ──「 ᴀɴᴏɴ ダ ᴍᴜsɪᴄ 」──
+    ──「 I will Add Random Start Pictures」──
 </h2>
 
 <p align="center">
