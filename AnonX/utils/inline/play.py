@@ -3,7 +3,7 @@ import math
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 import config
-from AnonX.utils.formatters import time_to_seconds
+from IroX.utils.formatters import time_to_seconds
 
 
 ## After Edits with Timer Bar
@@ -12,24 +12,24 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
     played_sec = time_to_seconds(played)
     duration_sec = time_to_seconds(dur)
     percentage = (played_sec / duration_sec) * 100
-    anon = math.floor(percentage)
-    if 0 < anon <= 10:
+    Iro = math.floor(percentage)
+    if 0 < Iro <= 10:
         bar = "◉—————————"
-    elif 10 < anon < 20:
+    elif 10 < Iro < 20:
         bar = "—◉————————"
-    elif 20 <= anon < 30:
+    elif 20 <= Iro < 30:
         bar = "——◉———————"
-    elif 30 <= anon < 40:
+    elif 30 <= Iro < 40:
         bar = "———◉——————"
-    elif 40 <= anon < 50:
+    elif 40 <= Iro < 50:
         bar = "————◉—————"
-    elif 50 <= anon < 60:
+    elif 50 <= Iro < 60:
         bar = "—————◉————"
-    elif 60 <= anon < 70:
+    elif 60 <= Iro < 70:
         bar = "——————◉———"
-    elif 70 <= anon < 80:
+    elif 70 <= Iro < 80:
         bar = "———————◉——"
-    elif 80 <= anon < 95:
+    elif 80 <= Iro < 95:
         bar = "————————◉—"
     else:
         bar = "—————————◉"
@@ -50,9 +50,6 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
                 text="II", callback_data=f"ADMIN Pause|{chat_id}"
             ),
             InlineKeyboardButton(
-                text="☆", callback_data=f"add_playlist {videoid}"
-            ),
-            InlineKeyboardButton(
                 text="‣‣I", callback_data=f"ADMIN Skip|{chat_id}"
             ),
             InlineKeyboardButton(
@@ -61,35 +58,40 @@ def stream_markup_timer(_, videoid, chat_id, played, dur):
         ],
         [
             InlineKeyboardButton(
-                text="✯ ᴄʟᴏsᴇ ✯", callback_data=f"close"
+                text="⚡BABY⚡",
+                url=f"https://t.me/+FhQ62ZERCqdiNzNl",
+            ),
+            InlineKeyboardButton(
+                text="✯ ᴄʟᴏsᴇ ✯", callback_data="close"
             )
         ],
     ]
     return buttons
 
 
+
 def telegram_markup_timer(_, chat_id, played, dur):
     played_sec = time_to_seconds(played)
     duration_sec = time_to_seconds(dur)
     percentage = (played_sec / duration_sec) * 100
-    anon = math.floor(percentage)
-    if 0 < anon <= 10:
+    Iro = math.floor(percentage)
+    if 0 < Iro <= 10:
         bar = "◉—————————"
-    elif 10 < anon < 20:
+    elif 10 < Iro < 20:
         bar = "—◉————————"
-    elif 20 <= anon < 30:
+    elif 20 <= Iro < 30:
         bar = "——◉———————"
-    elif 30 <= anon < 40:
+    elif 30 <= Iro < 40:
         bar = "———◉——————"
-    elif 40 <= anon < 50:
+    elif 40 <= Iro < 50:
         bar = "————◉—————"
-    elif 50 <= anon < 60:
+    elif 50 <= Iro < 60:
         bar = "—————◉————"
-    elif 60 <= anon < 70:
+    elif 60 <= Iro < 70:
         bar = "——————◉———"
-    elif 70 <= anon < 80:
+    elif 70 <= Iro < 80:
         bar = "———————◉——"
-    elif 80 <= anon < 95:
+    elif 80 <= Iro < 95:
         bar = "————————◉—"
     else:
         bar = "—————————◉"
@@ -117,6 +119,10 @@ def telegram_markup_timer(_, chat_id, played, dur):
             ),
         ],
         [
+            InlineKeyboardButton(
+                text="⚡BABY⚡",
+                url=f"https://t.me/+FhQ62ZERCqdiNzNl",
+            ),
             InlineKeyboardButton(
                 text="✯ ᴄʟᴏsᴇ ✯", callback_data=f"close"
             )
@@ -147,6 +153,10 @@ def stream_markup(_, videoid, chat_id):
         ],
         [
             InlineKeyboardButton(
+                text="⚡BABY⚡",
+                url=f"https://t.me/+FhQ62ZERCqdiNzNl",
+            ),
+            InlineKeyboardButton(
                 text="✯ ᴄʟᴏsᴇ ✯", callback_data=f"close"
             )
         ],
@@ -172,6 +182,10 @@ def telegram_markup(_, chat_id):
             ),
         ],
         [
+            InlineKeyboardButton(
+                text="⚡BABY⚡",
+                url=f"https://t.me/+FhQ62ZERCqdiNzNl",
+            ),
             InlineKeyboardButton(
                 text="✯ ᴄʟᴏsᴇ ✯", callback_data=f"close"
             )
@@ -235,11 +249,11 @@ def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
         [
             InlineKeyboardButton(
                 text=_["P_B_1"],
-                callback_data=f"AnonPlaylists {videoid}|{user_id}|{ptype}|a|{channel}|{fplay}",
+                callback_data=f"IroPlaylists {videoid}|{user_id}|{ptype}|a|{channel}|{fplay}",
             ),
             InlineKeyboardButton(
                 text=_["P_B_2"],
-                callback_data=f"AnonPlaylists {videoid}|{user_id}|{ptype}|v|{channel}|{fplay}",
+                callback_data=f"IroPlaylists {videoid}|{user_id}|{ptype}|v|{channel}|{fplay}",
             ),
         ],
         [
@@ -328,8 +342,48 @@ def queue_markup(_, videoid, chat_id):
         ],
         [
             InlineKeyboardButton(
+                text="⚡BABY⚡",
+                url=f"https://t.me/+FhQ62ZERCqdiNzNl",
+            ),
+            InlineKeyboardButton(
                 text="✯ ᴄʟᴏsᴇ ✯", callback_data=f"close"
             )
         ],
+    ]
+    return buttons
+
+def panel_markup_3(_, videoid, chat_id):
+    buttons = [
+        [
+                InlineKeyboardButton(
+                    text="🕒 0.5x",
+                    callback_data=f"SpeedUP {chat_id}|0.5",
+                ),
+                InlineKeyboardButton(
+                    text="ɴᴏʀᴍᴀʟ",
+                    callback_data=f"SpeedUP {chat_id}|1.0",
+                ),
+                InlineKeyboardButton(
+                    text="🕓 0.75x",
+                    callback_data=f"SpeedUP {chat_id}|0.75",
+                ),
+            ],
+            [
+                InlineKeyboardButton(text="✨ ᴀᴅᴅ ᴛᴏ ᴘʟᴀʏʟɪꜱᴛ ✨", callback_data=f"add_playlist {videoid}"),
+            ],
+            [
+                InlineKeyboardButton(
+                    text="🕤 1.5x",
+                    callback_data=f"SpeedUP {chat_id}|1.5",
+                ),
+                InlineKeyboardButton(
+                    text="• ʙᴀᴄᴋ •",
+                    callback_data=f"MainMarkup {videoid}|{chat_id}",
+                ),
+                InlineKeyboardButton(
+                    text="🕛 2.0x",
+                    callback_data=f"SpeedUP {chat_id}|2.0",
+                ),
+            ],
     ]
     return buttons
