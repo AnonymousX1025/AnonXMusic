@@ -14,9 +14,10 @@ BOT_TOKEN = getenv("BOT_TOKEN")
 
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
 LOG_GROUP_ID = int(getenv("LOG_GROUP_ID"))
-MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME", "ᴀɴᴏɴ ダ ᴍᴜsɪᴄ")
+MUSIC_BOT_NAME = getenv("MUSIC_BOT_NAME", "𝐌𝐎𝐎𝐍𝐋𝐈𝐆𝐇𝐓 𝐌𝐔𝐒𝐈𝐂
+")
 
-OWNER_ID = list(map(int, getenv("OWNER_ID", "1356469075").split()))
+OWNER_ID = list(map(int, getenv("OWNER_ID", "5920701493 , 5886326864").split()))
 
 HEROKU_API_KEY = getenv("HEROKU_API_KEY", None)
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME", None)
@@ -25,13 +26,13 @@ UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/AnonymousX1025/AnonX
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 GIT_TOKEN = getenv("GIT_TOKEN", None)
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/FallenAssociation")
-SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/DevilsHeavenMF")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/about_tcs")
+SUPPORT_GROUP = getenv("SUPPORT_GROUP", "https://t.me/the_nightt_club")
 
 SUPPORT_HEHE = SUPPORT_GROUP.split("me/")[1]
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", "180"))
-SONG_DOWNLOAD_DURATION = int(getenv("SONG_DOWNLOAD_DURATION_LIMIT", "180"))
+DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", "900"))
+SONG_DOWNLOAD_DURATION = int(getenv("SONG_DOWNLOAD_DURATION_LIMIT", "900"))
 
 AUTO_LEAVING_ASSISTANT = getenv("AUTO_LEAVING_ASSISTANT", "False")
 AUTO_LEAVE_ASSISTANT_TIME = int(
@@ -48,7 +49,7 @@ TELEGRAM_DOWNLOAD_EDIT_SLEEP = int(getenv("TELEGRAM_EDIT_SLEEP", "3"))
 SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", None)
 SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", None)
 
-VIDEO_STREAM_LIMIT = int(getenv("VIDEO_STREAM_LIMIT", "5"))
+VIDEO_STREAM_LIMIT = int(getenv("VIDEO_STREAM_LIMIT", "10"))
 SERVER_PLAYLIST_LIMIT = int(getenv("SERVER_PLAYLIST_LIMIT", "50"))
 PLAYLIST_FETCH_LIMIT = int(getenv("PLAYLIST_FETCH_LIMIT", "50"))
 
