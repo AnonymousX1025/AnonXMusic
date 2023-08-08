@@ -1,5 +1,5 @@
 {
-    "name": "ᴀɴᴏɴ ダ ᴍᴜsɪᴄ",
+    "name": "𝐌𝐎𝐎𝐍𝐋𝐈𝐆𝐇𝐓 𝐌𝐔𝐒𝐈𝐂",
     "description": "A Telegram Music Player Bot, written in Python with Pyrogram and Py-Tgcalls.",
     "logo": "https://graph.org/file/2a794cf3556a1f5ef8d93.jpg",
     "keywords": [
@@ -34,8 +34,7 @@
       },
       "MUSIC_BOT_NAME": {
         "description": "A name for your Music Bot. You can use special characters bot ko jhaat farak ni padega",
-        "value": "𝐌𝐎𝐎𝐍𝐋𝐈𝐆𝐇𝐓 𝐌𝐔𝐒𝐈𝐂
-",
+        "value": "𝐌𝐎𝐎𝐍𝐋𝐈𝐆𝐇𝐓 𝐌𝐔𝐒𝐈𝐂",
         "required": true
       },
       "OWNER_ID": {
