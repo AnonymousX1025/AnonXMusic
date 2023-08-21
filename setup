@@ -51,7 +51,7 @@ packages(){
 			pprint "SUCCESS.\n\n" "cgreen"
 		else
 			pprint "FAIL.\n\n" "cred"
-			pprint "You need to install ffmpeg manually in order to deploy AnonX Music, exiting...\n" "cblue"
+			pprint "You need to install ffmpeg manually in order to deploy AnonXMusic, exiting...\n" "cblue"
 			exit 1
 		fi
 	fi
@@ -65,8 +65,8 @@ packages(){
 node(){
 	command -v npm &>/dev/null && return
 	pprint "Installing Nodejs and Npm..  "
-	curl -fssL https://deb.nodesource.com/setup_18.x | sudo -E bash - &>nodelog.txt &&
-	sudo apt install nodejs -y &>>nodelog.txt &&
+	curl -fssL https://deb.nodesource.com/setup_19.x | sudo -E bash - &>nodelog.txt &&
+	sudo apt install -y nodejs &>>nodelog.txt &&
 	sudo npm i -g npm &>>nodelog.txt &&
 	pprint "SUCCESS!\n" "cgreen" || (pprint "FAIL.\n" "cred"; exit 1)
 }
@@ -94,7 +94,7 @@ update
 packages
 node
 installation
-pprint "\n\n\n\n\nAnonX Music Installation Completed !" "cgreen"
+pprint "\n\n\n\n\nAnonXMusic Installation Completed !" "cgreen"
 sleep 1
 clear
 
@@ -103,7 +103,6 @@ pprint "API ID: "; color_reset; read api_id
 pprint "\nAPI HASH: "; color_reset; read api_hash
 pprint "\nBOT TOKEN: "; color_reset; read bot_token
 pprint "\nOWNER ID:"; color_reset; read ownid
-pprint "\nMUSIC BOT NAME: "; color_reset; read mbt
 pprint "\nMONGO DB URI: "; color_reset; read mongo_db
 pprint "\nLOG GROUP ID: "; color_reset; read logger
 pprint "\nSTRING SESSION: "; color_reset; read string_session
@@ -118,11 +117,10 @@ echo """API_ID = $api_id
 API_HASH = $api_hash
 BOT_TOKEN = $bot_token
 MONGO_DB_URI = $mongo_db
-LOG_GROUP_ID = $logger
-MUSIC_BOT_NAME = $mbt
+LOGGER_ID = $logger
 STRING_SESSION = $string_session
 OWNER_ID = $ownid""" > .env
 clear
 
-pprint "\n\n\nThanks for using AnonX Music installer, your vars have been saved successfully ! \nIf you wanna add more variables add them in your env by : vi .env"
+pprint "\n\n\nThanks for using AnonXMusic installer, your vars have been saved successfully ! \nIf you wanna add more variables add them in your env by : vi .env"
 pprint "\n\nNow you can start the bot by : bash start\n\n"
