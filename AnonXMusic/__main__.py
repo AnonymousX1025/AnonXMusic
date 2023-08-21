@@ -54,6 +54,7 @@ async def init():
     )
     await idle()
     await app.stop()
+    await userbot.stop()
     LOGGER("AnonXMusic").info("Stopping AnonX Music Bot...")
 
 
