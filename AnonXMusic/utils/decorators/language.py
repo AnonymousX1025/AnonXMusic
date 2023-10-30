@@ -1,7 +1,9 @@
+from strings import get_string
+
+from AnonXMusic import app
 from AnonXMusic.misc import SUDOERS
 from AnonXMusic.utils.database import get_lang, is_maintenance
-from strings import get_string
-from AnonXMusic import app
+
 
 def language(mystic):
     async def wrapper(_, message, **kwargs):
