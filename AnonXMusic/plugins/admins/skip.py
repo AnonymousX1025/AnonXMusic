@@ -35,7 +35,7 @@ async def skip(cli, message: Message, _, chat_id):
         count = int(count - 1)
         if not 1 <= state <= count:
             return await message.reply_text(_["admin_11"].format(count))
-        for _ in range(state):
+        for __ in range(state):
             popped = None
             try:
                 popped = check.pop(0)
