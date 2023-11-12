@@ -96,9 +96,8 @@ def PlayWrapper(command):
                 admins = adminlist.get(message.chat.id)
                 if not admins:
                     return await message.reply_text(_["admin_13"])
-                else:
-                    if message.from_user.id not in admins:
-                        return await message.reply_text(_["play_4"])
+                if message.from_user.id not in admins:
+                    return await message.reply_text(_["play_4"])
         if message.command[0][0] == "v":
             video = True
         else:
@@ -120,10 +119,10 @@ def PlayWrapper(command):
                     get = await app.get_chat_member(chat_id, userbot.id)
                 except ChatAdminRequired:
                     return await message.reply_text(_["call_1"])
-                if (
-                    get.status == ChatMemberStatus.BANNED
-                    or get.status == ChatMemberStatus.RESTRICTED
-                ):
+                if get.status in [
+                    ChatMemberStatus.BANNED,
+                    ChatMemberStatus.RESTRICTED,
+                ]:
                     return await message.reply_text(
                         _["call_2"].format(
                             app.mention, userbot.id, userbot.name, userbot.username

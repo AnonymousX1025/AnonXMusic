@@ -79,15 +79,13 @@ class TeleAPI:
                     )
                 )
             except:
-                file_name = audio.file_unique_id + "." + "ogg"
+                file_name = f"{audio.file_unique_id}.ogg"
             file_name = os.path.join(os.path.realpath("downloads"), file_name)
         if video:
             try:
-                file_name = (
-                    video.file_unique_id + "." + (video.file_name.split(".")[-1])
-                )
+                file_name = f"{video.file_unique_id}." + video.file_name.split(".")[-1]
             except:
-                file_name = video.file_unique_id + "." + "mp4"
+                file_name = f"{video.file_unique_id}.mp4"
             file_name = os.path.join(os.path.realpath("downloads"), file_name)
         return file_name
 

@@ -18,7 +18,7 @@ def stats_buttons(_, status):
             callback_data="TopOverall",
         ),
     ]
-    upl = InlineKeyboardMarkup(
+    return InlineKeyboardMarkup(
         [
             sudo if status else not_sudo,
             [
@@ -29,11 +29,10 @@ def stats_buttons(_, status):
             ],
         ]
     )
-    return upl
 
 
 def back_stats_buttons(_):
-    upl = InlineKeyboardMarkup(
+    return InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton(
@@ -47,4 +46,3 @@ def back_stats_buttons(_):
             ],
         ]
     )
-    return upl

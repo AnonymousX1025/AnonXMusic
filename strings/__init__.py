@@ -22,7 +22,7 @@ for filename in os.listdir(r"./strings/langs/"):
         if language_name == "en":
             continue
         languages[language_name] = yaml.safe_load(
-            open(r"./strings/langs/" + filename, encoding="utf8")
+            open(f"./strings/langs/{filename}", encoding="utf8")
         )
         for item in languages["en"]:
             if item not in languages[language_name]:

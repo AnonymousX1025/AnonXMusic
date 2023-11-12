@@ -8,7 +8,7 @@ from ..logging import LOGGER
 
 class Anony(Client):
     def __init__(self):
-        LOGGER(__name__).info(f"Starting Bot...")
+        LOGGER(__name__).info("Starting Bot...")
         super().__init__(
             name="AnonXMusic",
             api_id=config.API_ID,
@@ -22,7 +22,7 @@ class Anony(Client):
     async def start(self):
         await super().start()
         self.id = self.me.id
-        self.name = self.me.first_name + " " + (self.me.last_name or "")
+        self.name = f"{self.me.first_name} " + (self.me.last_name or "")
         self.username = self.me.username
         self.mention = self.me.mention
 

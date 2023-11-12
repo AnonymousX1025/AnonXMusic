@@ -150,20 +150,20 @@ class Call(PyTgCalls):
 
     async def speedup_stream(self, chat_id: int, file_path, speed, playing):
         assistant = await group_assistant(self, chat_id)
-        if str(speed) != str("1.0"):
+        if str(speed) != "1.0":
             base = os.path.basename(file_path)
             chatdir = os.path.join(os.getcwd(), "playback", str(speed))
             if not os.path.isdir(chatdir):
                 os.makedirs(chatdir)
             out = os.path.join(chatdir, base)
             if not os.path.isfile(out):
-                if str(speed) == str("0.5"):
+                if str(speed) == "0.5":
                     vs = 2.0
-                if str(speed) == str("0.75"):
+                if str(speed) == "0.75":
                     vs = 1.35
-                if str(speed) == str("1.5"):
+                if str(speed) == "1.5":
                     vs = 0.68
-                if str(speed) == str("2.0"):
+                if str(speed) == "2.0":
                     vs = 0.5
                 proc = await asyncio.create_subprocess_shell(
                     cmd=(
@@ -180,8 +180,6 @@ class Call(PyTgCalls):
                     stderr=asyncio.subprocess.PIPE,
                 )
                 await proc.communicate()
-            else:
-                pass
         else:
             out = file_path
         dur = await asyncio.get_event_loop().run_in_executor(None, check_duration, out)
@@ -359,13 +357,12 @@ class Call(PyTgCalls):
             streamtype = check[0]["streamtype"]
             videoid = check[0]["vidid"]
             db[chat_id][0]["played"] = 0
-            exis = (check[0]).get("old_dur")
-            if exis:
+            if exis := (check[0]).get("old_dur"):
                 db[chat_id][0]["dur"] = exis
                 db[chat_id][0]["seconds"] = check[0]["old_second"]
                 db[chat_id][0]["speed_path"] = None
                 db[chat_id][0]["speed"] = 1.0
-            video = True if str(streamtype) == "video" else False
+            video = str(streamtype) == "video"
             if "live_" in queued:
                 n, link = await YouTube.video(videoid, True)
                 if n == 0:
@@ -413,7 +410,7 @@ class Call(PyTgCalls):
                         videoid,
                         mystic,
                         videoid=True,
-                        video=True if str(streamtype) == "video" else False,
+                        video=str(streamtype) == "video",
                     )
                 except:
                     return await mystic.edit_text(

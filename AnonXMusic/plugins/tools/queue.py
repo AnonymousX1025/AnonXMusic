@@ -29,10 +29,7 @@ def get_duration(playing):
     if "index_" in file_path or "live_" in file_path:
         return "Unknown"
     duration_seconds = int(playing[0]["seconds"])
-    if duration_seconds == 0:
-        return "Unknown"
-    else:
-        return "Inline"
+    return "Unknown" if duration_seconds == 0 else "Inline"
 
 
 @app.on_message(
@@ -71,17 +68,16 @@ async def get_queue(client, message: Message, _):
         IMAGE = get_image(videoid)
     elif "index_" in file:
         IMAGE = config.STREAM_IMG_URL
+    elif videoid == "telegram":
+        IMAGE = (
+            config.TELEGRAM_AUDIO_URL
+            if typo == "Audio"
+            else config.TELEGRAM_VIDEO_URL
+        )
+    elif videoid == "soundcloud":
+        IMAGE = config.SOUNCLOUD_IMG_URL
     else:
-        if videoid == "telegram":
-            IMAGE = (
-                config.TELEGRAM_AUDIO_URL
-                if typo == "Audio"
-                else config.TELEGRAM_VIDEO_URL
-            )
-        elif videoid == "soundcloud":
-            IMAGE = config.SOUNCLOUD_IMG_URL
-        else:
-            IMAGE = get_image(videoid)
+        IMAGE = get_image(videoid)
     send = _["queue_6"] if DUR == "Unknown" else _["queue_7"]
     cap = _["queue_8"].format(app.mention, title, typo, user, send)
     upl = (
@@ -102,27 +98,23 @@ async def get_queue(client, message: Message, _):
         try:
             while db[chat_id][0]["vidid"] == videoid:
                 await asyncio.sleep(5)
-                if await is_active_chat(chat_id):
-                    if basic[videoid]:
-                        if await is_music_playing(chat_id):
-                            try:
-                                buttons = queue_markup(
-                                    _,
-                                    DUR,
-                                    "c" if cplay else "g",
-                                    videoid,
-                                    seconds_to_min(db[chat_id][0]["played"]),
-                                    db[chat_id][0]["dur"],
-                                )
-                                await mystic.edit_reply_markup(reply_markup=buttons)
-                            except FloodWait:
-                                pass
-                        else:
-                            pass
-                    else:
-                        break
-                else:
+                if not await is_active_chat(chat_id):
                     break
+                if not basic[videoid]:
+                    break
+                if await is_music_playing(chat_id):
+                    try:
+                        buttons = queue_markup(
+                            _,
+                            DUR,
+                            "c" if cplay else "g",
+                            videoid,
+                            seconds_to_min(db[chat_id][0]["played"]),
+                            db[chat_id][0]["dur"],
+                        )
+                        await mystic.edit_reply_markup(reply_markup=buttons)
+                    except FloodWait:
+                        pass
         except:
             return
 
@@ -160,10 +152,8 @@ async def queued_tracks(client, CallbackQuery: CallbackQuery, _):
         caption=_["queue_1"],
     )
     await CallbackQuery.edit_message_media(media=med)
-    j = 0
     msg = ""
-    for x in got:
-        j += 1
+    for j, x in enumerate(got, start=1):
         if j == 1:
             msg += f'Streaming :\n\n✨ Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
         elif j == 2:
@@ -211,17 +201,16 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
         IMAGE = get_image(videoid)
     elif "index_" in file:
         IMAGE = config.STREAM_IMG_URL
+    elif videoid == "telegram":
+        IMAGE = (
+            config.TELEGRAM_AUDIO_URL
+            if typo == "Audio"
+            else config.TELEGRAM_VIDEO_URL
+        )
+    elif videoid == "soundcloud":
+        IMAGE = config.SOUNCLOUD_IMG_URL
     else:
-        if videoid == "telegram":
-            IMAGE = (
-                config.TELEGRAM_AUDIO_URL
-                if typo == "Audio"
-                else config.TELEGRAM_VIDEO_URL
-            )
-        elif videoid == "soundcloud":
-            IMAGE = config.SOUNCLOUD_IMG_URL
-        else:
-            IMAGE = get_image(videoid)
+        IMAGE = get_image(videoid)
     send = _["queue_6"] if DUR == "Unknown" else _["queue_7"]
     cap = _["queue_8"].format(app.mention, title, typo, user, send)
     upl = (
@@ -244,26 +233,22 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
         try:
             while db[chat_id][0]["vidid"] == videoid:
                 await asyncio.sleep(5)
-                if await is_active_chat(chat_id):
-                    if basic[videoid]:
-                        if await is_music_playing(chat_id):
-                            try:
-                                buttons = queue_markup(
-                                    _,
-                                    DUR,
-                                    cplay,
-                                    videoid,
-                                    seconds_to_min(db[chat_id][0]["played"]),
-                                    db[chat_id][0]["dur"],
-                                )
-                                await mystic.edit_reply_markup(reply_markup=buttons)
-                            except FloodWait:
-                                pass
-                        else:
-                            pass
-                    else:
-                        break
-                else:
+                if not await is_active_chat(chat_id):
                     break
+                if not basic[videoid]:
+                    break
+                if await is_music_playing(chat_id):
+                    try:
+                        buttons = queue_markup(
+                            _,
+                            DUR,
+                            cplay,
+                            videoid,
+                            seconds_to_min(db[chat_id][0]["played"]),
+                            db[chat_id][0]["dur"],
+                        )
+                        await mystic.edit_reply_markup(reply_markup=buttons)
+                    except FloodWait:
+                        pass
         except:
             return

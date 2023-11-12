@@ -38,10 +38,7 @@ class YouTubeAPI:
     async def exists(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
-        if re.search(self.regex, link):
-            return True
-        else:
-            return False
+        return bool(re.search(self.regex, link))
 
     async def url(self, message_1: Message) -> Union[str, None]:
         messages = [message_1]
@@ -63,9 +60,7 @@ class YouTubeAPI:
                 for entity in message.caption_entities:
                     if entity.type == MessageEntityType.TEXT_LINK:
                         return entity.url
-        if offset in (None,):
-            return None
-        return text[offset : offset + length]
+        return None if offset in (None,) else text[offset : offset + length]
 
     async def details(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
@@ -129,10 +124,7 @@ class YouTubeAPI:
             stderr=asyncio.subprocess.PIPE,
         )
         stdout, stderr = await proc.communicate()
-        if stdout:
-            return 1, stdout.decode().split("\n")[0]
-        else:
-            return 0, stderr.decode()
+        return (1, stdout.decode().split("\n")[0]) if stdout else (0, stderr.decode())
 
     async def playlist(self, link, limit, user_id, videoid: Union[bool, str] = None):
         if videoid:
@@ -187,7 +179,7 @@ class YouTubeAPI:
                     str(format["format"])
                 except:
                     continue
-                if not "dash" in str(format["format"]).lower():
+                if "dash" not in str(format["format"]).lower():
                     try:
                         format["format"]
                         format["filesize"]

@@ -2,7 +2,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def speed_markup(_, chat_id):
-    upl = InlineKeyboardMarkup(
+    return InlineKeyboardMarkup(
         [
             [
                 InlineKeyboardButton(
@@ -38,4 +38,3 @@ def speed_markup(_, chat_id):
             ],
         ]
     )
-    return upl

@@ -38,20 +38,19 @@ async def seek_comm(cli, message: Message, _, chat_id):
                 reply_markup=close_markup(_),
             )
         to_seek = duration_played - duration_to_skip + 1
+    elif (duration_seconds - (duration_played + duration_to_skip)) <= 10:
+        return await message.reply_text(
+            text=_["admin_23"].format(seconds_to_min(duration_played), duration),
+            reply_markup=close_markup(_),
+        )
     else:
-        if (duration_seconds - (duration_played + duration_to_skip)) <= 10:
-            return await message.reply_text(
-                text=_["admin_23"].format(seconds_to_min(duration_played), duration),
-                reply_markup=close_markup(_),
-            )
         to_seek = duration_played + duration_to_skip + 1
     mystic = await message.reply_text(_["admin_24"])
     if "vid_" in file_path:
         n, file_path = await YouTube.video(playing[0]["vidid"], True)
         if n == 0:
             return await message.reply_text(_["admin_22"])
-    check = (playing[0]).get("speed_path")
-    if check:
+    if check := (playing[0]).get("speed_path"):
         file_path = check
     if "index_" in file_path:
         file_path = playing[0]["vidid"]

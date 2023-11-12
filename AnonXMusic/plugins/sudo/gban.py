@@ -38,10 +38,8 @@ async def global_ban(client, message: Message, _):
         return await message.reply_text(_["gban_4"].format(user.mention))
     if user.id not in BANNED_USERS:
         BANNED_USERS.add(user.id)
-    served_chats = []
     chats = await get_served_chats()
-    for chat in chats:
-        served_chats.append(int(chat["chat_id"]))
+    served_chats = [int(chat["chat_id"]) for chat in chats]
     time_expected = get_readable_time(len(served_chats))
     mystic = await message.reply_text(_["gban_5"].format(user.mention, time_expected))
     number_of_chats = 0
@@ -80,10 +78,8 @@ async def global_un(client, message: Message, _):
         return await message.reply_text(_["gban_7"].format(user.mention))
     if user.id in BANNED_USERS:
         BANNED_USERS.remove(user.id)
-    served_chats = []
     chats = await get_served_chats()
-    for chat in chats:
-        served_chats.append(int(chat["chat_id"]))
+    served_chats = [int(chat["chat_id"]) for chat in chats]
     time_expected = get_readable_time(len(served_chats))
     mystic = await message.reply_text(_["gban_8"].format(user.mention, time_expected))
     number_of_chats = 0

@@ -24,10 +24,9 @@ def lanuages_keyboard(_):
     )
     keyboard.row(
         InlineKeyboardButton(
-            text=_["BACK_BUTTON"],
-            callback_data=f"settingsback_helper",
+            text=_["BACK_BUTTON"], callback_data="settingsback_helper"
         ),
-        InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data=f"close"),
+        InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
     )
     return keyboard
 

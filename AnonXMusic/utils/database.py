@@ -40,20 +40,19 @@ skipmode = {}
 
 
 async def get_assistant_number(chat_id: int) -> str:
-    assistant = assistantdict.get(chat_id)
-    return assistant
+    return assistantdict.get(chat_id)
 
 
 async def get_client(assistant: int):
-    if int(assistant) == 1:
+    if assistant == 1:
         return userbot.one
-    elif int(assistant) == 2:
+    elif assistant == 2:
         return userbot.two
-    elif int(assistant) == 3:
+    elif assistant == 3:
         return userbot.three
-    elif int(assistant) == 4:
+    elif assistant == 4:
         return userbot.four
-    elif int(assistant) == 5:
+    elif assistant == 5:
         return userbot.five
 
 
@@ -83,28 +82,24 @@ async def set_assistant(chat_id):
 async def get_assistant(chat_id: int) -> str:
     from AnonXMusic.core.userbot import assistants
 
-    assistant = assistantdict.get(chat_id)
-    if not assistant:
+    if assistant := assistantdict.get(chat_id):
+        userbot = (
+            await get_client(assistant)
+            if assistant in assistants
+            else await set_assistant(chat_id)
+        )
+    else:
         dbassistant = await assdb.find_one({"chat_id": chat_id})
         if not dbassistant:
             userbot = await set_assistant(chat_id)
-            return userbot
         else:
             got_assis = dbassistant["assistant"]
             if got_assis in assistants:
                 assistantdict[chat_id] = got_assis
                 userbot = await get_client(got_assis)
-                return userbot
             else:
                 userbot = await set_assistant(chat_id)
-                return userbot
-    else:
-        if assistant in assistants:
-            userbot = await get_client(assistant)
-            return userbot
-        else:
-            userbot = await set_assistant(chat_id)
-            return userbot
+    return userbot
 
 
 async def set_calls_assistant(chat_id):
@@ -123,8 +118,13 @@ async def set_calls_assistant(chat_id):
 async def group_assistant(self, chat_id: int) -> int:
     from AnonXMusic.core.userbot import assistants
 
-    assistant = assistantdict.get(chat_id)
-    if not assistant:
+    if assistant := assistantdict.get(chat_id):
+        assis = (
+            assistant
+            if assistant in assistants
+            else await set_calls_assistant(chat_id)
+        )
+    else:
         dbassistant = await assdb.find_one({"chat_id": chat_id})
         if not dbassistant:
             assis = await set_calls_assistant(chat_id)
@@ -135,11 +135,6 @@ async def group_assistant(self, chat_id: int) -> int:
                 assis = assis
             else:
                 assis = await set_calls_assistant(chat_id)
-    else:
-        if assistant in assistants:
-            assis = assistant
-        else:
-            assis = await set_calls_assistant(chat_id)
     if int(assis) == 1:
         return self.one
     elif int(assis) == 2:
@@ -199,9 +194,7 @@ async def set_upvotes(chat_id: int, mode: int):
 async def is_autoend() -> bool:
     chat_id = 1234
     user = await autoenddb.find_one({"chat_id": chat_id})
-    if not user:
-        return False
-    return True
+    return bool(user)
 
 
 async def autoend_on():
@@ -216,9 +209,7 @@ async def autoend_off():
 
 async def get_loop(chat_id: int) -> int:
     lop = loop.get(chat_id)
-    if not lop:
-        return 0
-    return lop
+    return 0 if not lop else lop
 
 
 async def set_loop(chat_id: int, mode: int):
@@ -300,9 +291,7 @@ async def set_lang(chat_id: int, lang: str):
 
 async def is_music_playing(chat_id: int) -> bool:
     mode = pause.get(chat_id)
-    if not mode:
-        return False
-    return mode
+    return False if not mode else mode
 
 
 async def music_on(chat_id: int):
@@ -318,10 +307,7 @@ async def get_active_chats() -> list:
 
 
 async def is_active_chat(chat_id: int) -> bool:
-    if chat_id not in active:
-        return False
-    else:
-        return True
+    return chat_id in active
 
 
 async def add_active_chat(chat_id: int):
@@ -339,10 +325,7 @@ async def get_active_video_chats() -> list:
 
 
 async def is_active_video_chat(chat_id: int) -> bool:
-    if chat_id not in activevideo:
-        return False
-    else:
-        return True
+    return chat_id in activevideo
 
 
 async def add_active_video_chat(chat_id: int):
@@ -357,9 +340,7 @@ async def remove_active_video_chat(chat_id: int):
 
 async def check_nonadmin_chat(chat_id: int) -> bool:
     user = await authdb.find_one({"chat_id": chat_id})
-    if not user:
-        return False
-    return True
+    return bool(user)
 
 
 async def is_nonadmin_chat(chat_id: int) -> bool:
@@ -392,9 +373,7 @@ async def remove_nonadmin_chat(chat_id: int):
 
 async def is_on_off(on_off: int) -> bool:
     onoff = await onoffdb.find_one({"on_off": on_off})
-    if not onoff:
-        return False
-    return True
+    return bool(onoff)
 
 
 async def add_on(on_off: int):
@@ -412,21 +391,17 @@ async def add_off(on_off: int):
 
 
 async def is_maintenance():
-    if not maintenance:
-        get = await onoffdb.find_one({"on_off": 1})
-        if not get:
-            maintenance.clear()
-            maintenance.append(2)
-            return True
-        else:
-            maintenance.clear()
-            maintenance.append(1)
-            return False
+    if maintenance:
+        return 1 not in maintenance
+    get = await onoffdb.find_one({"on_off": 1})
+    if not get:
+        maintenance.clear()
+        maintenance.append(2)
+        return True
     else:
-        if 1 in maintenance:
-            return False
-        else:
-            return True
+        maintenance.clear()
+        maintenance.append(1)
+        return False
 
 
 async def maintenance_off():
@@ -449,9 +424,7 @@ async def maintenance_on():
 
 async def is_served_user(user_id: int) -> bool:
     user = await usersdb.find_one({"user_id": user_id})
-    if not user:
-        return False
-    return True
+    return bool(user)
 
 
 async def get_served_users() -> list:
@@ -477,9 +450,7 @@ async def get_served_chats() -> list:
 
 async def is_served_chat(chat_id: int) -> bool:
     chat = await chatsdb.find_one({"chat_id": chat_id})
-    if not chat:
-        return False
-    return True
+    return bool(chat)
 
 
 async def add_served_chat(chat_id: int):
@@ -512,25 +483,17 @@ async def whitelist_chat(chat_id: int) -> bool:
 
 async def _get_authusers(chat_id: int) -> Dict[str, int]:
     _notes = await authuserdb.find_one({"chat_id": chat_id})
-    if not _notes:
-        return {}
-    return _notes["notes"]
+    return {} if not _notes else _notes["notes"]
 
 
 async def get_authuser_names(chat_id: int) -> List[str]:
-    _notes = []
-    for note in await _get_authusers(chat_id):
-        _notes.append(note)
-    return _notes
+    return list(await _get_authusers(chat_id))
 
 
 async def get_authuser(chat_id: int, name: str) -> Union[bool, dict]:
     name = name
     _notes = await _get_authusers(chat_id)
-    if name in _notes:
-        return _notes[name]
-    else:
-        return False
+    return _notes[name] if name in _notes else False
 
 
 async def save_authuser(chat_id: int, name: str, note: dict):
@@ -567,9 +530,7 @@ async def get_gbanned() -> list:
 
 async def is_gbanned_user(user_id: int) -> bool:
     user = await gbansdb.find_one({"user_id": user_id})
-    if not user:
-        return False
-    return True
+    return bool(user)
 
 
 async def add_gban_user(user_id: int):
@@ -588,9 +549,7 @@ async def remove_gban_user(user_id: int):
 
 async def get_sudoers() -> list:
     sudoers = await sudoersdb.find_one({"sudo": "sudo"})
-    if not sudoers:
-        return []
-    return sudoers["sudoers"]
+    return [] if not sudoers else sudoers["sudoers"]
 
 
 async def add_sudo(user_id: int) -> bool:
@@ -627,9 +586,7 @@ async def get_banned_count() -> int:
 
 async def is_banned_user(user_id: int) -> bool:
     user = await blockeddb.find_one({"user_id": user_id})
-    if not user:
-        return False
-    return True
+    return bool(user)
 
 
 async def add_banned_user(user_id: int):

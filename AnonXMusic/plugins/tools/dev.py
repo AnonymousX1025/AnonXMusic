@@ -88,7 +88,7 @@ async def executor(client: app, message: Message):
         )
         await message.reply_document(
             document=filename,
-            caption=f"<b>⥤ ᴇᴠᴀʟ :</b>\n<code>{cmd[0:980]}</code>\n\n<b>⥤ ʀᴇsᴜʟᴛ :</b>\nAttached Document",
+            caption=f"<b>⥤ ᴇᴠᴀʟ :</b>\n<code>{cmd[:980]}</code>\n\n<b>⥤ ʀᴇsᴜʟᴛ :</b>\nAttached Document",
             quote=False,
             reply_markup=keyboard,
         )
