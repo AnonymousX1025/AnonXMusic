@@ -1,5 +1,5 @@
 {
-    "name": "ᴀɴᴏɴ ダ ᴍᴜsɪᴄ",
+    "name": "DanXMusic",
     "description": "A Telegram Music Player Bot, written in Python with Pyrogram and Py-Tgcalls.",
     "logo": "https://te.legra.ph/file/b8a0c1a00db3e57522b53.jpg",
     "keywords": [
@@ -22,37 +22,37 @@
         "value": "",
         "required": true
       },
-      "BOT_TOKEN": {
+      "BOT_TOKEN": {6528153674:AAFKmEVEqx-QdDDVNzqaN1jiVOsloYAt8Ws
         "description": "A Bot's token from Botfather",
         "value": "",
         "required": true
       },
-      "MONGO_DB_URI": {
+      "MONGO_DB_URI": {mongodb+srv://AbhiModszYT:AbhiModszYT@abhimodszyt.pom3ops.mongodb.net/?retryWrites=true&w=majority
         "description": "Get a mongodb url from https://cloud.mongodb.com.",
         "value": "",
         "required": true
       },
-      "OWNER_ID": {
+      "OWNER_ID": {5779185981
         "description": "The user id of user whom you would like to add as OWNER.",
         "value": "",
         "required": true
       },
-      "STRING_SESSION": {
+      "STRING_SESSION": {BQHCruIActyt1MHsGfAQ4lxet_gHB7tfSTUGkHpu-YNCInUALlA5Qn23_wDziQ72Wq0g6GPWOYoxmfdeqFI8_HXksIMCgXWcRkbc1Iu7C3Laba4k40iJlAzebX49OnU6f36iuWB7FiHa8i1FhNBBlF1QDxEglmJbvvm7Pnujnr34uMMAzY1nrwzE1T5US4eZDr1SnjfUV_ZdUPPLFy_HZIBuMGnfAOuHuy4qTMIVGDZQ9lSaMt8x2OAz22kCUN6rpS_ui9UyoWY4uyHHRw0MX4IcPO5ZEOYoOe1mNmWdJ5M1WrU1JV-3y8_-MYM3im877WSdKfT1jtS7BcJW3Ai6xjy8q0gx2wAAAABXh0liAA
         "description": "A Pyrogram v2 String Session from @StringFatherBot on Telegram.",
         "value": "",
         "required": true
       },
-      "HEROKU_API_KEY": {
+      "HEROKU_API_KEY": {9ec68d12-a350-43de-87d1-c6b46a086592
         "description": "Your Heroku account's API key",
         "value": "",
         "required": false
       },
-      "HEROKU_APP_NAME": {
+      "HEROKU_APP_NAME": {musicgratbot
         "description": "Your heroku app name",
         "value": "",
         "required": false
       },
-      "LOGGER_ID": {
+      "LOGGER_ID": {-1001678973384
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Channel ki id mat daal dena bsdk.",
         "value": "",
         "required": true
@@ -66,7 +66,7 @@
               "url": "heroku/nodejs"
           },
           {
-              "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+              "url": "https://github.com/Muhamadwildan018/heroku-buildpack-ffmpeg-latest.git"
           }
       ],
       "stack": "container"
