@@ -1,5 +1,5 @@
 <h2 align="center">
-    ──「 ᴀɴᴏɴ ダ ᴍᴜsɪᴄ 」──
+    ──「 Blacklover ダ ᴍᴜsɪᴄ 」──
 </h2>
 
 <p align="center">
