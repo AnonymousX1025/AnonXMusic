@@ -24,10 +24,9 @@ def lanuages_keyboard(_):
     )
     keyboard.row(
         InlineKeyboardButton(
-            text=_["BACK_BUTTON"],
-            callback_data=f"settingsback_helper",
+            text=_["BACK_BUTTON"], callback_data="settingsback_helper"
         ),
-        InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data=f"close"),
+        InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
     )
     return keyboard
 
@@ -47,7 +46,7 @@ async def langs_command(client, message: Message, _):
 async def lanuagecb(client, CallbackQuery, _):
     try:
         await CallbackQuery.answer()
-    except:
+    except Exception:
         pass
     keyboard = lanuages_keyboard(_)
     return await CallbackQuery.edit_message_reply_markup(reply_markup=keyboard)
@@ -63,7 +62,7 @@ async def language_markup(client, CallbackQuery, _):
     try:
         _ = get_string(langauge)
         await CallbackQuery.answer(_["lang_2"], show_alert=True)
-    except:
+    except Exception:
         _ = get_string(old)
         return await CallbackQuery.answer(
             _["lang_3"],

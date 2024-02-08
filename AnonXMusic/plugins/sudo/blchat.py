@@ -51,7 +51,7 @@ async def all_chats(client, message: Message, _):
     for count, chat_id in enumerate(await blacklisted_chats(), 1):
         try:
             title = (await app.get_chat(chat_id)).title
-        except:
+        except Exception:
             title = "ᴘʀɪᴠᴀᴛᴇ ᴄʜᴀᴛ"
         j = 1
         text += f"{count}. {title}[<code>{chat_id}</code>]\n"

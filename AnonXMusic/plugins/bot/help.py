@@ -21,7 +21,7 @@ async def helper_private(
     if is_callback:
         try:
             await update.answer()
-        except:
+        except Exception:
             pass
         chat_id = update.message.chat.id
         language = await get_lang(chat_id)
@@ -33,7 +33,7 @@ async def helper_private(
     else:
         try:
             await update.delete()
-        except:
+        except Exception:
             pass
         language = await get_lang(update.chat.id)
         _ = get_string(language)

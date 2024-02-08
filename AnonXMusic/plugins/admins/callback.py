@@ -83,18 +83,18 @@ async def del_back_playlist(client, CallbackQuery, _):
             try:
                 exists = confirmer[chat_id][CallbackQuery.message.id]
                 current = db[chat_id][0]
-            except:
-                return await CallbackQuery.edit_message_text(f"ғᴀɪʟᴇᴅ.")
+            except Exception:
+                return await CallbackQuery.edit_message_text("ғᴀɪʟᴇᴅ.")
             try:
                 if current["vidid"] != exists["vidid"]:
                     return await CallbackQuery.edit_message.text(_["admin_35"])
                 if current["file"] != exists["file"]:
                     return await CallbackQuery.edit_message.text(_["admin_35"])
-            except:
+            except Exception:
                 return await CallbackQuery.edit_message_text(_["admin_36"])
             try:
                 await CallbackQuery.edit_message_text(_["admin_37"].format(upvote))
-            except:
+            except Exception:
                 pass
             command = counter
             mention = "ᴜᴘᴠᴏᴛᴇs"
@@ -120,16 +120,15 @@ async def del_back_playlist(client, CallbackQuery, _):
             return await CallbackQuery.edit_message_reply_markup(reply_markup=upl)
     else:
         is_non_admin = await is_nonadmin_chat(CallbackQuery.message.chat.id)
-        if not is_non_admin:
-            if CallbackQuery.from_user.id not in SUDOERS:
-                admins = adminlist.get(CallbackQuery.message.chat.id)
-                if not admins:
-                    return await CallbackQuery.answer(_["admin_13"], show_alert=True)
-                else:
-                    if CallbackQuery.from_user.id not in admins:
-                        return await CallbackQuery.answer(
-                            _["admin_14"], show_alert=True
-                        )
+        if not is_non_admin and CallbackQuery.from_user.id not in SUDOERS:
+            if not (
+                admins := adminlist.get(CallbackQuery.message.chat.id)
+            ):
+                return await CallbackQuery.answer(_["admin_13"], show_alert=True)
+            if CallbackQuery.from_user.id not in admins:
+                return await CallbackQuery.answer(
+                    _["admin_14"], show_alert=True
+                )
     if command == "Pause":
         if not await is_music_playing(chat_id):
             return await CallbackQuery.answer(_["admin_1"], show_alert=True)
@@ -148,7 +147,7 @@ async def del_back_playlist(client, CallbackQuery, _):
         await CallbackQuery.message.reply_text(
             _["admin_4"].format(mention), reply_markup=close_markup(_)
         )
-    elif command == "Stop" or command == "End":
+    elif command in ["Stop", "End"]:
         await CallbackQuery.answer()
         await Anony.stop_stream(chat_id)
         await set_loop(chat_id, 0)
@@ -156,14 +155,13 @@ async def del_back_playlist(client, CallbackQuery, _):
             _["admin_5"].format(mention), reply_markup=close_markup(_)
         )
         await CallbackQuery.message.delete()
-    elif command == "Skip" or command == "Replay":
+    elif command in ["Skip", "Replay"]:
         check = db.get(chat_id)
         if command == "Skip":
             txt = f"➻ sᴛʀᴇᴀᴍ sᴋɪᴩᴩᴇᴅ 🎄\n│ \n└ʙʏ : {mention} 🥀"
             popped = None
             try:
-                popped = check.pop(0)
-                if popped:
+                if popped := check.pop(0):
                     await auto_clean(popped)
                 if not check:
                     await CallbackQuery.edit_message_text(
@@ -177,9 +175,9 @@ async def del_back_playlist(client, CallbackQuery, _):
                     )
                     try:
                         return await Anony.stop_stream(chat_id)
-                    except:
+                    except Exception:
                         return
-            except:
+            except Exception:
                 try:
                     await CallbackQuery.edit_message_text(
                         f"➻ sᴛʀᴇᴀᴍ sᴋɪᴩᴩᴇᴅ 🎄\n│ \n└ʙʏ : {mention} 🥀"
@@ -191,7 +189,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                         reply_markup=close_markup(_),
                     )
                     return await Anony.stop_stream(chat_id)
-                except:
+                except Exception:
                     return
         else:
             txt = f"➻ sᴛʀᴇᴀᴍ ʀᴇ-ᴘʟᴀʏᴇᴅ 🎄\n│ \n└ʙʏ : {mention} 🥀"
@@ -204,8 +202,7 @@ async def del_back_playlist(client, CallbackQuery, _):
         videoid = check[0]["vidid"]
         status = True if str(streamtype) == "video" else None
         db[chat_id][0]["played"] = 0
-        exis = (check[0]).get("old_dur")
-        if exis:
+        if exis := (check[0]).get("old_dur"):
             db[chat_id][0]["dur"] = exis
             db[chat_id][0]["seconds"] = check[0]["old_second"]
             db[chat_id][0]["speed_path"] = None
@@ -219,11 +216,11 @@ async def del_back_playlist(client, CallbackQuery, _):
                 )
             try:
                 image = await YouTube.thumbnail(videoid, True)
-            except:
+            except Exception:
                 image = None
             try:
                 await Anony.skip_stream(chat_id, link, video=status, image=image)
-            except:
+            except Exception:
                 return await CallbackQuery.message.reply_text(_["call_6"])
             button = stream_markup(_, chat_id)
             img = await get_thumb(videoid)
@@ -251,7 +248,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                     videoid=True,
                     video=status,
                 )
-            except:
+            except Exception:
                 return await mystic.edit_text(_["call_6"])
             try:
                 image = await YouTube.thumbnail(videoid, True)
@@ -259,7 +256,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                 image = None
             try:
                 await Anony.skip_stream(chat_id, file_path, video=status, image=image)
-            except:
+            except Exception:
                 return await mystic.edit_text(_["call_6"])
             button = stream_markup(_, chat_id)
             img = await get_thumb(videoid)
@@ -280,7 +277,7 @@ async def del_back_playlist(client, CallbackQuery, _):
         elif "index_" in queued:
             try:
                 await Anony.skip_stream(chat_id, videoid, video=status)
-            except:
+            except Exception:
                 return await CallbackQuery.message.reply_text(_["call_6"])
             button = stream_markup(_, chat_id)
             run = await CallbackQuery.message.reply_photo(
@@ -292,9 +289,7 @@ async def del_back_playlist(client, CallbackQuery, _):
             db[chat_id][0]["markup"] = "tg"
             await CallbackQuery.edit_message_text(txt, reply_markup=close_markup(_))
         else:
-            if videoid == "telegram":
-                image = None
-            elif videoid == "soundcloud":
+            if videoid in ["telegram", "soundcloud"]:
                 image = None
             else:
                 try:
@@ -303,7 +298,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                     image = None
             try:
                 await Anony.skip_stream(chat_id, queued, video=status, image=image)
-            except:
+            except Exception:
                 return await CallbackQuery.message.reply_text(_["call_6"])
             if videoid == "telegram":
                 button = stream_markup(_, chat_id)
@@ -364,18 +359,18 @@ async def markup_timer():
                     continue
                 try:
                     mystic = playing[0]["mystic"]
-                except:
+                except Exception:
                     continue
                 try:
                     check = checker[chat_id][mystic.id]
                     if check is False:
                         continue
-                except:
+                except Exception:
                     pass
                 try:
                     language = await get_lang(chat_id)
                     _ = get_string(language)
-                except:
+                except Exception:
                     _ = get_string("en")
                 try:
                     buttons = stream_markup_timer(
@@ -387,9 +382,9 @@ async def markup_timer():
                     await mystic.edit_reply_markup(
                         reply_markup=InlineKeyboardMarkup(buttons)
                     )
-                except:
+                except Exception:
                     continue
-            except:
+            except Exception:
                 continue
 
 

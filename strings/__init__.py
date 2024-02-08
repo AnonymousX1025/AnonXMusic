@@ -22,13 +22,13 @@ for filename in os.listdir(r"./strings/langs/"):
         if language_name == "en":
             continue
         languages[language_name] = yaml.safe_load(
-            open(r"./strings/langs/" + filename, encoding="utf8")
+            open(f"./strings/langs/{filename}", encoding="utf8")
         )
         for item in languages["en"]:
             if item not in languages[language_name]:
                 languages[language_name][item] = languages["en"][item]
     try:
         languages_present[language_name] = languages[language_name]["name"]
-    except:
+    except Exception:
         print("There is some issue with the language file inside bot.")
         exit()

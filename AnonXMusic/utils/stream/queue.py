@@ -21,7 +21,7 @@ async def put_queue(
     title = title.title()
     try:
         duration_in_seconds = time_to_seconds(duration) - 3
-    except:
+    except Exception:
         duration_in_seconds = 0
     put = {
         "title": title,
@@ -36,8 +36,7 @@ async def put_queue(
         "played": 0,
     }
     if forceplay:
-        check = db.get(chat_id)
-        if check:
+        if check := db.get(chat_id):
             check.insert(0, put)
         else:
             db[chat_id] = []
@@ -64,7 +63,7 @@ async def put_queue_index(
                 None, check_duration, vidid
             )
             duration = seconds_to_min(dur)
-        except:
+        except Exception:
             duration = "ᴜʀʟ sᴛʀᴇᴀᴍ"
             dur = 0
     else:
@@ -81,8 +80,7 @@ async def put_queue_index(
         "played": 0,
     }
     if forceplay:
-        check = db.get(chat_id)
-        if check:
+        if check := db.get(chat_id):
             check.insert(0, put)
         else:
             db[chat_id] = []

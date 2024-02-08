@@ -20,7 +20,7 @@ async def admins(Client, message: Message, _, chat_id):
         return await message.reply_text(_["queue_2"])
     try:
         popped = check.pop(0)
-    except:
+    except Exception:
         return await message.reply_text(_["admin_15"], reply_markup=close_markup(_))
     check = db.get(chat_id)
     if not check:

@@ -16,8 +16,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     heightRatio = maxHeight / image.size[1]
     newWidth = int(widthRatio * image.size[0])
     newHeight = int(heightRatio * image.size[1])
-    newImage = image.resize((newWidth, newHeight))
-    return newImage
+    return image.resize((newWidth, newHeight))
 
 
 def clear(text):
@@ -25,7 +24,7 @@ def clear(text):
     title = ""
     for i in list:
         if len(title) + len(i) < 60:
-            title += " " + i
+            title += f" {i}"
     return title.strip()
 
 
@@ -41,20 +40,20 @@ async def get_thumb(videoid):
                 title = result["title"]
                 title = re.sub("\W+", " ", title)
                 title = title.title()
-            except:
+            except Exception:
                 title = "Unsupported Title"
             try:
                 duration = result["duration"]
-            except:
+            except Exception:
                 duration = "Unknown Mins"
             thumbnail = result["thumbnails"][0]["url"].split("?")[0]
             try:
                 views = result["viewCount"]["short"]
-            except:
+            except Exception:
                 views = "Unknown Views"
             try:
                 channel = result["channel"]["name"]
-            except:
+            except Exception:
                 channel = "Unknown Channel"
 
         async with aiohttp.ClientSession() as session:
@@ -112,7 +111,7 @@ async def get_thumb(videoid):
         )
         try:
             os.remove(f"cache/thumb{videoid}.png")
-        except:
+        except Exception:
             pass
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"

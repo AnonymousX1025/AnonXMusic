@@ -31,11 +31,11 @@ async def init():
         users = await get_banned_users()
         for user_id in users:
             BANNED_USERS.add(user_id)
-    except:
+    except Exception:
         pass
     await app.start()
     for all_module in ALL_MODULES:
-        importlib.import_module("AnonXMusic.plugins" + all_module)
+        importlib.import_module(f"AnonXMusic.plugins{all_module}")
     LOGGER("AnonXMusic.plugins").info("Successfully Imported Modules...")
     await userbot.start()
     await Anony.start()
@@ -46,7 +46,7 @@ async def init():
             "Please turn on the videochat of your log group\channel.\n\nStopping Bot..."
         )
         exit()
-    except:
+    except Exception:
         pass
     await Anony.decorators()
     LOGGER("AnonXMusic").info(

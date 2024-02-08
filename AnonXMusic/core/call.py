@@ -114,56 +114,56 @@ class Call(PyTgCalls):
         try:
             await _clear_(chat_id)
             await assistant.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
 
     async def stop_stream_force(self, chat_id: int):
         try:
             if config.STRING1:
                 await self.one.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
         try:
             if config.STRING2:
                 await self.two.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
         try:
             if config.STRING3:
                 await self.three.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
         try:
             if config.STRING4:
                 await self.four.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
         try:
             if config.STRING5:
                 await self.five.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
         try:
             await _clear_(chat_id)
-        except:
+        except Exception:
             pass
 
     async def speedup_stream(self, chat_id: int, file_path, speed, playing):
         assistant = await group_assistant(self, chat_id)
-        if str(speed) != str("1.0"):
+        if str(speed) != "1.0":
             base = os.path.basename(file_path)
             chatdir = os.path.join(os.getcwd(), "playback", str(speed))
             if not os.path.isdir(chatdir):
                 os.makedirs(chatdir)
             out = os.path.join(chatdir, base)
             if not os.path.isfile(out):
-                if str(speed) == str("0.5"):
+                if str(speed) == "0.5":
                     vs = 2.0
-                if str(speed) == str("0.75"):
+                if str(speed) == "0.75":
                     vs = 1.35
-                if str(speed) == str("1.5"):
+                if str(speed) == "1.5":
                     vs = 0.68
-                if str(speed) == str("2.0"):
+                if str(speed) == "2.0":
                     vs = 0.5
                 proc = await asyncio.create_subprocess_shell(
                     cmd=(
@@ -180,8 +180,6 @@ class Call(PyTgCalls):
                     stderr=asyncio.subprocess.PIPE,
                 )
                 await proc.communicate()
-            else:
-                pass
         else:
             out = file_path
         dur = await asyncio.get_event_loop().run_in_executor(None, check_duration, out)
@@ -222,13 +220,13 @@ class Call(PyTgCalls):
         try:
             check = db.get(chat_id)
             check.pop(0)
-        except:
+        except Exception:
             pass
         await remove_active_video_chat(chat_id)
         await remove_active_chat(chat_id)
         try:
             await assistant.leave_group_call(chat_id)
-        except:
+        except Exception:
             pass
 
     async def skip_stream(
@@ -313,12 +311,12 @@ class Call(PyTgCalls):
                 stream,
                 stream_type=StreamType().pulse_stream,
             )
-        except NoActiveGroupCall:
-            raise AssistantErr(_["call_8"])
-        except AlreadyJoinedError:
-            raise AssistantErr(_["call_9"])
-        except TelegramServerError:
-            raise AssistantErr(_["call_10"])
+        except NoActiveGroupCall as e:
+            raise AssistantErr(_["call_8"]) from e
+        except AlreadyJoinedError as e:
+            raise AssistantErr(_["call_9"]) from e
+        except TelegramServerError as e:
+            raise AssistantErr(_["call_10"]) from e
         await add_active_chat(chat_id)
         await music_on(chat_id)
         if video:
@@ -343,11 +341,11 @@ class Call(PyTgCalls):
             if not check:
                 await _clear_(chat_id)
                 return await client.leave_group_call(chat_id)
-        except:
+        except Exception:
             try:
                 await _clear_(chat_id)
                 return await client.leave_group_call(chat_id)
-            except:
+            except Exception:
                 return
         else:
             queued = check[0]["file"]
@@ -359,13 +357,12 @@ class Call(PyTgCalls):
             streamtype = check[0]["streamtype"]
             videoid = check[0]["vidid"]
             db[chat_id][0]["played"] = 0
-            exis = (check[0]).get("old_dur")
-            if exis:
+            if exis := (check[0]).get("old_dur"):
                 db[chat_id][0]["dur"] = exis
                 db[chat_id][0]["seconds"] = check[0]["old_second"]
                 db[chat_id][0]["speed_path"] = None
                 db[chat_id][0]["speed"] = 1.0
-            video = True if str(streamtype) == "video" else False
+            video = str(streamtype) == "video"
             if "live_" in queued:
                 n, link = await YouTube.video(videoid, True)
                 if n == 0:
@@ -413,9 +410,9 @@ class Call(PyTgCalls):
                         videoid,
                         mystic,
                         videoid=True,
-                        video=True if str(streamtype) == "video" else False,
+                        video=str(streamtype) == "video",
                     )
-                except:
+                except Exception:
                     return await mystic.edit_text(
                         _["call_6"], disable_web_page_preview=True
                     )
@@ -432,7 +429,7 @@ class Call(PyTgCalls):
                     )
                 try:
                     await client.change_stream(chat_id, stream)
-                except:
+                except Exception:
                     return await app.send_message(
                         original_chat_id,
                         text=_["call_6"],
