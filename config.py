@@ -22,7 +22,7 @@ DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
 LOGGER_ID = int(getenv("LOGGER_ID", None))
 
 # Get this value from @FallenxBot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", 1356469075))
+OWNER_ID = int(getenv("OWNER_ID", 6614053620))
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
@@ -39,16 +39,16 @@ GIT_TOKEN = getenv(
     "GIT_TOKEN", None
 )  # Fill this variable if your upstream repository is private
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/FallenAssociation")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/DevilsHeavenMF")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/MAGICAL_WORLD_SQUAD")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/MAGICAL_WORLD_SQUAD")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
 
 
 # Get this credentials from https://developer.spotify.com/dashboard
-SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", None)
-SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", None)
+SPOTIFY_CLIENT_ID = getenv("a863e9d9aa014bb5ba443a361d175a29", None)
+SPOTIFY_CLIENT_SECRET = getenv("6e3bd4d32f6640a994b4555179cf0349", None)
 
 
 # Maximum limit for fetching playlist's track from youtube, spotify, apple links.
@@ -78,13 +78,13 @@ confirmer = {}
 
 
 START_IMG_URL = getenv(
-    "START_IMG_URL", "https://te.legra.ph/file/25efe6aa029c6baea73ea.jpg"
+    "START_IMG_URL", "https://te.legra.ph/HEY-im-%F0%9D%95%84%F0%9D%95%92%F0%9D%95%98%F0%9D%95%9A%F0%9D%95%94%F0%9D%95%92%F0%9D%95%9D-%F0%9D%95%8E%F0%9D%95%A0%F0%9D%95%A3%F0%9D%95%9D%F0%9D%95%95-%F0%9D%95%8F-%F0%9D%95%9E%F0%9D%95%A6%F0%9D%95%A4%F0%9D%95%9A%F0%9D%95%94-02-10"
 )
 PING_IMG_URL = getenv(
     "PING_IMG_URL", "https://te.legra.ph/file/b8a0c1a00db3e57522b53.jpg"
 )
 PLAYLIST_IMG_URL = "https://te.legra.ph/file/4ec5ae4381dffb039b4ef.jpg"
-STATS_IMG_URL = "https://te.legra.ph/file/e906c2def5afe8a9b9120.jpg"
+STATS_IMG_URL = "https://te.legra.ph/HEY-im%F0%9D%95%84%F0%9D%95%92%F0%9D%95%98%F0%9D%95%9A%F0%9D%95%94%F0%9D%95%92%F0%9D%95%9D-%F0%9D%95%8E%F0%9D%95%A0%F0%9D%95%A3%F0%9D%95%9D%F0%9D%95%95-%F0%9D%95%8F-%F0%9D%95%9E%F0%9D%95%A6%F0%9D%95%A4%F0%9D%95%9A%F0%9D%95%94-02-10"
 TELEGRAM_AUDIO_URL = "https://te.legra.ph/file/6298d377ad3eb46711644.jpg"
 TELEGRAM_VIDEO_URL = "https://te.legra.ph/file/6298d377ad3eb46711644.jpg"
 STREAM_IMG_URL = "https://te.legra.ph/file/bd995b032b6bd263e2cc9.jpg"
