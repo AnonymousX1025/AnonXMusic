@@ -7,22 +7,22 @@ from pyrogram import filters
 load_dotenv()
 
 # Get this value from my.telegram.org/apps
-API_ID = int(getenv("API_ID"))
-API_HASH = getenv("API_HASH")
+API_ID = int(getenv("27175096"))
+API_HASH = getenv("22930f3501fc1c277e707d385c772547")
 
 # Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN")
+BOT_TOKEN = getenv("5474502814:AAH261L7TCCNh48gBcYiI4mMnPxBiAGRt3M")
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://noobarpita:arpita9711@cluster0.6tcho7h.mongodb.net/?retryWrites=true&w=majority")
 
-DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
+DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 700))
 
 # Chat id of a group for logging bot's activities
-LOGGER_ID = int(getenv("LOGGER_ID", None))
+LOGGER_ID = int(getenv("LOGGER_ID", -1002103073049))
 
 # Get this value from @FallenxBot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", 1356469075))
+OWNER_ID = int(getenv("OWNER_ID", 6878751957))
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
@@ -36,19 +36,19 @@ UPSTREAM_REPO = getenv(
 )
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 GIT_TOKEN = getenv(
-    "GIT_TOKEN", None
+    "GIT_TOKEN", "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"
 )  # Fill this variable if your upstream repository is private
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/FallenAssociation")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/DevilsHeavenMF")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/CWH_Official")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/voidxsupportchat")
 
 # Set this to True if you want the assistant to automatically leave chats after an interval
-AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
+AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", True))
 
 
 # Get this credentials from https://developer.spotify.com/dashboard
-SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", None)
-SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", None)
+SPOTIFY_CLIENT_ID = getenv("SPOTIFY_CLIENT_ID", "8e84d6ccd3094428908d5d2045d16790")
+SPOTIFY_CLIENT_SECRET = getenv("SPOTIFY_CLIENT_SECRET", "14785b6abaab46f18ffe6dbc24bef229")
 
 
 # Maximum limit for fetching playlist's track from youtube, spotify, apple links.
@@ -62,10 +62,10 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 
 
 # Get your pyrogram v2 session from @StringFatherBot on Telegram
-STRING1 = getenv("STRING_SESSION", None)
-STRING2 = getenv("STRING_SESSION2", None)
-STRING3 = getenv("STRING_SESSION3", None)
-STRING4 = getenv("STRING_SESSION4", None)
+STRING1 = getenv("STRING_SESSION", "=BQE9sBUAFJlZ02B0ffeiS_Tnw1lMPuDJdIuwZ2232BV6YxGrQlJpX1Vtsl7P0AU-1MLGCh5OyH3-AVW7eioG0lGSxR4x5bhBK0YqSGUXGnDkcbCR0asqjc8mSpba44QWghRt_87mLqhgwaSs1gDvh7Kh1lkfUwgvi90s0nK5QVtfBB0GREczHMMLna9GXBxMfnlvjp4n59qHFGXBjgbxkQWmvO80efOzvRtOyiYzrZoA5-cT4TWpmYZNS7UYua9BOFSnhtHtwOJnoa1cWCbr3vajHHA4xI66w1jHlHOVBMJ3iknbg8n3FzLWqDRKU2ZX-ohHmKGnZWIyjxMB1jD_fiMBBlsWaQAAAAGTQ4j6AA")
+STRING2 = getenv("STRING_SESSION2", "BQE9sBUAkTD5HzwPgWzJ1LFtewKZ6ACI-YdMXebBk_fma6W6KiPcbl9tu_5Xp19gOmIVWUTtgwKKnwacsM5kKtv1937v5rfQWUJ6HUymrL3_8SR5GLT2K2qEYLSbVgNclkZT2FFASOhut_4rhGvqlbIkXdR9I_WPyu0AHRfZWPWIrpXBQ5CPLEltZCxc6qhk-K6S9adbvRGDt5uVB2bgYqnoNpP_DbhgwNuS_DGwUangWicUWlYR2Mw0jliuybwp486rZ37RIlvkoiPfLmhGiQtxYDq61RZPSave8v3VuY4e7AbAkM7SLaXuu2jQFGfq5Vku8E7CRrd6ubxZZtTCevnwcxiSHQAAAAGRxMZZAA")
+STRING3 = getenv("STRING_SESSION3", "BQE9sBUAfTqkBXK66k3g40H60tP8gMjcqYGjwj5xaNoUkjhgJpvDkOeEHgOvCZipcrglVlSbZBGVjRv1Iaih07AnLUg8P78DfOPwld2VcN6d3LDyhfaCkU0oLQhImNWA5OxBbhZ98L3BoLQibTGJ0mRDkvg0XXPhfigslBtCeAKh6zkmja2Pg20zqeaL-w1xc3NPCCCR2QGPi7-4vTGPpTMzH5zII7xA8h2TtZ1bupiOS6LZ9OUYQWaC_3iwAp0nuqEB0RoUuvbHB-foyyMj9b45sipdH5LhOxreLCG3AZ0Y4CYg0uIqA_ZjMfRWvz0Z-Gl6pUQU6VkVtzPYO3W8qI0L57z7CgAAAAGbURsWAA")
+STRING4 = getenv("STRING_SESSION4", "BQE9sBUARdkh_LlN7UwOtOuZRVkcyftKSCwe2AV1LhXbrM4NOiwcHjYgC580zl-pi8vbG3JdqI03XtxlT1-JnzoEzmuj9strfyKs8b_vuv5jP70cBEwBL4OyYA_6DZLonG-bcqStpXMRrXFqYvsqBd4G8bvFu8BGGhDOPbmOKlVjMl-T4JnG6KNtXu_xkgPx_WSRiuWAPF2KM9_uzgul-uKAxIp-wC22NMHEjupD-1b_RBKwU6pUZk_XqTtymWiXC0fyhmn1ANFaK0cHd-KqTJtCtbA38ZTqbx0KQLvjHaA22g7YfithLTyFUQxtDvip_h8E3PLGijBxzVz9J9kIZoer26SIRAAAAAF9x7rQAA")
 STRING5 = getenv("STRING_SESSION5", None)
 
 
