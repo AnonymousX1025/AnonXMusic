@@ -24,7 +24,7 @@ def clear(text):
     list = text.split(" ")
     title = ""
     for i in list:
-        if len(title) + len(i) < 60:
+        if len(title) + len(i) < 300:
             title += " " + i
     return title.strip()
 
