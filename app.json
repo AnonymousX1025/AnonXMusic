@@ -57,7 +57,7 @@
         "value": "",
         "required": false
       },
-      "SUPPORT_Group": {
+      "SUPPORT_GROUP": {
         "description": "Copy a telegram your Group.",
         "value": "",
         "required": false
