@@ -51,6 +51,16 @@
         "description": "Your heroku app name",
         "value": "",
         "required": false
+      }
+      "SUPPORT_GROUP": {
+        "description": "Copy a telegram your group.",
+        "value": "",
+        "required": true
+      },
+      "SUPPORT_CHANNEL": {
+        "description": "Copy a telegram your Channel.",
+        "value": "",
+        "required": true
       },
       "LOGGER_ID": {
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Channel ki id mat daal dena bsdk.",
