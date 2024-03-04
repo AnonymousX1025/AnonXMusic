@@ -51,7 +51,7 @@
         "description": "Your heroku app name",
         "value": "",
         "required": false
-      }
+      },
       "SUPPORT_GROUP": {
         "description": "Copy a telegram your group.",
         "value": "",
