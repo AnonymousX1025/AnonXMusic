@@ -55,12 +55,12 @@
       "SUPPORT_CHANNEL": {
         "description": "Copy a telegram your Channel.",
         "value": "",
-        "required": false
+        "required": true
       },
       "SUPPORT_GROUP": {
         "description": "Copy a telegram your Group.",
         "value": "",
-        "required": false
+        "required": true
       },
       "LOGGER_ID": {
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Channel ki id mat daal dena bsdk.",
