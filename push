@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Prompt the user for a commit message
+read -p "Masukkan commit: " commit_message
+
+# Run git commands
+git add .
+git commit -m "$commit_message"
+git push
