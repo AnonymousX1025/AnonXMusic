@@ -8,3 +8,4 @@ cache/
 downloads/
 __pycache__/
 *.session-journal
+venv/
