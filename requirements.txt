@@ -20,6 +20,6 @@ speedtest-cli
 spotipy
 tgcrypto
 unidecode
-yt-dlp
+yt_dlp==2024.07.16
 youtube-search
 youtube-search-python
