@@ -31,10 +31,8 @@
 - Get your [Necessary Variables](https://github.com/AnonymousX1025/AnonXMusic/blob/master/sample.env)
 - Upgrade and Update by :
 `sudo apt-get update && sudo apt-get upgrade -y`
-- Install Ffmpeg by :
+- Install Ffmpeg & Python by :
 `sudo apt-get install python3-pip ffmpeg -y`
-- Install required packages by :
-`sudo apt-get install python3-pip -y`
 - Install pip by :
 `sudo pip3 install -U pip`
 - Install Node js by :
