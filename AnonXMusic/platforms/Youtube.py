@@ -179,7 +179,7 @@ class YouTubeAPI:
             link = link.split("&")[0]
         ytdl_opts = {
             "quiet": True,
-            "cookiefile": "cook",  # Menambahkan baris ini
+            "cookiefile": "musikanon/pepek.txt",  # Menambahkan baris ini
         }
         ydl = yt_dlp.YoutubeDL(ytdl_opts)
         with ydl:
@@ -252,7 +252,7 @@ class YouTubeAPI:
                 "nocheckcertificate": True,
                 "quiet": True,
                 "no_warnings": True,
-                "cookiefile": "cook",  # Menambahkan baris ini
+                "cookiefile": "musikanon/pepek.txt",  # Menambahkan baris ini
             }
             x = yt_dlp.YoutubeDL(ydl_optssx)
             info = x.extract_info(link, False)
@@ -270,7 +270,7 @@ class YouTubeAPI:
                 "nocheckcertificate": True,
                 "quiet": True,
                 "no_warnings": True,
-                "cookiefile": "cook",  # Menambahkan baris ini
+                "cookiefile": "musikanon/pepek.txt",  # Menambahkan baris ini
             }
             x = yt_dlp.YoutubeDL(ydl_optssx)
             info = x.extract_info(link, False)
@@ -292,7 +292,7 @@ class YouTubeAPI:
                 "no_warnings": True,
                 "prefer_ffmpeg": True,
                 "merge_output_format": "mp4",
-                "cookiefile": "cook",  # Menambahkan baris ini
+                "cookiefile": "musikanon/pepek.txt",  # Menambahkan baris ini
             }
             x = yt_dlp.YoutubeDL(ydl_optssx)
             x.download([link])
@@ -314,7 +314,7 @@ class YouTubeAPI:
                         "preferredquality": "192",
                     }
                 ],
-                "cookiefile": "cook",  # Menambahkan baris ini
+                "cookiefile": "musikanon/pepek.txt",  # Menambahkan baris ini
             }
             x = yt_dlp.YoutubeDL(ydl_optssx)
             x.download([link])
