@@ -299,7 +299,7 @@ class YouTubeAPI:
         def song_audio_dl():
             fpath = f"downloads/{title}.%(ext)s"
             ydl_optssx = {
-                "cookiefile": "/cookies/cookies.txt"
+                "cookiefile": "/cookies/cookies.txt",
                 "format": format_id,
                 "outtmpl": fpath,
                 "geo_bypass": True,
