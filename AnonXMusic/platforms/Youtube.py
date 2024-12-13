@@ -245,7 +245,7 @@ class YouTubeAPI:
 
         def audio_dl():
             ydl_optssx = {
-                "cookiefile": "/cookies/cookies.txt"
+                "cookiefile": "/cookies/cookies.txt",
                 "format": "bestaudio/best",
                 "outtmpl": "downloads/%(id)s.%(ext)s",
                 "geo_bypass": True,
@@ -263,7 +263,7 @@ class YouTubeAPI:
 
         def video_dl():
             ydl_optssx = {
-                "cookiefile": "/cookies/cookies.txt"
+                "cookiefile": "/cookies/cookies.txt",
                 "format": "(bestvideo[height<=?720][width<=?1280][ext=mp4])+(bestaudio[ext=m4a])",
                 "outtmpl": "downloads/%(id)s.%(ext)s",
                 "geo_bypass": True,
@@ -283,7 +283,7 @@ class YouTubeAPI:
             formats = f"{format_id}+140"
             fpath = f"downloads/{title}"
             ydl_optssx = {
-                "cookiefile": "/cookies/cookies.txt"
+                "cookiefile": "/cookies/cookies.txt",
                 "format": formats,
                 "outtmpl": fpath,
                 "geo_bypass": True,
