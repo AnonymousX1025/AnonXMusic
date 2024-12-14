@@ -7,6 +7,7 @@ Follow these steps to get the `cookies.txt` file from an Android or PC:
 3. Play any video.
 4. Use the extension to retrieve the cookies for this site.
 5. Paste the contents of the `cookies.txt` file here in cookies.txt.
+6. Your cookies may look like the ones already in cookies.txt 
 
 ---
 
