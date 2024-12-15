@@ -116,7 +116,4 @@ if SUPPORT_CHAT:
         raise SystemExit(
             "[ERROR] - Your SUPPORT_CHAT url is wrong. Please ensure that it starts with https://"
         )
-
-# Check if the cookie file exists, set cookiePath or send a message and exit
-cookiePath = os.path.join(os.getcwd(), "cookies", "cookies.txt") if os.path.exists(os.path.join(os.getcwd(), "cookies", "cookies.txt")) else (requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", params={"chat_id": LOGGER_ID, "text": "Please set up the cookie file ('cookies/cookies.txt')."}).status_code == 200 and sys.exit())
-print('Path set :',cookiePath)
+        
