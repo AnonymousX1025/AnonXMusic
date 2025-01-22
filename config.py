@@ -7,22 +7,22 @@ from pyrogram import filters
 load_dotenv()
 
 # Get this value from my.telegram.org/apps
-API_ID = int(getenv("API_ID"))
-API_HASH = getenv("API_HASH")
+API_ID = int(getenv("API_ID","20213849"))
+API_HASH = getenv("API_HASH","e97df0eca2a9531c80202c1a7d3f5721")
 
 # Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN")
+BOT_TOKEN = getenv("BOT_TOKEN","6591274198:AAFFsE0pTw3tUE9kq49QjUBarwLaQTdjurY")
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI", None)
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://sadbot19033:sadbotbey@cluster0.01dwa.mongodb.net/")
 
 DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
 
 # Chat id of a group for logging bot's activities
-LOGGER_ID = int(getenv("LOGGER_ID", None))
+LOGGER_ID = int(getenv("LOGGER_ID", -1002143343100))
 
 # Get this value from @FallenxBot on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", 1356469075))
+OWNER_ID = int(getenv("OWNER_ID", 6180151150))
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
@@ -62,11 +62,11 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 
 
 # Get your pyrogram v2 session from @StringFatherBot on Telegram
-STRING1 = getenv("STRING_SESSION", None)
-STRING2 = getenv("STRING_SESSION2", None)
-STRING3 = getenv("STRING_SESSION3", None)
-STRING4 = getenv("STRING_SESSION4", None)
-STRING5 = getenv("STRING_SESSION5", None)
+STRING1 = getenv("STRING_SESSION", "AgDY4YEATvn3sIR0kiN1sOLkAONRhouL-KGZtyDH-EMS-34a_muXwk60pfuL4b-uqq-MniAlll9wQRb2Fc7SVpPILHAxvp38bzLHssWLvSl0O9Evo1BtB9Pki1awykxVgeOjiVJxBaU1ynHkvm_dPhNHhYnOJMDTiqWL0v9O6UMvcpF8OS9OnbQuvsDDE-xCu7lhLMAiQb_sk-wpGYyE9bpzvb89whwUMPp1Zv-03VZZIjPUrcWU-qheggjhD7AiwxaWFBsP69RaNCZ_NTz18T8yl6Cnx6xiwsEPrJFxINrw3RHC5n9Eu-2FToZlrEhIaxeOZHsje0RQ_yCdyRs0BzC5HpwR4gAAAAE1ZEE9AA")
+STRING2 = getenv("STRING_SESSION", "AgDY4YEATvn3sIR0kiN1sOLkAONRhouL-KGZtyDH-EMS-34a_muXwk60pfuL4b-uqq-MniAlll9wQRb2Fc7SVpPILHAxvp38bzLHssWLvSl0O9Evo1BtB9Pki1awykxVgeOjiVJxBaU1ynHkvm_dPhNHhYnOJMDTiqWL0v9O6UMvcpF8OS9OnbQuvsDDE-xCu7lhLMAiQb_sk-wpGYyE9bpzvb89whwUMPp1Zv-03VZZIjPUrcWU-qheggjhD7AiwxaWFBsP69RaNCZ_NTz18T8yl6Cnx6xiwsEPrJFxINrw3RHC5n9Eu-2FToZlrEhIaxeOZHsje0RQ_yCdyRs0BzC5HpwR4gAAAAE1ZEE9AA")
+STRING3 = getenv("STRING_SESSION", "AgDY4YEATvn3sIR0kiN1sOLkAONRhouL-KGZtyDH-EMS-34a_muXwk60pfuL4b-uqq-MniAlll9wQRb2Fc7SVpPILHAxvp38bzLHssWLvSl0O9Evo1BtB9Pki1awykxVgeOjiVJxBaU1ynHkvm_dPhNHhYnOJMDTiqWL0v9O6UMvcpF8OS9OnbQuvsDDE-xCu7lhLMAiQb_sk-wpGYyE9bpzvb89whwUMPp1Zv-03VZZIjPUrcWU-qheggjhD7AiwxaWFBsP69RaNCZ_NTz18T8yl6Cnx6xiwsEPrJFxINrw3RHC5n9Eu-2FToZlrEhIaxeOZHsje0RQ_yCdyRs0BzC5HpwR4gAAAAE1ZEE9AA")
+STRING4 = getenv("STRING_SESSION", "AgDY4YEATvn3sIR0kiN1sOLkAONRhouL-KGZtyDH-EMS-34a_muXwk60pfuL4b-uqq-MniAlll9wQRb2Fc7SVpPILHAxvp38bzLHssWLvSl0O9Evo1BtB9Pki1awykxVgeOjiVJxBaU1ynHkvm_dPhNHhYnOJMDTiqWL0v9O6UMvcpF8OS9OnbQuvsDDE-xCu7lhLMAiQb_sk-wpGYyE9bpzvb89whwUMPp1Zv-03VZZIjPUrcWU-qheggjhD7AiwxaWFBsP69RaNCZ_NTz18T8yl6Cnx6xiwsEPrJFxINrw3RHC5n9Eu-2FToZlrEhIaxeOZHsje0RQ_yCdyRs0BzC5HpwR4gAAAAE1ZEE9AA")
+STRING5 = getenv("STRING_SESSION", "AgDY4YEATvn3sIR0kiN1sOLkAONRhouL-KGZtyDH-EMS-34a_muXwk60pfuL4b-uqq-MniAlll9wQRb2Fc7SVpPILHAxvp38bzLHssWLvSl0O9Evo1BtB9Pki1awykxVgeOjiVJxBaU1ynHkvm_dPhNHhYnOJMDTiqWL0v9O6UMvcpF8OS9OnbQuvsDDE-xCu7lhLMAiQb_sk-wpGYyE9bpzvb89whwUMPp1Zv-03VZZIjPUrcWU-qheggjhD7AiwxaWFBsP69RaNCZ_NTz18T8yl6Cnx6xiwsEPrJFxINrw3RHC5n9Eu-2FToZlrEhIaxeOZHsje0RQ_yCdyRs0BzC5HpwR4gAAAAE1ZEE9AA")
 
 
 BANNED_USERS = filters.user()
