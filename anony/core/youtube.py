@@ -105,7 +105,11 @@ class YouTube:
         else:
             ydl_opts = {
                 **base_opts,
-                "format": "bestaudio[ext=webm][acodec=opus]",
+                "format": "worst", #"bestaudio[ext=webm][acodec=opus]",  Temporary fix for audio downloads
+                "postprocessors": [{
+                    "key": "FFmpegExtractAudio",
+                    "preferredcodec": "m4a",
+                }],
             }
 
         def _download():
