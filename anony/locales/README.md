@@ -19,6 +19,56 @@
       <td>English</td>
       <td><a href=https://github.com/AnonymousX1025>@AnonymousX1025</a></td>
     </tr>
+    <tr>
+      <td>ar</td>
+      <td>Arabic</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>my</td>
+      <td>Burmese</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>fr</td>
+      <td>French</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>ja</td>
+      <td>Japanese</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>ru</td>
+      <td>Russian</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>es</td>
+      <td>Spanish</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>de</td>
+      <td>German</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>hi</td>
+      <td>Hindi</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>zh-hans</td>
+      <td>Chinese (Simplified)</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
+    <tr>
+      <td>pt</td>
+      <td>Portuguese</td>
+      <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+    </tr>
   </tbody>
 </table>
 
