@@ -11,14 +11,16 @@ from anony import db, logger
 
 lang_codes = {
     "en": "English",
+    "ar": "Arabic",
+    "my": "Burmese",
     "es": "Spanish",
     "ru": "Russian",
     "fr": "French",
     "de": "German",
     "pt": "Portuguese",
-    "it": "Italian",
+    "hi": "Hindi",
     "ja": "Japanese",
-    "ko": "Korean",
+    "zh-hans": "Chinese (Simplified)",
 }
 
 
