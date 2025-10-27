@@ -2,7 +2,6 @@
 # Licensed under the MIT License.
 # This file is part of AnonXMusic
 
-
 import os
 import re
 import random
@@ -22,9 +21,12 @@ class YouTube:
         self.base = "https://www.youtube.com/watch?v="
         self.cookies = []
         self.checked = False
-        self.regex = r"(https?://)?(www\.|m\.)?(youtube\.com/(watch\?v=|shorts/)|youtu\.be/)([a-zA-Z0-9_-]{11})"
+        self.regex = (
+            r"(https?://)?(www\.|m\.)?(youtube\.com/(watch\?v=|shorts/)|youtu\.be/)([a-zA-Z0-9_-]{11})"
+        )
 
-    def get_cookies(self):
+    def get_cookies(self) -> Optional[str]:
+        """Pick a random available cookie file"""
         if not self.checked:
             for file in os.listdir("anony/cookies"):
                 if file.endswith(".txt"):
@@ -35,9 +37,11 @@ class YouTube:
         return f"anony/cookies/{random.choice(self.cookies)}"
 
     def valid(self, url: str) -> bool:
+        """Validate YouTube URL"""
         return bool(re.match(self.regex, url))
 
     def url(self, message_1: types.Message) -> Union[str, None]:
+        """Extract YouTube link from message or caption"""
         messages = [message_1]
         if message_1.reply_to_message:
             messages.append(message_1.reply_to_message)
@@ -57,7 +61,8 @@ class YouTube:
 
         return None
 
-    async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
+    async def search(self, query: str, m_id: int, video: bool = False) -> Optional[Track]:
+        """Search YouTube and return Track object"""
         _search = VideosSearch(query, limit=1)
         results = await _search.next()
         if results and results["result"]:
@@ -77,6 +82,7 @@ class YouTube:
         return None
 
     async def download(self, video_id: str, video: bool = False) -> Optional[str]:
+        """Download YouTube video/audio with smart multi-format fallback"""
         url = self.base + video_id
         ext = "mp4" if video else "m4a"
         filename = f"downloads/{video_id}.{ext}"
@@ -99,22 +105,45 @@ class YouTube:
         if video:
             ydl_opts = {
                 **base_opts,
-                "format": "(bestvideo[height<=?720][width<=?1280][ext=mp4])+(bestaudio)",
+                "format": "(bestvideo[height<=?720][ext=mp4])+bestaudio/best",
                 "merge_output_format": "mp4",
             }
         else:
             ydl_opts = {
                 **base_opts,
-                "format": "worst", #"bestaudio[ext=webm][acodec=opus]",  Temporary fix for audio downloads
-                "postprocessors": [{
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "m4a",
-                }],
+                "format": "bestaudio/best",
+                "postprocessors": [
+                    {
+                        "key": "FFmpegExtractAudio",
+                        "preferredcodec": "m4a",
+                    }
+                ],
             }
 
         def _download():
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
+            try:
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([url])
+            except yt_dlp.utils.DownloadError:
+                fallback_formats = [
+                    "(bestvideo+bestaudio/best)[ext=mp4]",
+                    "bestvideo+bestaudio/best",
+                    "best",
+                ]
+
+                for fmt in fallback_formats:
+                    try:
+                        fallback_opts = {
+                            **base_opts,
+                            "format": fmt,
+                            "merge_output_format": "mp4" if video else None,
+                            "cookiefile": self.get_cookies(),
+                        }
+                        with yt_dlp.YoutubeDL(fallback_opts) as ydl:
+                            ydl.download([url])
+                        break
+                    except yt_dlp.utils.DownloadError:
+                        continue
             return filename
 
         return await asyncio.to_thread(_download)
