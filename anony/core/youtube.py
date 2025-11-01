@@ -78,7 +78,7 @@ class YouTube:
 
     async def download(self, video_id: str, video: bool = False) -> Optional[str]:
         url = self.base + video_id
-        ext = "mp4" if video else "m4a"
+        ext = "mp4" if video else "webm"
         filename = f"downloads/{video_id}.{ext}"
 
         if Path(filename).exists():
@@ -105,11 +105,7 @@ class YouTube:
         else:
             ydl_opts = {
                 **base_opts,
-                "format": "worst", #"bestaudio[ext=webm][acodec=opus]",  Temporary fix for audio downloads
-                "postprocessors": [{
-                    "key": "FFmpegExtractAudio",
-                    "preferredcodec": "m4a",
-                }],
+                "format": "bestaudio[ext=webm][acodec=opus]",
             }
 
         def _download():
