@@ -10,17 +10,17 @@ from pathlib import Path
 from anony import db, logger
 
 lang_codes = {
-    "en": "English",
     "ar": "Arabic",
-    "my": "Burmese",
-    "es": "Spanish",
-    "ru": "Russian",
-    "fr": "French",
     "de": "German",
-    "pt": "Portuguese",
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
     "hi": "Hindi",
-    "pa": "Punjabi",
     "ja": "Japanese",
+    "my": "Burmese",
+    "pa": "Punjabi",
+    "pt": "Portuguese",
+    "ru": "Russian",
     "zh": "Chinese",
 }
 
