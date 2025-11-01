@@ -19,8 +19,9 @@ lang_codes = {
     "de": "German",
     "pt": "Portuguese",
     "hi": "Hindi",
+    "pa": "Punjabi",
     "ja": "Japanese",
-    "zh-hans": "Chinese (Simplified)",
+    "zh": "Chinese",
 }
 
 
