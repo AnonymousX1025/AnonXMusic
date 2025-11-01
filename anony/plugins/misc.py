@@ -8,7 +8,7 @@ import time
 
 from pyrogram import enums, filters, types
 
-from anony import anon, app, config, db, lang, queue, tasks, userbot
+from anony import anon, app, config, db, lang, queue, tasks, userbot, yt
 from anony.helpers import buttons
 
 
@@ -70,6 +70,14 @@ async def update_timer(length=10):
                 remaining = duration - played
                 pos = min(int((played / duration) * length), length - 1)
                 timer = "—" * pos + "◉" + "—" * (length - pos - 1)
+
+                if remaining <= 30:
+                    next = queue.get_next(chat_id, check=True)
+                    if next and not next.file_path:
+                        try:
+                            next.file_path = await yt.download(next.id, video=next.video)
+                        except:
+                            pass
 
                 if remaining < 10:
                     remove = True

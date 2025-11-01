@@ -47,10 +47,13 @@ class Queue:
         """Return the currently playing item (first in queue), if any."""
         return self.queues[chat_id][0] if self.queues[chat_id] else None
 
-    def get_next(self, chat_id: int) -> MediaItem | None:
+    def get_next(self, chat_id: int, check: bool = False) -> MediaItem | None:
         """Remove current item and return the next one, or None if empty."""
         if not self.queues[chat_id]:
             return None
+        if check:
+            return self.queues[chat_id][1] if len(self.queues[chat_id]) > 1 else None
+
         self.queues[chat_id].popleft()
         return self.queues[chat_id][0] if self.queues[chat_id] else None
 

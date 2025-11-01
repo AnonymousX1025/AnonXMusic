@@ -43,6 +43,24 @@ install_pkg() {
     }
 }
 
+install_deno() {
+    pprint "\n\nInstalling Deno...\n" "cblue"
+    if command -v deno &>/dev/null; then
+        pprint "Deno already installed.\n" "cgreen"
+    else
+        curl -fsSL https://deno.land/install.sh | sh >/dev/null 2>&1
+        deno_path="$HOME/.deno/bin"
+        if [[ ":$PATH:" != *":$deno_path:"* ]]; then
+            echo "export DENO_INSTALL=\"$HOME/.deno\"" >> ~/.bashrc
+            echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> ~/.bashrc
+            pprint "Deno path added to ~/.bashrc\n" "cyellow"
+        fi
+        export DENO_INSTALL="$HOME/.deno"
+        export PATH="$DENO_INSTALL/bin:$PATH"
+        pprint "Deno installation complete.\n" "cgreen"
+    fi
+}
+
 install_py() {
     pprint "\n\nInstalling Python dependencies...\n"
     if pip3 install -U pip -q && pip3 install -U -r requirements.txt -q; then
@@ -59,9 +77,9 @@ save_env_vars() {
 API_ID=$1
 API_HASH=$2
 BOT_TOKEN=$3
-MONGO_DB_URI=$4
+MONGO_URL=$4
 LOGGER_ID=$5
-STRING_SESSION=$6
+SESSION=$6
 OWNER_ID=$7
 EOF
 }
@@ -73,7 +91,8 @@ sleep 1
 
 update
 install_pkg python3-pip python3-pip
-install_pkg ffmpeg ffmpeg
+install_pkg ffmpeg ffmpeg unzip
+install_deno
 install_py
 
 pprint "\nAnonXMusic Installation Completed.\n" "cgreen"
