@@ -80,11 +80,14 @@ async def is_admin(chat_id: int, user_id: int) -> bool:
 
 
 async def reload_admins(chat_id: int) -> list[int]:
-    admins = [
-        admin
-        async for admin in app.get_chat_members(
-            chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS
-        )
-        if not admin.user.is_bot
-    ]
-    return [admin.user.id for admin in admins]
+    try:
+        admins = [
+            admin
+            async for admin in app.get_chat_members(
+                chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS
+            )
+            if not admin.user.is_bot
+        ]
+        return [admin.user.id for admin in admins]
+    except:
+        return []
