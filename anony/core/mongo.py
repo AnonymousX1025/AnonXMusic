@@ -296,7 +296,8 @@ class MongoDB:
                 musers.append({"_id": user_id})
         await self.usersdb.drop()
         await self.db.tgusersdb.drop()
-        await self.usersdb.insert_many(musers)
+        if musers:
+            await self.usersdb.insert_many(musers)
 
         async for chat in self.chatsdb.find():
             if str(chat.get("_id")).lstrip("-").isdigit():
@@ -312,7 +313,8 @@ class MongoDB:
                 done.append(chat_id)
                 mchats.append({"_id": chat_id})
         await self.chatsdb.drop()
-        await self.chatsdb.insert_many(mchats)
+        if mchats:
+            await self.chatsdb.insert_many(mchats)
 
         await self.cache.insert_one({"_id": "migrated"})
         logger.info("Migration completed.")
