@@ -5,6 +5,6 @@ psutil~=7.1.2
 pymongo>=4.15.3
 pytgcrypto>=1.2.11
 py-tgcalls~=2.2.8
-py-yt-search~=0.3
+py-yt-search~=0.5
 python-dotenv~=1.1.1
 yt-dlp[default]>=2025.10.31.222828.dev0
