@@ -12,8 +12,8 @@ class Bot(pyrogram.Client):
     def __init__(self):
         super().__init__(
             name="Anony",
-            api_id=6,
-            api_hash="eb06d4abfb49dc3eeb1aeb98ae0f581e",
+            api_id=config.API_ID,
+            api_hash=config.API_HASH,
             bot_token=config.BOT_TOKEN,
             parse_mode=pyrogram.enums.ParseMode.HTML,
             max_concurrent_transmissions=7,
