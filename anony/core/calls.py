@@ -91,6 +91,9 @@ class TgCall(PyTgCalls):
                     ),
                     reply_markup=buttons.controls(chat_id),
                 )
+        except FileNotFoundError:
+            await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
+            await self.play_next(chat_id)
         except exceptions.NoActiveGroupCall:
             await self.stop(chat_id)
             await message.edit_text(_lang["error_no_call"])
