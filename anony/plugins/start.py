@@ -40,7 +40,7 @@ async def start(_, message: types.Message):
         photo=config.START_IMG,
         caption=_text,
         reply_markup=key,
-        quote=not private,
+        quote=False,
     )
 
     if private:
