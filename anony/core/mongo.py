@@ -275,6 +275,7 @@ class MongoDB:
 
 
     async def migrate_coll(self) -> None:
+        from bson import ObjectId
         logger.info("Migrating users and chats from old collections...")
 
         musers, mchats, done = [], [], []
@@ -282,14 +283,14 @@ class MongoDB:
         ulist.extend([user async for user in self.usersdb.find()])
 
         for user in ulist:
-            if str(user.get("_id")).isdigit():
-                user_id = int(user["_id"])
+            if isinstance(user.get("_id"), ObjectId):
+                user_id = int(user["user_id"])
                 if user_id in done:
                     continue
                 done.append(user_id)
                 musers.append(user)
             else:
-                user_id = int(user["user_id"])
+                user_id = int(user["_id"])
                 if user_id in done:
                     continue
                 done.append(user_id)
@@ -300,14 +301,14 @@ class MongoDB:
             await self.usersdb.insert_many(musers)
 
         async for chat in self.chatsdb.find():
-            if str(chat.get("_id")).lstrip("-").isdigit():
-                chat_id = int(chat["_id"])
+            if isinstance(chat.get("_id"), ObjectId):
+                chat_id = int(chat["chat_id"])
                 if chat_id in mchats:
                     continue
                 done.append(chat_id)
                 mchats.append(chat)
             else:
-                chat_id = int(chat["chat_id"])
+                chat_id = int(chat["_id"])
                 if chat_id in done:
                     continue
                 done.append(chat_id)
