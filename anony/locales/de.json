@@ -22,6 +22,7 @@
     "dl_limit": "Datei konnte nicht verarbeitet werden. Das maximale Download-Limit beträgt <b>200 MB</b>.",
     "dl_progress": "<u><b>Datei wird heruntergeladen</b></u>\n\n<b>Fortschritt:</b> {0} / {1} [{2:.1f}%]\n<b>Geschwindigkeit:</b> {3}/s | <b>ETA:</b> {4}",
     "dl_not_found": "Download bereits abgebrochen.",
+    "error_no_audio": "Weiter zum nächsten Titel…\n\nAudioquelle in der Datei nicht gefunden.",
     "error_no_call": "<b>Kein aktiver Video-Chat gefunden.</b>\n\nBitte starte einen und <b>versuche es erneut</b>.",
     "error_no_file": "Download fehlgeschlagen.\n\nWenn das Problem weiterhin besteht, melde es dem <a href={0}>Support-Chat</a>",
     "error_tg_server": "<u><b>Telegram-Serverfehler</b></u>\n\nTelegram hat interne Probleme. Die Warteschlange wird gelöscht und der Video-Chat verlassen.",

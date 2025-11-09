@@ -29,13 +29,13 @@ class TgCall(PyTgCalls):
     async def stop(self, chat_id: int) -> None:
         client = await db.get_assistant(chat_id)
         try:
-            await client.leave_call(chat_id, close=False)
+            queue.clear(chat_id)
+            await db.remove_call(chat_id)
         except:
             pass
 
         try:
-            queue.clear(chat_id)
-            await db.remove_call(chat_id)
+            await client.leave_call(chat_id, close=False)
         except:
             pass
 
@@ -97,6 +97,9 @@ class TgCall(PyTgCalls):
         except exceptions.NoActiveGroupCall:
             await self.stop(chat_id)
             await message.edit_text(_lang["error_no_call"])
+        except exceptions.NoAudioSourceFound:
+            await message.edit_text(_lang["error_no_audio"])
+            await self.play_next(chat_id)
         except (ConnectionNotFound, TelegramServerError):
             await self.stop(chat_id)
             await message.edit_text(_lang["error_tg_server"])

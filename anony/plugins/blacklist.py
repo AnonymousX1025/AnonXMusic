@@ -15,8 +15,12 @@ async def _blacklist(_, m: types.Message):
         return await m.reply_text(m.lang["bl_usage"].format(m.command[0]))
 
     try:
-        chat_id = int(m.command[1])
-    except ValueError:
+        chat_id = m.command[1]
+        if not str(chat_id).startswith("@"):
+            chat_id = int(chat_id)
+        else:
+            chat_id = (await app.get_chat(chat_id)).id
+    except:
         return await m.reply_text(m.lang["bl_invalid"])
 
     if m.command[0] == "blacklist":

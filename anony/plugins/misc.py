@@ -5,10 +5,11 @@
 
 import asyncio
 import time
+from logging import Logger
 
 from pyrogram import enums, filters, types
 
-from anony import anon, app, config, db, lang, queue, tasks, userbot, yt
+from anony import anon, app, config, db, lang, queue, tasks, userbot, yt, logger
 from anony.helpers import buttons
 
 
@@ -63,6 +64,9 @@ async def update_timer(length=10):
                 continue
             try:
                 media = queue.get_current(chat_id)
+                if not media:
+                    logger.warning("Media not found in queue for chat_id: %s", chat_id)
+                    continue
                 duration, message_id = media.duration_sec, media.message_id
                 if not duration or not message_id or not media.playing:
                     continue

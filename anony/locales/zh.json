@@ -22,6 +22,7 @@
     "dl_limit": "无法处理文件。最大下载限制为<b>200 MB</b>。",
     "dl_progress": "<u><b>正在下载文件</b></u>\n\n<b>进度: </b> {0} / {1} [{2:.1f}%]\n<b>速度: </b> {3}/s | <b>预计到达时间: </b> {4}",
     "dl_not_found": "下载已被取消。",
+    "error_no_audio": "正在切换到下一首曲目……\n\n文件中未找到音频源。",
     "error_no_call": "<b>未找到活动的视频聊天。</b>\n\n请开始一个并<b>重试</b>。",
     "error_no_file": "下载失败。\n\n如果问题仍然存在, 请向<a href={0}>支持聊天</a>报告",
     "error_tg_server": "<u><b>Telegram 服务器错误</b></u>\n\nTelegram 遇到内部问题。正在清除队列并离开视频聊天。",
