@@ -11,14 +11,14 @@ from anony import anon, app, db, lang, queue, tg, yt
 from anony.helpers import admin_check, buttons, can_manage_vc
 
 
-@app.on_callback_query(filters.regex("cancel_dl"))
+@app.on_callback_query(filters.regex("cancel_dl") & ~app.bl_users)
 @lang.language()
 async def cancel_dl(_, query: types.CallbackQuery):
     await query.answer()
     await tg.cancel(query)
 
 
-@app.on_callback_query(filters.regex("controls"))
+@app.on_callback_query(filters.regex("controls") & ~app.bl_users)
 @lang.language()
 @can_manage_vc
 async def _controls(_, query: types.CallbackQuery):
@@ -116,7 +116,7 @@ async def _controls(_, query: types.CallbackQuery):
         pass
 
 
-@app.on_callback_query(filters.regex("help"))
+@app.on_callback_query(filters.regex("help") & ~app.bl_users)
 @lang.language()
 async def _help(_, query: types.CallbackQuery):
     data = query.data.split()
@@ -140,7 +140,7 @@ async def _help(_, query: types.CallbackQuery):
     )
 
 
-@app.on_callback_query(filters.regex("playmode"))
+@app.on_callback_query(filters.regex("playmode") & ~app.bl_users)
 @lang.language()
 @admin_check
 async def _playmode(_, query: types.CallbackQuery):

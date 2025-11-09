@@ -22,6 +22,7 @@
     "dl_limit": "Error al procesar el archivo. El límite máximo de descarga es de <b>200 MB</b>.",
     "dl_progress": "<u><b>Descargando archivo</b></u>\n\n<b>Progreso:</b> {0} / {1} [{2:.1f}%]\n<b>Velocidad:</b> {3}/s | <b>ETA:</b> {4}",
     "dl_not_found": "La descarga ya fue cancelada.",
+    "error_no_audio": "Pasando a la siguiente pista...\n\nNo se encontró la fuente de audio en el archivo.",
     "error_no_call": "<b>No se encontró ningún chat de video activo.</b>\n\nInicia uno e <b>inténtalo de nuevo</b>.",
     "error_no_file": "Error en la descarga.\n\nSi el problema persiste, infórmalo en el <a href={0}>chat de soporte</a>",
     "error_tg_server": "<u><b>Error del servidor de Telegram</b></u>\n\nTelegram está experimentando problemas internos. Borrando la cola y saliendo del chat de video.",

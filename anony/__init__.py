@@ -58,3 +58,19 @@ queue = Queue()
 
 from anony.core.calls import TgCall
 anon = TgCall()
+
+
+async def stop() -> None:
+    logger.info("Stopping...")
+    await app.stop()
+    await userbot.stop()
+    await db.close()
+
+    for task in tasks:
+        task.cancel()
+        try:
+            await task
+        except:
+            pass
+
+    logger.info("Stopped.\n")

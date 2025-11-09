@@ -17,7 +17,7 @@ async def _lang(_, m: types.Message):
     await m.reply_text(m.lang["lang_choose"], reply_markup=keyboard)
 
 
-@app.on_callback_query(filters.regex(r"^lang(?:_change|uage)"))
+@app.on_callback_query(filters.regex(r"^lang(?:_change|uage)") & ~app.bl_users)
 @lang.language()
 @admin_check
 async def _lang_cb(_, query: types.CallbackQuery):
