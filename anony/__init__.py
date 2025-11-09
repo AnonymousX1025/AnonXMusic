@@ -62,15 +62,15 @@ anon = TgCall()
 
 async def stop() -> None:
     logger.info("Stopping...")
-    await app.stop()
-    await userbot.stop()
-    await db.close()
-
     for task in tasks:
         task.cancel()
         try:
             await task
         except:
             pass
+
+    await app.exit()
+    await userbot.exit()
+    await db.close()
 
     logger.info("Stopped.\n")
