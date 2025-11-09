@@ -6,11 +6,10 @@
 import os
 import sys
 import shutil
-import asyncio
 
 from pyrogram import filters, types
 
-from anony import anon, app, db, lang, tasks, userbot
+from anony import app, db, lang, stop
 
 
 @app.on_message(filters.command(["logs"]) & app.sudoers)
@@ -48,26 +47,12 @@ async def _logger(_, m: types.Message):
 async def _restart(_, m: types.Message):
     sent = await m.reply_text(m.lang["restarting"])
 
-    for directory in ["downloads", "cache"]:
+    for directory in ["cache", "downloads"]:
         try:
             shutil.rmtree(directory)
         except:
-            pass
+            continue
 
     await sent.edit_text(m.lang["restarted"])
-
-    try:
-        await app.exit()
-        await userbot.exit()
-        await db.close()
-    except:
-        pass
-
-    for task in tasks:
-        task.cancel()
-        try:
-            await task
-        except:
-            pass    
-
+    await stop()    
     os.execl(sys.executable, sys.executable, "-m", "anony")

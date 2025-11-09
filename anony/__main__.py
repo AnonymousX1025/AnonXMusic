@@ -8,7 +8,7 @@ import importlib
 
 from pyrogram import idle
 
-from anony import anon, app, db, logger, tasks, userbot
+from anony import anon, app, db, logger, stop, userbot
 from anony.plugins import all_modules
 
 
@@ -28,17 +28,7 @@ async def main():
     logger.info(f"Loaded {len(app.sudoers)} sudo users.")
 
     await idle()
-    logger.info("Stopping...")
-    await app.exit()
-    await userbot.exit()
-    await db.close()
-    for task in tasks:
-        task.cancel()
-        try:
-            await task
-        except:
-            pass
-    logger.info("Stopped.")
+    await stop()
 
 
 if __name__ == "__main__":
