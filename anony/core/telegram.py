@@ -81,10 +81,10 @@ class Telegram:
                 await task
                 self.active.remove(file_id)
                 self.active_tasks.pop(msg_id, None)
+                await sent.edit_text(
+                    sent.lang["dl_complete"].format(round(time.time() - start_time, 2))
+                )
 
-            await sent.edit_text(
-                sent.lang["dl_complete"].format(round(time.time() - start_time, 2))
-            )
             return Media(
                 id=file_id,
                 duration=time.strftime("%M:%S", time.gmtime(duration)),
