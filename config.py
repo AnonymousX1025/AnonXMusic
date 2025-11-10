@@ -11,8 +11,10 @@ class Config:
         self.BOT_TOKEN = getenv("BOT_TOKEN")
         self.MONGO_URL = getenv("MONGO_URL")
 
+        self.DURATION_LIMIT = int(getenv("DURATION_LIMIT", 60)) * 60
         self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
         self.OWNER_ID = int(getenv("OWNER_ID", 0))
+        self.QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", 20))
 
         self.SESSION1 = getenv("SESSION", None)
         self.SESSION2 = getenv("SESSION2", None)

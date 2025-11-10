@@ -26,8 +26,8 @@ async def play_hndlr(
 ) -> None:
     sent = await m.reply_text(m.lang["play_searching"])
 
-    if len(queue.get_queue(m.chat.id)) >= 20:
-        return await sent.edit_text(m.lang["queue_full"])
+    if len(queue.get_queue(m.chat.id)) >= config.QUEUE_LIMIT:
+        return await sent.edit_text(m.lang["play_queue_full"].format(config.QUEUE_LIMIT))
 
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
 
@@ -50,8 +50,10 @@ async def play_hndlr(
         setattr(sent, "lang", m.lang)
         file = await tg.download(m.reply_to_message, sent)
 
-    if file.duration_sec > 3600:
-        return await sent.edit_text(m.lang["play_duration_limit"])
+    if file.duration_sec > config.DURATION_LIMIT:
+        return await sent.edit_text(
+            m.lang["play_duration_limit"].format(config.DURATION_LIMIT // 60)
+        )
 
     if await db.is_logger():
         await utils.play_log(m, file.title, file.duration)

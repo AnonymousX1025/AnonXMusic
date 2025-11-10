@@ -9,6 +9,7 @@ import time
 
 from pyrogram import types
 
+from anony import config
 from anony.helpers import Media, buttons, utils
 
 
@@ -37,6 +38,10 @@ class Telegram:
         file_title = getattr(media, "title", "Telegram File") or "Telegram File"
         duration = getattr(media, "duration", 0)
         video = bool(getattr(media, "mime_type", "").startswith("video/"))
+
+        if duration > config.DURATION_LIMIT:
+            await sent.edit_text(sent.lang["play_duration_limit"].format(config.DURATION_LIMIT // 60))
+            return await sent.stop_propagation()
 
         if file_size > 200 * 1024 * 1024:
             await sent.edit_text(sent.lang["dl_limit"])
