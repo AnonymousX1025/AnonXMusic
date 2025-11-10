@@ -25,10 +25,6 @@ async def play_hndlr(
     url: str = None,
 ) -> None:
     sent = await m.reply_text(m.lang["play_searching"])
-
-    if len(queue.get_queue(m.chat.id)) >= config.QUEUE_LIMIT:
-        return await sent.edit_text(m.lang["play_queue_full"].format(config.QUEUE_LIMIT))
-
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
 
     if url:
