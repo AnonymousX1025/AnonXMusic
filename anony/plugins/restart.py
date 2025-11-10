@@ -6,6 +6,7 @@
 import os
 import sys
 import shutil
+import asyncio
 
 from pyrogram import filters, types
 
@@ -48,11 +49,10 @@ async def _restart(_, m: types.Message):
     sent = await m.reply_text(m.lang["restarting"])
 
     for directory in ["cache", "downloads"]:
-        try:
-            shutil.rmtree(directory)
-        except:
-            continue
+        shutil.rmtree(directory, ignore_errors=True)
 
     await sent.edit_text(m.lang["restarted"])
-    await stop()    
+    asyncio.create_task(stop())
+    await asyncio.sleep(2)
+
     os.execl(sys.executable, sys.executable, "-m", "anony")
