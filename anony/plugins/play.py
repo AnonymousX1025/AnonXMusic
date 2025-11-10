@@ -75,12 +75,6 @@ async def play_hndlr(
             )
 
     if not file.file_path:
-        try:
-            file.file_path = await yt.download(file.id, video=video)
-        except:
-            await anon.stop(m.chat.id)
-            return await sent.edit_text(
-                m.lang["error_no_file"].format(config.SUPPORT_CHAT)
-            )
+        file.file_path = await yt.download(file.id, video=video)
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)

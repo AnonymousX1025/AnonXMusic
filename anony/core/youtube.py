@@ -14,6 +14,7 @@ import yt_dlp
 from py_yt import VideosSearch
 from pyrogram import enums, types
 
+from anony import logger
 from anony.helpers import Track, utils
 
 
@@ -22,6 +23,7 @@ class YouTube:
         self.base = "https://www.youtube.com/watch?v="
         self.cookies = []
         self.checked = False
+        self.warned = False
         self.regex = r"(https?://)?(www\.|m\.)?(youtube\.com/(watch\?v=|shorts/)|youtu\.be/)([a-zA-Z0-9_-]{11})"
 
     def get_cookies(self):
@@ -31,6 +33,9 @@ class YouTube:
                     self.cookies.append(file)
             self.checked = True
         if not self.cookies:
+            if not self.warned:
+                self.warned = True
+                logger.warning("Cookies are missing; downloads might fail.")
             return None
         return f"anony/cookies/{random.choice(self.cookies)}"
 
@@ -84,6 +89,7 @@ class YouTube:
         if Path(filename).exists():
             return filename
 
+        cookie = self.get_cookies()
         base_opts = {
             "outtmpl": "downloads/%(id)s.%(ext)s",
             "quiet": True,
@@ -93,7 +99,7 @@ class YouTube:
             "overwrites": False,
             "ignoreerrors": True,
             "nocheckcertificate": True,
-            "cookiefile": self.get_cookies(),
+            "cookiefile": cookie,
         }
 
         if video:
@@ -110,7 +116,11 @@ class YouTube:
 
         def _download():
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
+                try:
+                    ydl.download([url])
+                except (yt_dlp.utils.DownloadError, yt_dlp.utils.ExtractorError):
+                    self.cookies.remove(cookie)
+                    return None
             return filename
 
         return await asyncio.to_thread(_download)
