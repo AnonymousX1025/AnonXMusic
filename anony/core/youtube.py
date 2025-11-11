@@ -24,7 +24,11 @@ class YouTube:
         self.cookies = []
         self.checked = False
         self.warned = False
-        self.regex = r"(https?://)?(www\.|m\.)?(youtube\.com/(watch\?v=|shorts/)|youtu\.be/)([a-zA-Z0-9_-]{11})"
+        self.regex = re.compile(
+            r"(https?://)?(www\.|m\.)?"
+            r"(youtube\.com/(watch\?v=|shorts/|playlist\?list=)|youtu\.be/)"
+            r"([A-Za-z0-9_-]{11}|PL[A-Za-z0-9_-]+)([&?][^\s]*)?"
+        )
 
     def get_cookies(self):
         if not self.checked:
@@ -81,6 +85,21 @@ class YouTube:
             )
         return None
 
+    async def playlist(self, limit: int, url: str) -> list[str]:
+        vids = []
+        ydl_opts = {
+            "quiet": True,
+            "extract_flat": True,
+            "ignoreerrors": True,
+            "geo_bypass": True,
+            "skip_download": True,
+            "playlistend": limit,
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+            vids.extend([entry.get("url") for entry in info.get("entries")])
+        return vids
+
     async def download(self, video_id: str, video: bool = False) -> Optional[str]:
         url = self.base + video_id
         ext = "mp4" if video else "webm"
@@ -97,7 +116,6 @@ class YouTube:
             "geo_bypass": True,
             "no_warnings": True,
             "overwrites": False,
-            "ignoreerrors": True,
             "nocheckcertificate": True,
             "cookiefile": cookie,
         }
