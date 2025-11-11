@@ -16,14 +16,15 @@ async def playlist_to_queue(
     user: str,
     video: bool
 ) -> str:
-    text = ""
+    text = "<blockquote expandable>"
     for track in tracks:
         srch = await yt.search(track, 0, video=video)
         if not srch:
             continue
         srch.user = user
         pos = queue.add(chat_id, srch)
-        text += f"{pos}. {srch.title}\n"
+        text += f"<b>{pos}.</b> {srch.title}\n"
+    text += "</blockquote>"
     return text
 
 @app.on_message(
