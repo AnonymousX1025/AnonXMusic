@@ -10,7 +10,7 @@ from anony.helpers import buttons, utils
 from anony.helpers._play import checkUB
 
 
-async def playlist_to_queue(chat_id: int, tracks: list) -> str:
+def playlist_to_queue(chat_id: int, tracks: list) -> str:
     text = "<blockquote expandable>"
     for track in tracks:
         pos = queue.add(chat_id, track)
@@ -98,7 +98,7 @@ async def play_hndlr(
                 ),
             )
             if tracks:
-                added = await playlist_to_queue(m.chat.id, tracks)
+                added = playlist_to_queue(m.chat.id, tracks)
                 await app.send_message(
                     chat_id=m.chat.id,
                     text=m.lang["playlist_queued"].format(len(tracks)) + added,
@@ -111,7 +111,7 @@ async def play_hndlr(
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
     if not tracks:
         return
-    added = await playlist_to_queue(m.chat.id, tracks)
+    added = playlist_to_queue(m.chat.id, tracks)
     await app.send_message(
         chat_id=m.chat.id,
         text=m.lang["playlist_queued"].format(len(tracks)) + added,
