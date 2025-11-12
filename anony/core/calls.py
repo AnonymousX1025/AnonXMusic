@@ -4,6 +4,7 @@
 
 
 from ntgcalls import ConnectionNotFound, TelegramServerError
+from pyrogram.errors import MessageIdInvalid
 from pyrogram.types import InputMediaPhoto, Message
 from pytgcalls import PyTgCalls, exceptions, types
 from pytgcalls.pytgcalls_session import PyTgCallsSession
@@ -79,18 +80,28 @@ class TgCall(PyTgCalls):
             if not seek_time:
                 media.playing = True
                 await db.add_call(chat_id)
-                await message.edit_media(
-                    media=InputMediaPhoto(
-                        media=_thumb,
-                        caption=_lang["play_media"].format(
-                            media.url,
-                            media.title,
-                            media.duration,
-                            media.user,
-                        ),
-                    ),
-                    reply_markup=buttons.controls(chat_id),
+                text = _lang["play_media"].format(
+                    media.url,
+                    media.title,
+                    media.duration,
+                    media.user,
                 )
+                keyboard = buttons.controls(chat_id)
+                try:
+                    await message.edit_media(
+                        media=InputMediaPhoto(
+                            media=_thumb,
+                            caption=text,
+                        ),
+                        reply_markup=keyboard,
+                    )
+                except MessageIdInvalid:
+                    await app.send_photo(
+                        chat_id=chat_id,
+                        photo=_thumb,
+                        caption=text,
+                        reply_markup=keyboard,
+                    )
         except FileNotFoundError:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             await self.play_next(chat_id)
@@ -121,12 +132,13 @@ class TgCall(PyTgCalls):
 
         media = queue.get_next(chat_id)
         try:
-            await app.delete_messages(
-                chat_id=chat_id,
-                message_ids=media.message_id if media else 0,
-                revoke=True,
-            )
-            media.message_id = None
+            if media.message_id:
+                await app.delete_messages(
+                    chat_id=chat_id,
+                    message_ids=media.message_id,
+                    revoke=True,
+                )
+                media.message_id = 0
         except:
             pass
 

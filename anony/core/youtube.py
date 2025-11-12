@@ -5,14 +5,15 @@
 
 import os
 import re
+import yt_dlp
 import random
 import asyncio
+import aiohttp
 from pathlib import Path
 from typing import Optional, Union
 
-import yt_dlp
-from py_yt import VideosSearch
 from pyrogram import enums, types
+from py_yt import Playlist, VideosSearch
 
 from anony import logger
 from anony.helpers import Track, utils
@@ -43,11 +44,23 @@ class YouTube:
             return None
         return f"anony/cookies/{random.choice(self.cookies)}"
 
+    async def save_cookies(self, urls: list[str]) -> None:
+        logger.info("Saving cookies from urls...")
+        for url in urls:
+            path = f"anony/cookies/cookie{random.randint(10000, 99999)}.txt"
+            link = url.replace("me/", "me/raw/")
+            async with aiohttp.ClientSession() as session:
+                async with session.get(link) as resp:
+                    with open(path, "wb") as fw:
+                        fw.write(await resp.read())
+        logger.info("Cookies saved.")
+
     def valid(self, url: str) -> bool:
         return bool(re.match(self.regex, url))
 
     def url(self, message_1: types.Message) -> Union[str, None]:
         messages = [message_1]
+        link = None
         if message_1.reply_to_message:
             messages.append(message_1.reply_to_message)
 
@@ -57,13 +70,15 @@ class YouTube:
             if message.entities:
                 for entity in message.entities:
                     if entity.type == enums.MessageEntityType.URL:
-                        return text[entity.offset : entity.offset + entity.length]
+                        link = text[entity.offset : entity.offset + entity.length]
 
             if message.caption_entities:
                 for entity in message.caption_entities:
                     if entity.type == enums.MessageEntityType.TEXT_LINK:
-                        return entity.url
+                        link = entity.url
 
+        if link:
+            return link.split("&si")[0]
         return None
 
     async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
@@ -85,20 +100,24 @@ class YouTube:
             )
         return None
 
-    async def playlist(self, limit: int, url: str) -> list[str]:
-        vids = []
-        ydl_opts = {
-            "quiet": True,
-            "extract_flat": True,
-            "ignoreerrors": True,
-            "geo_bypass": True,
-            "skip_download": True,
-            "playlistend": limit,
-        }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(url, download=False)
-            vids.extend([entry.get("url") for entry in info.get("entries")])
-        return vids
+    async def playlist(self, limit: int, user: str, url: str, video: bool) -> list[Track]:
+        plist = await Playlist.get(url)
+        tracks = []
+        for data in plist["videos"][:limit]:
+            track = Track(
+                id=data.get("id"),
+                channel_name=data.get("channel", {}).get("name", ""),
+                duration=data.get("duration"),
+                duration_sec=utils.to_seconds(data.get("duration")),
+                title=data.get("title")[:25],
+                thumbnail=data.get("thumbnails")[-1].get("url").split("?")[0],
+                url=data.get("link").split("&list=")[0],
+                user=user,
+                view_count="",
+                video=video,
+            )
+            tracks.append(track)
+        return tracks
 
     async def download(self, video_id: str, video: bool = False) -> Optional[str]:
         url = self.base + video_id
@@ -138,6 +157,9 @@ class YouTube:
                     ydl.download([url])
                 except (yt_dlp.utils.DownloadError, yt_dlp.utils.ExtractorError):
                     self.cookies.remove(cookie)
+                    return None
+                except Exception as ex:
+                    logger.error("Download failed: %s", ex)
                     return None
             return filename
 

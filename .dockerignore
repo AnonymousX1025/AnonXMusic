@@ -2,9 +2,10 @@
 .cache
 log.txt
 .DS_Store
+venv/
 cache/
 downloads/
 __pycache__/
-venv/
+anony/cookies/*.txt
 *.session
 *.session-journal

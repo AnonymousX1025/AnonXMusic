@@ -96,7 +96,7 @@
     "play_user_invalid": "Eres un administrador anónimo.\n\nVuelve a la cuenta de usuario.",
     "playlist_fetch": "Obteniendo la lista de reproducción...\n\nPor favor, espera.",
     "playlist_error": "Ocurrió un error al obtener la lista de reproducción.",
-    "playlist_queued": "Se añadieron {0} pistas de la cola a la lista de reproducción:\n\n",
+    "playlist_queued": "<u><b>Se añadieron {0} pistas de la cola a la lista de reproducción:</b></u>\n\n",
     "queue_curr": "<u><b>Reproduciendo actualmente:</b></u>\n\n<b>Título:</b> <a href={0}>{1}</a>\n<b>Duración:</b> {2}\n<b>Solicitado por:</b> {3}\n\n",
     "queue_item": "<b>{0}. Título:</b> {1}\n     - {2} min\n\n",
     "queue_fetching": "Obteniendo cola...",

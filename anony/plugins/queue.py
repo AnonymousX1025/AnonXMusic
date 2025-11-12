@@ -34,10 +34,10 @@ async def _queue_func(_, m: types.Message):
     if _queue:
         _text += "<blockquote expandable>"
         for i, media in enumerate(_queue, start=1):
-            if i == 12:
+            if i == 15:
                 break
             _text += m.lang["queue_item"].format(
-                i + 1, media.title[:75], media.duration
+                i + 1, media.title, media.duration
             )
         _text += "</blockquote>"
 

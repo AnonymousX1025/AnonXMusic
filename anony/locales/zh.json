@@ -96,7 +96,7 @@
     "play_user_invalid": "您是匿名管理员。\n\n恢复为用户帐户。",
     "playlist_fetch": "正在获取播放列表...\n\n请稍候。",
     "playlist_error": "获取播放列表时出错。",
-    "playlist_queued": "已将队列中的 {0} 首歌曲添加到播放列表：\n\n",
+    "playlist_queued": "<u><b>已将队列中的 {0} 首歌曲添加到播放列表：</b></u>\n\n",
     "queue_curr": "<u><b>当前正在播放: </b></u>\n\n<b>标题: </b> <a href={0}>{1}</a>\n<b>持续时间: </b> {2}\n<b>请求者: </b> {3}\n\n",
     "queue_item": "<b>{0}. 标题: </b> {1}\n     - {2} 分钟\n\n",
     "queue_fetching": "正在获取队列...",

@@ -44,7 +44,7 @@ class Thumbnail:
             image.paste(_rect, (183, 30), _rect)
 
             draw = ImageDraw.Draw(image)
-            draw.text((50, 560), f"{song.channel_name[:25]} | {song.view_count[:15]}", font=self.font2, fill=self.fill)
+            draw.text((50, 560), f"{song.channel_name[:25]} | {song.view_count}", font=self.font2, fill=self.fill)
             draw.text((50, 600), song.title[:50], font=self.font1, fill=self.fill)
             draw.text((40, 650), "0:01", font=self.font1)
             draw.line([(140, 670), (1160, 670)], fill=self.fill, width=5, joint="curve")

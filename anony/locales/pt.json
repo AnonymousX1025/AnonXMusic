@@ -96,7 +96,7 @@
     "play_user_invalid": "Você é um administrador anônimo.\n\nVolte para a conta de usuário.",
     "playlist_fetch": "Buscando a playlist...\n\nPor favor, aguarde.",
     "playlist_error": "Ocorreu um erro ao buscar a playlist.",
-    "playlist_queued": "Adicionados {0} faixas da fila à playlist:\n\n",
+    "playlist_queued": "<u><b>Adicionados {0} faixas da fila à playlist:</b></u>\n\n",
     "queue_curr": "<u><b>Tocando atualmente:</b></u>\n\n<b>Título:</b> <a href={0}>{1}</a>\n<b>Duração:</b> {2}\n<b>Solicitado por:</b> {3}\n\n",
     "queue_item": "<b>{0}. Título:</b> {1}\n     - {2} min\n\n",
     "queue_fetching": "Buscando fila...",
