@@ -71,11 +71,13 @@ class YouTube:
                 for entity in message.entities:
                     if entity.type == enums.MessageEntityType.URL:
                         link = text[entity.offset : entity.offset + entity.length]
+                        break
 
             if message.caption_entities:
                 for entity in message.caption_entities:
                     if entity.type == enums.MessageEntityType.TEXT_LINK:
                         link = entity.url
+                        break
 
         if link:
             return link.split("&si")[0]
