@@ -50,7 +50,7 @@ async def track_time():
             if not await db.playing(chat_id):
                 continue
             media = queue.get_current(chat_id)
-            if media.time:
+            if not media:
                 continue
             media.time += 1
 
