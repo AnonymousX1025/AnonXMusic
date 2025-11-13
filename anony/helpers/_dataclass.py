@@ -18,7 +18,6 @@ class Media:
     time: int = 0
     user: str = None
     video: bool = False
-    playing: bool = False
 
 
 @dataclass
@@ -31,7 +30,6 @@ class Track:
     url: str
     file_path: str = None
     message_id: int = 0
-    playing: bool = False
     time: int = 0
     thumbnail: str = None
     user: str = None

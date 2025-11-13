@@ -26,7 +26,7 @@ class YouTube:
         self.checked = False
         self.warned = False
         self.regex = re.compile(
-            r"(https?://)?(www\.|m\.)?"
+            r"(https?://)?(www\.|m\.|music\.)?"
             r"(youtube\.com/(watch\?v=|shorts/|playlist\?list=)|youtu\.be/)"
             r"([A-Za-z0-9_-]{11}|PL[A-Za-z0-9_-]+)([&?][^\s]*)?"
         )
@@ -158,7 +158,7 @@ class YouTube:
                 try:
                     ydl.download([url])
                 except (yt_dlp.utils.DownloadError, yt_dlp.utils.ExtractorError):
-                    if cookie:
+                    if cookie in self.cookies:
                         self.cookies.remove(cookie)
                     return None
                 except Exception as ex:

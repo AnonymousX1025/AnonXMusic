@@ -78,7 +78,7 @@ class TgCall(PyTgCalls):
                 config=types.GroupCallConfig(auto_start=False),
             )
             if not seek_time:
-                media.playing = True
+                media.time = 1
                 await db.add_call(chat_id)
                 text = _lang["play_media"].format(
                     media.url,
@@ -96,12 +96,12 @@ class TgCall(PyTgCalls):
                         reply_markup=keyboard,
                     )
                 except MessageIdInvalid:
-                    await app.send_photo(
+                    media.message_id = (await app.send_photo(
                         chat_id=chat_id,
                         photo=_thumb,
                         caption=text,
                         reply_markup=keyboard,
-                    )
+                    )).id
         except FileNotFoundError:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             await self.play_next(chat_id)

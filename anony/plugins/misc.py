@@ -50,7 +50,7 @@ async def track_time():
             if not await db.playing(chat_id):
                 continue
             media = queue.get_current(chat_id)
-            if not media.playing:
+            if media.time:
                 continue
             media.time += 1
 
@@ -64,7 +64,7 @@ async def update_timer(length=10):
             try:
                 media = queue.get_current(chat_id)
                 duration, message_id = media.duration_sec, media.message_id
-                if not duration or not message_id or not media.playing:
+                if not duration or not message_id or not media.time:
                     continue
                 played = media.time
                 remaining = duration - played
@@ -113,8 +113,9 @@ async def vc_watcher(sleep=15):
                 await sent.reply_text(_lang["auto_left"])
 
 
+if config.AUTO_END:
+    tasks.append(asyncio.create_task(vc_watcher()))
 if config.AUTO_LEAVE:
     tasks.append(asyncio.create_task(auto_leave()))
 tasks.append(asyncio.create_task(track_time()))
 tasks.append(asyncio.create_task(update_timer()))
-tasks.append(asyncio.create_task(vc_watcher()))
