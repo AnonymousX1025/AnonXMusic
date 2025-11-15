@@ -36,6 +36,7 @@ async def play_hndlr(
     mention = m.from_user.mention
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
     tracks = []
+    file = None  # Initialize file variable
 
     if url:
         if "playlist" in url:
@@ -69,6 +70,14 @@ async def play_hndlr(
     elif media:
         setattr(sent, "lang", m.lang)
         file = await tg.download(m.reply_to_message, sent)
+
+    if not file:
+        return await sent.edit_text(m.lang["play_usage"])
+
+    try:
+        await m.delete()
+    except:
+        pass
 
     if file.duration_sec > config.DURATION_LIMIT:
         return await sent.edit_text(
@@ -115,4 +124,4 @@ async def play_hndlr(
     await app.send_message(
         chat_id=m.chat.id,
         text=m.lang["playlist_queued"].format(len(tracks)) + added,
-    )
+)
