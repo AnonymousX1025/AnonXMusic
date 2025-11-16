@@ -111,21 +111,21 @@ class Inline:
                 [
                     self.ikb(
                         text=lang["play_mode"] + " ➜",
-                        callback_data=f"controls status {chat_id}",
+                        callback_data="settings",
                     ),
                     self.ikb(text=admin_only, callback_data="settings play"),
                 ],
                 [
                     self.ikb(
                         text=lang["cmd_delete"] + " ➜",
-                        callback_data=f"controls status {chat_id}",
+                        callback_data="settings",
                     ),
                     self.ikb(text=cmd_delete, callback_data="settings delete"),
                 ],
                 [
                     self.ikb(
                         text=lang["language"] + " ➜",
-                        callback_data=f"controls status {chat_id}",
+                        callback_data="settings",
                     ),
                     self.ikb(text=lang_codes[language], callback_data="language"),
                 ],
