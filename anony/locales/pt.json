@@ -132,6 +132,7 @@
     "help": "Ajuda",
     "language": "Idioma",
     "paused": "Stream pausado",
+    "cmd_delete": "Excluir comando",
     "play_mode": "Reprodução somente para administradores",
     "playing": "Reproduzindo",
     "processing": "Processando...",

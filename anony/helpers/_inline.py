@@ -104,7 +104,7 @@ class Inline:
         )
 
     def settings_markup(
-        self, lang: dict, admin_only: bool, language: str, chat_id: int
+        self, lang: dict, admin_only: bool, cmd_delete: bool, language: str, chat_id: int
     ) -> types.InlineKeyboardMarkup:
         return self.ikm(
             [
@@ -113,7 +113,14 @@ class Inline:
                         text=lang["play_mode"] + " ➜",
                         callback_data=f"controls status {chat_id}",
                     ),
-                    self.ikb(text=admin_only, callback_data="playmode"),
+                    self.ikb(text=admin_only, callback_data="settings play"),
+                ],
+                [
+                    self.ikb(
+                        text=lang["cmd_delete"] + " ➜",
+                        callback_data=f"controls status {chat_id}",
+                    ),
+                    self.ikb(text=cmd_delete, callback_data="settings delete"),
                 ],
                 [
                     self.ikb(
@@ -158,8 +165,8 @@ class Inline:
         return self.ikm(
             [
                 [
-                    self.ikb(text="Copy Link", copy_text=link),
-                    self.ikb(text="Open in YouTube", url=link),
+                    self.ikb(text="❐", copy_text=link),
+                    self.ikb(text="Youtube", url=link),
                 ],
             ]
         )

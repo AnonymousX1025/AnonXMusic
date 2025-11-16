@@ -132,6 +132,7 @@
     "help": "Ayuda",
     "language": "Idioma",
     "paused": "Transmisión pausada",
+    "cmd_delete": "Eliminar comando",
     "play_mode": "Solo para administradores",
     "playing": "Reproduciendo",
     "processing": "Procesando...",

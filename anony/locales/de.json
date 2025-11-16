@@ -132,6 +132,7 @@
     "help": "Hilfe",
     "language": "Sprache",
     "paused": "Stream pausiert",
+    "cmd_delete": "Befehl löschen",
     "play_mode": "Nur-Admin-Wiedergabe",
     "playing": "Wiedergabe läuft",
     "processing": "Wird verarbeitet...",

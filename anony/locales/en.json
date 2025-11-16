@@ -132,6 +132,7 @@
     "help": "Help",
     "language": "Language",
     "paused": "Stream paused",
+    "cmd_delete": "Command delete",
     "play_mode": "Admin only play",
     "playing": "Playing",
     "processing": "Processing...",

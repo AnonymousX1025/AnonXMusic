@@ -132,6 +132,7 @@
     "help": "帮助",
     "language": "语言",
     "paused": "流已暂停",
+    "cmd_delete": "删除指令",
     "play_mode": "仅限管理员播放",
     "playing": "正在播放",
     "processing": "正在处理...",

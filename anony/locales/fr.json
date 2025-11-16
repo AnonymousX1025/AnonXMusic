@@ -132,6 +132,7 @@
     "help": "Aide",
     "language": "Langue",
     "paused": "Flux mis en pause",
+    "cmd_delete": "Supprimer la commande",
     "play_mode": "Lecture administrateur uniquement",
     "playing": "En cours de lecture",
     "processing": "Traitement...",

@@ -132,6 +132,7 @@
     "help": "ヘルプ",
     "language": "言語",
     "paused": "ストリームが一時停止されました",
+    "cmd_delete": "コマンドを削除",
     "play_mode": "管理者のみ再生",
     "playing": "再生中",
     "processing": "処理中...",

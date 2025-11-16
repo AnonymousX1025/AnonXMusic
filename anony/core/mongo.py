@@ -21,7 +21,9 @@ class MongoDB:
 
         self.admin_list = {}
         self.active_calls = {}
+        self.admin_play = []
         self.blacklisted = []
+        self.cmd_delete = []
         self.notified = []
         self.cache = self.db.cache
         self.logger = False
@@ -37,9 +39,6 @@ class MongoDB:
 
         self.lang = {}
         self.langdb = self.db.lang
-
-        self.play_mode = []
-        self.playmodedb = self.db.play
 
         self.users = []
         self.usersdb = self.db.users
@@ -190,6 +189,25 @@ class MongoDB:
             self.chats.extend([chat["_id"] async for chat in self.chatsdb.find()])
         return self.chats
 
+    # COMMAND DELETE
+    async def get_cmd_delete(self, chat_id: int) -> bool:
+        if chat_id not in self.cmd_delete:
+            doc = await self.chatsdb.find_one({"_id": chat_id})
+            if doc and doc.get("cmd_delete"):
+                self.cmd_delete.append(chat_id)
+        return chat_id in self.cmd_delete
+
+    async def set_cmd_delete(self, chat_id: int, delete: bool = False) -> None:
+        if delete:
+            self.cmd_delete.append(chat_id)
+        else:
+            self.cmd_delete.remove(chat_id)
+        await self.chatsdb.update_one(
+            {"_id": chat_id},
+            {"$set": {"cmd_delete": delete}},
+            upsert=True,
+        )
+
     # LANGUAGE METHODS
     async def set_lang(self, chat_id: int, lang_code: str):
         await self.langdb.update_one(
@@ -225,19 +243,22 @@ class MongoDB:
 
     # PLAY MODE METHODS
     async def get_play_mode(self, chat_id: int) -> bool:
-        if chat_id not in self.play_mode:
-            doc = await self.playmodedb.find_one({"_id": chat_id})
-            if doc:
-                self.play_mode.append(chat_id)
-        return chat_id in self.play_mode
+        if chat_id not in self.admin_play:
+            doc = await self.chatsdb.find_one({"_id": chat_id})
+            if doc and doc.get("admin_play"):
+                self.admin_play.append(chat_id)
+        return chat_id in self.admin_play
 
     async def set_play_mode(self, chat_id: int, remove: bool = False) -> None:
         if remove:
-            self.play_mode.remove(chat_id)
-            await self.playmodedb.delete_one({"_id": chat_id})
+            self.admin_play.remove(chat_id)
         else:
-            self.play_mode.append(chat_id)
-            await self.playmodedb.insert_one({"_id": chat_id})
+            self.admin_play.append(chat_id)
+        await self.chatsdb.update_one(
+            {"_id": chat_id},
+            {"$set": {"admin_play": not remove}},
+            upsert=True,
+        )
 
     # SUDO METHODS
     async def add_sudo(self, user_id: int) -> None:
