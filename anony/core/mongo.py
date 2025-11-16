@@ -250,7 +250,7 @@ class MongoDB:
         return chat_id in self.admin_play
 
     async def set_play_mode(self, chat_id: int, remove: bool = False) -> None:
-        if remove:
+        if remove and chat_id in self.admin_play:
             self.admin_play.remove(chat_id)
         else:
             self.admin_play.append(chat_id)
