@@ -55,4 +55,7 @@ async def _restart(_, m: types.Message):
     asyncio.create_task(stop())
     await asyncio.sleep(2)
 
+    try: os.remove("log.txt")
+    except: pass
+
     os.execl(sys.executable, sys.executable, "-m", "anony")
