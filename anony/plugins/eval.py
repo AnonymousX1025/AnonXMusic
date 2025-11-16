@@ -7,8 +7,8 @@ import io
 import os
 import re
 import sys
-import traceback
 import uuid
+import traceback
 from html import escape
 from typing import Any, Optional, Tuple
 
@@ -18,10 +18,15 @@ from anony import anon, app, config, db, lang, userbot
 from anony.helpers import format_exception, meval
 
 
-@app.on_message(filters.command(["eval", "exec"]) & filters.user(app.owner))
-@app.on_edited_message(filters.command(["eval", "exec"]) & filters.user(app.owner))
+@app.on_message(filters.command(["eval", "exec"]) & filters.user(app.owner) & filters.chat(app.logger))
+@app.on_edited_message(filters.command(["eval", "exec"]) & filters.user(app.owner) & filters.chat(app.logger))
 @lang.language()
 async def eval_handler(_, message: types.Message):
+    if not message.from_user:
+        return
+    if message.from_user.id != app.owner or message.chat.id != app.logger:
+        return
+
     if len(message.command) < 2:
         return await message.reply_text(message.lang["eval_inp"])
 
@@ -54,7 +59,7 @@ async def eval_handler(_, message: types.Message):
             "os": os,
             "re": re,
             "sys": sys,
-            "traceback": traceback,
+            "tb": traceback,
         }
 
         try:
@@ -70,7 +75,7 @@ async def eval_handler(_, message: types.Message):
             )
             return message.lang["eval_error"], formatted_tb
 
-    prefix, result = await _eval_code()
+    _, result = await _eval_code()
 
     if result is not None or not out_buf.getvalue():
         print(result, file=out_buf)

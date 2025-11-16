@@ -46,11 +46,12 @@ class YouTube:
 
     async def save_cookies(self, urls: list[str]) -> None:
         logger.info("Saving cookies from urls...")
-        for url in urls:
-            path = f"anony/cookies/cookie{random.randint(10000, 99999)}.txt"
-            link = url.replace("me/", "me/raw/")
-            async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession() as session:
+            for url in urls:
+                path = f"anony/cookies/cookie{random.randint(10000, 99999)}.txt"
+                link = url.replace("me/", "me/raw/")
                 async with session.get(link) as resp:
+                    resp.raise_for_status()
                     with open(path, "wb") as fw:
                         fw.write(await resp.read())
         logger.info("Cookies saved.")
@@ -102,23 +103,26 @@ class YouTube:
             )
         return None
 
-    async def playlist(self, limit: int, user: str, url: str, video: bool) -> list[Track]:
-        plist = await Playlist.get(url)
+    async def playlist(self, limit: int, user: str, url: str, video: bool) -> list[Track | None]:
         tracks = []
-        for data in plist["videos"][:limit]:
-            track = Track(
-                id=data.get("id"),
-                channel_name=data.get("channel", {}).get("name", ""),
-                duration=data.get("duration"),
-                duration_sec=utils.to_seconds(data.get("duration")),
-                title=data.get("title")[:25],
-                thumbnail=data.get("thumbnails")[-1].get("url").split("?")[0],
-                url=data.get("link").split("&list=")[0],
-                user=user,
-                view_count="",
-                video=video,
-            )
-            tracks.append(track)
+        try:
+            plist = await Playlist.get(url)
+            for data in plist["videos"][:limit]:
+                track = Track(
+                    id=data.get("id"),
+                    channel_name=data.get("channel", {}).get("name", ""),
+                    duration=data.get("duration"),
+                    duration_sec=utils.to_seconds(data.get("duration")),
+                    title=data.get("title")[:25],
+                    thumbnail=data.get("thumbnails")[-1].get("url").split("?")[0],
+                    url=data.get("link").split("&list=")[0],
+                    user=user,
+                    view_count="",
+                    video=video,
+                )
+                tracks.append(track)
+        except:
+            pass
         return tracks
 
     async def download(self, video_id: str, video: bool = False) -> Optional[str]:

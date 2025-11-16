@@ -33,6 +33,7 @@ async def play_hndlr(
     url: str = None,
 ) -> None:
     sent = await m.reply_text(m.lang["play_searching"])
+    file = None
     mention = m.from_user.mention
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
     tracks = []
@@ -70,6 +71,9 @@ async def play_hndlr(
         setattr(sent, "lang", m.lang)
         file = await tg.download(m.reply_to_message, sent)
 
+    if not file:
+        return await sent.edit_text(m.lang["play_usage"])
+
     if file.duration_sec > config.DURATION_LIMIT:
         return await sent.edit_text(
             m.lang["play_duration_limit"].format(config.DURATION_LIMIT // 60)
@@ -106,6 +110,7 @@ async def play_hndlr(
             return
 
     if not file.file_path:
+        await sent.edit_text(m.lang["play_downloading"])
         file.file_path = await yt.download(file.id, video=video)
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
