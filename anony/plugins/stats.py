@@ -14,7 +14,6 @@ from pytgcalls import __version__ as pytgver
 from anony import app, config, db, lang, userbot
 from anony.plugins import all_modules
 
-
 @app.on_message(filters.command(["stats"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def _stats(_, m: types.Message):
@@ -34,7 +33,10 @@ async def _stats(_, m: types.Message):
         len(await db.get_chats()),
         len(await db.get_users()),
     )
-    if m.from_user.id in app.sudoers:
+
+    user_id = m.from_user.id if m.from_user else None
+
+    if user_id and user_id in app.sudoers:
         process = psutil.Process(pid)
         storage = psutil.disk_usage("/")
         _utext += m.lang["stats_sudo"].format(
