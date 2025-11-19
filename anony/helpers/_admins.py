@@ -24,6 +24,10 @@ def admin_check(func):
             if isinstance(update, types.Message)
             else update.message.chat.id
         )
+        
+        if not update.from_user:
+            return await reply(update.lang["play_user_invalid"])
+        
         user_id = update.from_user.id
         admins = await db.get_admins(chat_id)
 
@@ -46,6 +50,13 @@ def can_manage_vc(func):
             if isinstance(update, types.Message)
             else update.message.chat.id
         )
+        
+        if not update.from_user:
+            if isinstance(update, types.Message):
+                return await update.reply_text(update.lang["play_user_invalid"])
+            else:
+                return await update.answer(update.lang["play_user_invalid"], show_alert=True)
+        
         user_id = update.from_user.id
 
         if user_id in app.sudoers:
