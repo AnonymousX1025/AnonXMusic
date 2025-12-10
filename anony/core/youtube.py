@@ -73,7 +73,7 @@ class YouTube:
             if message.entities:
                 for entity in message.entities:
                     if entity.type in entities:
-                        link = text[entity.offset : entity.offset + entity.length]
+                        link = entity.url
                         break
 
             if message.caption_entities:
