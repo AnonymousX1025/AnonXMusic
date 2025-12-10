@@ -18,15 +18,10 @@ from anony import anon, app, config, db, lang, userbot
 from anony.helpers import format_exception, meval
 
 
-@app.on_message(filters.command(["eval", "exec"]) & filters.user(app.owner) & filters.chat(app.logger))
-@app.on_edited_message(filters.command(["eval", "exec"]) & filters.user(app.owner) & filters.chat(app.logger))
+@app.on_message(filters.command(["eval", "exec"]) & filters.user(app.owner))
+@app.on_edited_message(filters.command(["eval", "exec"]) & filters.user(app.owner))
 @lang.language()
 async def eval_handler(_, message: types.Message):
-    if not message.from_user:
-        return
-    if message.from_user.id != app.owner or message.chat.id != app.logger:
-        return
-
     if len(message.command) < 2:
         return await message.reply_text(message.lang["eval_inp"])
 
