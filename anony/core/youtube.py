@@ -60,8 +60,10 @@ class YouTube:
         return bool(re.match(self.regex, url))
 
     def url(self, message_1: types.Message) -> Union[str, None]:
-        messages = [message_1]
         link = None
+        messages = [message_1]
+        entities = [enums.MessageEntityType.URL, enums.MessageEntityType.TEXT_LINK]
+
         if message_1.reply_to_message:
             messages.append(message_1.reply_to_message)
 
@@ -70,13 +72,13 @@ class YouTube:
 
             if message.entities:
                 for entity in message.entities:
-                    if entity.type == enums.MessageEntityType.URL:
+                    if entity.type in entities:
                         link = text[entity.offset : entity.offset + entity.length]
                         break
 
             if message.caption_entities:
                 for entity in message.caption_entities:
-                    if entity.type == enums.MessageEntityType.TEXT_LINK:
+                    if entity.type in entities:
                         link = entity.url
                         break
 
