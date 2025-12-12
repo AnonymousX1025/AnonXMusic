@@ -31,6 +31,7 @@ async def play_hndlr(
     _,
     m: types.Message,
     force: bool = False,
+    m3u8: bool = False,
     video: bool = False,
     url: str = None,
 ) -> None:

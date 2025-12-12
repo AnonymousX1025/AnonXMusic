@@ -7,7 +7,8 @@ import asyncio
 
 from pyrogram import enums, errors, types
 
-from anony import app, config, db, queue, yt
+from anony import app, config, db, logger, queue, yt
+from anony.helpers import utils
 
 
 def checkUB(play):
@@ -32,9 +33,8 @@ def checkUB(play):
             len(m.command) > 1 and "-f" in m.command[1]
         )
         video = m.command[0][0] == "v" and config.VIDEO_PLAY
-        url = yt.url(m)
-        if url and not yt.valid(url):
-            return await m.reply_text(m.lang["play_unsupported"])
+        url = utils.get_url(m)
+        m3u8 = url and not yt.valid(url)
 
         play_mode = await db.get_play_mode(chat_id)
         if play_mode or force:
@@ -69,7 +69,7 @@ def checkUB(play):
                         )
             except errors.ChatAdminRequired:
                 return await m.reply_text(m.lang["admin_required"])
-            except errors.UserNotParticipant:
+            except (errors.UserNotParticipant, errors.exceptions.bad_request_400.UserNotParticipant):
                 if m.chat.username:
                     invite_link = m.chat.username
                     try:
@@ -102,6 +102,7 @@ def checkUB(play):
                             m.lang["play_invite_error"].format(type(ex).__name__)
                         )
                 except Exception as ex:
+                    logger.error(f"Error joining chat - {chat_id}: {ex}")
                     return await umm.edit_text(
                         m.lang["play_invite_error"].format(type(ex).__name__)
                     )
@@ -115,6 +116,6 @@ def checkUB(play):
             except:
                 pass
 
-        return await play(_, m, force, video, url)
+        return await play(_, m, force, m3u8, video, url)
 
     return wrapper

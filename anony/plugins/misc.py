@@ -46,7 +46,7 @@ async def auto_leave():
 async def track_time():
     while True:
         await asyncio.sleep(1)
-        for chat_id in db.active_calls:
+        for chat_id in list(db.active_calls):
             if not await db.playing(chat_id):
                 continue
             media = queue.get_current(chat_id)
@@ -58,7 +58,7 @@ async def track_time():
 async def update_timer(length=10):
     while True:
         await asyncio.sleep(7)
-        for chat_id in db.active_calls:
+        for chat_id in list(db.active_calls):
             if not await db.playing(chat_id):
                 continue
             try:
@@ -96,7 +96,7 @@ async def update_timer(length=10):
 async def vc_watcher(sleep=15):
     while True:
         await asyncio.sleep(sleep)
-        for chat_id in db.active_calls:
+        for chat_id in list(db.active_calls):
             client = await db.get_assistant(chat_id)
             played = await client.time(chat_id)
             participants = await client.get_participants(chat_id)

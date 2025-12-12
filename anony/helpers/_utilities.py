@@ -37,6 +37,31 @@ class Utilities:
         parts = [int(p) for p in time.strip().split(":")]
         return sum(value * 60**i for i, value in enumerate(reversed(parts)))
 
+    def get_url(self, message_1: types.Message) -> str | None:
+        link = None
+        messages = [message_1]
+        entities = [enums.MessageEntityType.URL, enums.MessageEntityType.TEXT_LINK]
+
+        if message_1.reply_to_message:
+            messages.append(message_1.reply_to_message)
+
+        for message in messages:
+            if message.entities:
+                for entity in message.entities:
+                    if entity.type in entities:
+                        link = entity.url
+                        break
+
+            if message.caption_entities:
+                for entity in message.caption_entities:
+                    if entity.type in entities:
+                        link = entity.url
+                        break
+
+        if link:
+            return link.split("&si")[0].split("?si")[0]
+        return None
+
     async def extract_user(self, msg: types.Message) -> types.User | None:
         if msg.reply_to_message:
             return msg.reply_to_message.from_user

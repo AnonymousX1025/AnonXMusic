@@ -10,9 +10,7 @@ import random
 import asyncio
 import aiohttp
 from pathlib import Path
-from typing import Optional, Union
 
-from pyrogram import enums, types
 from py_yt import Playlist, VideosSearch
 
 from anony import logger
@@ -59,33 +57,6 @@ class YouTube:
     def valid(self, url: str) -> bool:
         return bool(re.match(self.regex, url))
 
-    def url(self, message_1: types.Message) -> Union[str, None]:
-        link = None
-        messages = [message_1]
-        entities = [enums.MessageEntityType.URL, enums.MessageEntityType.TEXT_LINK]
-
-        if message_1.reply_to_message:
-            messages.append(message_1.reply_to_message)
-
-        for message in messages:
-            text = message.text or message.caption or ""
-
-            if message.entities:
-                for entity in message.entities:
-                    if entity.type in entities:
-                        link = entity.url
-                        break
-
-            if message.caption_entities:
-                for entity in message.caption_entities:
-                    if entity.type in entities:
-                        link = entity.url
-                        break
-
-        if link:
-            return link.split("&si")[0].split("?si")[0]
-        return None
-
     async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
         _search = VideosSearch(query, limit=1)
         results = await _search.next()
@@ -127,7 +98,7 @@ class YouTube:
             pass
         return tracks
 
-    async def download(self, video_id: str, video: bool = False) -> Optional[str]:
+    async def download(self, video_id: str, video: bool = False) -> str | None:
         url = self.base + video_id
         ext = "mp4" if video else "webm"
         filename = f"downloads/{video_id}.{ext}"
