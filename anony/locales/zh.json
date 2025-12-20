@@ -26,6 +26,7 @@
     "error_no_call": "<b>未找到活动的视频聊天。</b>\n\n请开始一个并<b>重试</b>。",
     "error_no_file": "下载失败。\n\n如果问题仍然存在, 请向<a href={0}>支持聊天</a>报告",
     "error_tg_server": "<u><b>Telegram 服务器错误</b></u>\n\nTelegram 遇到内部问题。正在清除队列并离开视频聊天。",
+    "error_rtmp": "不支持 RTMP 推流。请停止 RTMP 流并改为开始视频聊天。",
     "eval_error": "⚠️ 执行代码段时出错\n\n",
     "eval_inp": "什么？",
     "eval_out": "<b>输出: </b>\n<code>{0}</code>",

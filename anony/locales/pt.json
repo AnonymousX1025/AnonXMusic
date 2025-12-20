@@ -26,6 +26,7 @@
     "error_no_call": "<b>Nenhum chat de vídeo ativo encontrado.</b>\n\nInicie um e <b>tente novamente</b>.",
     "error_no_file": "Falha no download.\n\nSe o problema persistir, relate-o ao <a href={0}>chat de suporte</a>",
     "error_tg_server": "<u><b>Erro do servidor do Telegram</b></u>\n\nO Telegram está enfrentando problemas internos. Limpando a fila e saindo do chat de vídeo.",
+    "error_rtmp": "A transmissão RTMP não é suportada. Por favor, interrompa a transmissão RTMP e inicie um chat de vídeo.",
     "eval_error": "⚠️ Erro ao executar o trecho\n\n",
     "eval_inp": "O quê?",
     "eval_out": "<b>Saída:</b>\n<code>{0}</code>",

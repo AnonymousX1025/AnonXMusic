@@ -26,6 +26,7 @@
     "error_no_call": "<b>Kein aktiver Video-Chat gefunden.</b>\n\nBitte starte einen und <b>versuche es erneut</b>.",
     "error_no_file": "Download fehlgeschlagen.\n\nWenn das Problem weiterhin besteht, melde es dem <a href={0}>Support-Chat</a>",
     "error_tg_server": "<u><b>Telegram-Serverfehler</b></u>\n\nTelegram hat interne Probleme. Die Warteschlange wird gelöscht und der Video-Chat verlassen.",
+    "error_rtmp": "RTMP-Streaming wird nicht unterstützt. Bitte beenden Sie den RTMP-Stream und starten Sie stattdessen einen Videochat.",
     "eval_error": "⚠️ Fehler beim Ausführen des Snippets\n\n",
     "eval_inp": "Was?",
     "eval_out": "<b>Ausgabe:</b>\n<code>{0}</code>",

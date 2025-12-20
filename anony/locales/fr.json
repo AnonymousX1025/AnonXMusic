@@ -26,6 +26,7 @@
     "error_no_call": "<b>Aucun chat vidéo actif trouvé.</b>\n\nVeuillez en démarrer un et <b>réessayer</b>.",
     "error_no_file": "Échec du téléchargement.\n\nSi le problème persiste, signalez-le au <a href={0}>chat d'assistance</a>",
     "error_tg_server": "<u><b>Erreur du serveur Telegram</b></u>\n\nTelegram rencontre des problèmes internes. Effacement de la file d'attente et sortie du chat vidéo.",
+    "error_rtmp": "Le streaming RTMP n’est pas pris en charge. Veuillez arrêter le flux RTMP et démarrer un chat vidéo à la place.",
     "eval_error": "⚠️ Erreur lors de l'exécution de l'extrait\n\n",
     "eval_inp": "Quoi ?",
     "eval_out": "<b>Sortie :</b>\n<code>{0}</code>",
