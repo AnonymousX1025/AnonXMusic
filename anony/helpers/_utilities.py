@@ -37,6 +37,7 @@ class Utilities:
         parts = [int(p) for p in time.strip().split(":")]
         return sum(value * 60**i for i, value in enumerate(reversed(parts)))
 
+
     def get_url(self, message_1: types.Message) -> str | None:
         link = None
         messages = [message_1]
@@ -62,6 +63,7 @@ class Utilities:
             return link.split("&si")[0].split("?si")[0]
         return None
 
+
     async def extract_user(self, msg: types.Message) -> types.User | None:
         if msg.reply_to_message:
             return msg.reply_to_message.from_user
@@ -81,6 +83,7 @@ class Utilities:
                 pass
 
         return None
+
 
     async def play_log(
         self,

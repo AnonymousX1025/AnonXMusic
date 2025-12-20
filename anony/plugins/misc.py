@@ -6,7 +6,7 @@
 import asyncio
 import time
 
-from pyrogram import enums, filters, types
+from pyrogram import enums, errors, filters, types
 
 from anony import anon, app, config, db, lang, queue, tasks, userbot, yt
 from anony.helpers import buttons
@@ -89,7 +89,7 @@ async def update_timer(length=10):
                         chat_id=chat_id, timer=timer, remove=remove
                     ),
                 )
-            except:
+            except Exception:
                 pass
 
 
@@ -102,15 +102,18 @@ async def vc_watcher(sleep=15):
             participants = await client.get_participants(chat_id)
             if len(participants) < 2 and played > 30:
                 _lang = await lang.get_lang(chat_id)
-                sent = await app.edit_message_reply_markup(
-                    chat_id=chat_id,
-                    message_id=queue.get_current(chat_id).message_id,
-                    reply_markup=buttons.controls(
-                        chat_id=chat_id, status=_lang["stopped"], remove=True
-                    ),
-                )
                 await anon.stop(chat_id)
-                await sent.reply_text(_lang["auto_left"])
+                try:
+                    sent = await app.edit_message_reply_markup(
+                        chat_id=chat_id,
+                        message_id=queue.get_current(chat_id).message_id,
+                        reply_markup=buttons.controls(
+                            chat_id=chat_id, status=_lang["stopped"], remove=True
+                        ),
+                    )
+                    await sent.reply_text(_lang["auto_left"])
+                except errors.MessageIdInvalid:
+                    pass
 
 
 if config.AUTO_END:
