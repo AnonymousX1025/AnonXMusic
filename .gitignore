@@ -1,6 +1,7 @@
 .env
 .cache
-log.txt
+*.txt
+.idea
 .DS_Store
 venv/
 cache/
