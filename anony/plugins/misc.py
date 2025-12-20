@@ -102,7 +102,6 @@ async def vc_watcher(sleep=15):
             participants = await client.get_participants(chat_id)
             if len(participants) < 2 and played > 30:
                 _lang = await lang.get_lang(chat_id)
-                await anon.stop(chat_id)
                 try:
                     sent = await app.edit_message_reply_markup(
                         chat_id=chat_id,
@@ -111,6 +110,7 @@ async def vc_watcher(sleep=15):
                             chat_id=chat_id, status=_lang["stopped"], remove=True
                         ),
                     )
+                    await anon.stop(chat_id)
                     await sent.reply_text(_lang["auto_left"])
                 except errors.MessageIdInvalid:
                     pass
