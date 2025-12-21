@@ -67,6 +67,9 @@ class Language:
                     None,
                 )
 
+                if not fallen.from_user:
+                    return
+
                 if hasattr(fallen, "chat"):
                     chat = fallen.chat
                 elif hasattr(fallen, "message"):
