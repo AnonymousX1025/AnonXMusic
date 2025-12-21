@@ -48,7 +48,7 @@ class YouTube:
         async with aiohttp.ClientSession() as session:
             for i, url in enumerate(urls):
                 path = f"{self.cookie_dir}/cookie_{i}.txt"
-                link = url.replace("me/", "me/raw/")
+                link = "https://batbin.me/api/v2/paste/" + url.split("/")[-1]
                 async with session.get(link) as resp:
                     resp.raise_for_status()
                     with open(path, "wb") as fw:

@@ -21,7 +21,6 @@ logging.getLogger("ntgcalls").setLevel(logging.CRITICAL)
 logging.getLogger("pymongo").setLevel(logging.ERROR)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
 logging.getLogger("pytgcalls").setLevel(logging.ERROR)
-logging.getLogger("yt_dlp").setLevel(logging.CRITICAL)
 logger = logging.getLogger(__name__)
 
 

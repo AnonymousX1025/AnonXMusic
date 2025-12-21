@@ -58,7 +58,8 @@ class TgCall(PyTgCalls):
         )
 
         if not media.file_path:
-            return await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
+            await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
+            return await self.play_next(chat_id)
 
         stream = types.MediaStream(
             media_path=media.file_path,
@@ -131,9 +132,6 @@ class TgCall(PyTgCalls):
 
 
     async def play_next(self, chat_id: int) -> None:
-        if not await db.get_call(chat_id):
-            return
-
         media = queue.get_next(chat_id)
         try:
             if media.message_id:
