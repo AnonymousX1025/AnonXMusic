@@ -1,7 +1,6 @@
 # Netscape HTTP Cookie File
 # https://curl.haxx.se/rfc/cookie_spec.html
 # This is a generated file! Do not edit.
-
 .youtube.com	TRUE	/	FALSE	1800108980	HSID	AVSbUaNWSjsv1XgZD
 .youtube.com	TRUE	/	TRUE	1800108980	SSID	AUOUWcMv49V_IEGWy
 .youtube.com	TRUE	/	FALSE	1800108980	APISID	o5v3BFfpZ2YZ6doB/ATOOcGGwhQEFTNu9Q
@@ -27,4 +26,3 @@
 .youtube.com	TRUE	/	TRUE	1781101148	__Secure-YNID	14.YT=CFUWngOkA7jSHk4d6rvyHSRG4O8w2IWpRAAVlWHFEBDTVkgf6_qnRLTcHqJvE8dKiqJR5ucUahuXWxKPudd3iHpV5zkxbajDRklHYAFn44Amlw1273ppLkEvM7qPDdjJeMx6emlbBEMMJH8KQJ0AhGrwPo6_zPkSk9tnNnIWy31d-OFxra_AG4bi7cJEcat0yi8Jus_gPBBv_sLYC8KtU31TqmteF5m13JWgNtOtMfumlA4URpcjpJrxIxF88qFKmqlJuU2f-YhaAREjA7KYGPtL9l4FQ7w8yCHv9RVZNMuT7wOivIV7dR8qxd9hjHyC5tTv1AkOlkP1MriZX6iGNA
 .youtube.com	TRUE	/	TRUE	1781101148	__Secure-ROLLOUT_TOKEN	CNizsp_QyfD7pQEQhr6djp-4kQMYhr6djp-4kQM%3D
 .youtube.com	TRUE	/	TRUE	1782020129	__Secure-ROLLOUT_TOKEN	CNuztv_XlMSxrAEQ6MifhJ64kQMY88mJy_7SkQM%3D
-  
