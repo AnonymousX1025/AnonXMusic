@@ -1,12 +1,5 @@
-# Copyright (c) 2025 AnonymousX1025
-# Licensed under the MIT License.
-# This file is part of AnonXMusic
-
-
 from pathlib import Path
-
 from pyrogram import filters, types
-
 from anony import anon, app, config, db, lang, queue, tg, yt
 from anony.helpers import buttons, utils
 from anony.helpers._play import checkUB
@@ -21,7 +14,7 @@ def playlist_to_queue(chat_id: int, tracks: list) -> str:
     return text
 
 @app.on_message(
-    filters.command(["play", "playforce", "vplay", "vplayforce"])
+    filters.command(["شغل", "تشغيل", "vplay", "vplayforce"])
     & filters.group
     & ~app.bl_users
 )
