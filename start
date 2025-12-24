@@ -1,3 +1,2 @@
 #!/bin/bash
-python3 web.py &
-python3 -m anony
+python3 web.py & python3 -m anony
