@@ -1,14 +1,11 @@
-# ===== الاستيرادات =====
 from pathlib import Path
+
 from pyrogram import filters, types
+
 from anony import anon, app, config, db, lang, queue, tg, yt
 from anony.helpers import buttons, utils
-from anony.helpers._play import checkUB
+# Removed @checkUB because its wrapper expected m.command (caused TypeError with filters.text)
 
-# إنشاء مجلد التحميل إذا لم يكن موجودًا
-Path("downloads").mkdir(exist_ok=True)
-
-# ===== دالة تحويل playlist إلى قائمة الانتظار =====
 def playlist_to_queue(chat_id: int, tracks: list) -> str:
     text = "<blockquote expandable>"
     for track in tracks:
@@ -17,10 +14,8 @@ def playlist_to_queue(chat_id: int, tracks: list) -> str:
     text = text[:1948] + "</blockquote>"
     return text
 
-# ===== دالة التعامل مع رسائل التشغيل =====
 @app.on_message(filters.text & filters.group & ~app.bl_users)
 @lang.language()
-@checkUB
 async def play_hndlr(_, m: types.Message) -> None:
     text = (m.text or m.caption or "").strip()
     if not text:
@@ -55,7 +50,6 @@ async def play_hndlr(_, m: types.Message) -> None:
             file.message_id = sent.id
         else:
             file = await yt.search(url, sent.id, video=video)
-
         if not file:
             return await sent.edit_text(m.lang["play_not_found"].format(config.SUPPORT_CHAT))
 
@@ -84,10 +78,7 @@ async def play_hndlr(_, m: types.Message) -> None:
             )
             if tracks:
                 added = playlist_to_queue(m.chat.id, tracks)
-                await app.send_message(
-                    chat_id=m.chat.id,
-                    text=m.lang["playlist_queued"].format(len(tracks)) + added,
-                )
+                await app.send_message(chat_id=m.chat.id, text=m.lang["playlist_queued"].format(len(tracks)) + added)
             return
 
     if not file.file_path:
@@ -99,9 +90,7 @@ async def play_hndlr(_, m: types.Message) -> None:
             file.file_path = await yt.download(file.id, video=video)
 
     await anon.play_media(chat_id=m.chat.id, message=sent, media=file)
+
     if tracks:
         added = playlist_to_queue(m.chat.id, tracks)
-        await app.send_message(
-            chat_id=m.chat.id,
-            text=m.lang["playlist_queued"].format(len(tracks)) + added,
-            )
+        await app.send_message(chat_id=m.chat.id, text=m.lang["playlist_queued"].format(len(tracks)) + added)
