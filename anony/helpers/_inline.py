@@ -52,8 +52,8 @@ class Inline:
         if back:
             rows = [
                 [
-                    self.ikb(text=_lang["back"], callback_data="help back"),
-                    self.ikb(text=_lang["close"], callback_data="help close"),
+                    self.ikb(text=_lang["رجوع"], callback_data="help back"),
+                    self.ikb(text=_lang["اغلاق"], callback_data="help close"),
                 ]
             ]
         else:
@@ -138,22 +138,22 @@ class Inline:
         rows = [
             [
                 self.ikb(
-                    text=lang["add_me"],
+                    text=lang["أضفني لمجموعتك 🩷"],
                     url=f"https://t.me/{app.username}?startgroup=true",
                 )
             ],
             [self.ikb(text=lang["help"], callback_data="help")],
             [
-                self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
-                self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
+                self.ikb(text=lang["للمساعدة"], url=config.SUPPORT_CHAT),
+                self.ikb(text=lang["قناة الدعم"], url=config.SUPPORT_CHANNEL),
             ],
         ]
         if private:
             rows += [
                 [
                     self.ikb(
-                        text=lang["source"],
-                        url="https://github.com/AnonymousX1025/AnonXMusic",
+                        text=lang["المطور"],
+                        url="t.me/dev_mido",
                     )
                 ]
             ]
