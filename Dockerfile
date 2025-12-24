@@ -10,13 +10,11 @@ RUN apt-get update -y && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/* \
     && curl -fsSL https://deno.land/install.sh | sh
 
-
 ENV DENO_INSTALL="/root/.deno"
 ENV PATH="${DENO_INSTALL}/bin:${PATH}"
-
 
 RUN pip3 install -U pip && pip3 install -U -r requirements.txt
 
 COPY . .
 
-CMD ["bash", "start"]
+CMD ["bash", "-c", "python3 web.py & python3 -m anony"]
