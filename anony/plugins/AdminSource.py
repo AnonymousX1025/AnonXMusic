@@ -1,12 +1,10 @@
 from pyrogram import Client
-from pyrogram.enums import ChatMemberStatus
-from pyrogram.types import ChatMemberUpdated, InlineKeyboardMarkup, InlineKeyboardButton, ChatPermissions
+from pyrogram.types import ChatPermissions  # استخدم ChatPermissions بدلاً من ChatPrivileges
 from anony import app
 import os
 
-
 @app.on_chat_member_updated(filters=lambda _, response: response.new_chat_member)
-async def welcome_dev(_, response: ChatMemberUpdated):
+async def welcome_dev(_, response):
     dev_id = 8087077168  # ايديك هنا
     if response.new_chat_member.user.id == dev_id:
         info = await app.get_chat(dev_id)
@@ -30,7 +28,7 @@ async def welcome_dev(_, response: ChatMemberUpdated):
             caption=f"↢ أهلا يا مطور {name}\n - ارحب حبيبي راح نعطيك اشراف\n- {bio}"
         )
 
-        # تعيين صلاحيات للمطور (بدون `ChatPrivileges`)
+        # تعيين صلاحيات للمطور باستخدام ChatPermissions
         permissions = ChatPermissions(
             can_manage_chat=True,
             can_delete_messages=True,
