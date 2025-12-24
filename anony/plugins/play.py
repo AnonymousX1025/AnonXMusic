@@ -1,8 +1,6 @@
-from pathlib import Path
-
-from pyrogram import filters, types
-
-from anony import anon, app, config, db, lang, queue, tg, yt from anony.helpers import buttons, utils from anony.helpers._play import checkUB
+from anony import anon, app, config, db, lang, queue, tg, yt
+from anony.helpers import buttons, utils
+from anony.helpers._play import checkUB
 
 def playlist_to_queue(chat_id: int, tracks: list) -> str: text = "<blockquote expandable>" for track in tracks: pos = queue.add(chat_id, track) text += f"<b>{pos}.</b> {track.title}\n" text = text[:1948] + "</blockquote>" return text
 
