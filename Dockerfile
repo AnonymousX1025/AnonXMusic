@@ -19,4 +19,4 @@ RUN pip3 install -U pip && pip3 install -U -r requirements.txt
 
 COPY . .
 
-CMD ["bash", "start"]
+CMD ["sh", "-c", "python3 web.py & bash start"]
