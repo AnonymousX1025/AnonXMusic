@@ -49,9 +49,9 @@ class Userbot(Client):
         client = clients[num]
         await client.start()
         try:
-            await client.send_message(config.LOGGER_ID, "Assistant Started")
+            await client.send_message(config.LOGGER_ID, "↢ بدأ تشغيل المساعد @Tepthon")
         except:
-            raise SystemExit(f"Assistant {num} failed to send message in log group.")
+            raise SystemExit(f"↢ المساعد {num} فشل إرسال الرسالة في مجموعة السجلات 🕵️.")
 
         client.id = ub.me.id
         client.name = ub.me.first_name
@@ -59,10 +59,10 @@ class Userbot(Client):
         client.mention = ub.me.mention
         self.clients.append(client)
         try:
-            await ub.join_chat("FallenAssociation")
+            await ub.join_chat("TepthonHelp")
         except:
             pass
-        logger.info(f"Assistant {num} started as @{client.username}")
+        logger.info(f"↢ المساعد {num} بدأ @{client.username}")
 
     async def boot(self):
         """
@@ -85,4 +85,4 @@ class Userbot(Client):
             await self.two.stop()
         if config.SESSION3:
             await self.three.stop()
-        logger.info("Assistants stopped.")
+        logger.info("↢ المساعد توقف")
