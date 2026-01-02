@@ -128,11 +128,10 @@ async def _help(_, query: types.CallbackQuery):
             text=query.lang["help_menu"], reply_markup=buttons.help_markup(query.lang)
         )
     elif data[1] == "close":
-        try:
-            await query.message.delete()
-            return await query.message.reply_to_message.delete()
-        except:
-            pass
+        await query.message.delete()
+        if query.message.reply_to_message:
+            await query.message.reply_to_message.delete()
+        return
 
     await query.edit_message_text(
         text=query.lang[f"help_{data[1]}"],
