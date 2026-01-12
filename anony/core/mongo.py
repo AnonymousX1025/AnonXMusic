@@ -298,8 +298,8 @@ class MongoDB:
         from bson import ObjectId
         logger.info("Migrating users and chats from old collections...")
 
-        users = musers = mchats = []
-        seen_chats = seen_users = set()
+        users, musers, mchats = [], [], []
+        seen_chats, seen_users = set(), set()
         users.extend([self.db.tgusersdb.find() + self.usersdb.find()])
 
         async for user in users:
