@@ -303,10 +303,13 @@ class MongoDB:
         users.extend([self.db.tgusersdb.find() + self.usersdb.find()])
 
         async for user in users:
-            if isinstance(user.get("_id"), ObjectId):
-                user_id = int(user.get("user_id"))
-            else:
-                user_id = int(user.get("_id"))
+            try:
+                if isinstance(user.get("_id"), ObjectId):
+                    user_id = int(user.get("user_id"))
+                else:
+                    user_id = int(user.get("_id"))
+            except ValueError:
+                continue
 
             if user_id in seen_users:
                 continue
@@ -319,10 +322,13 @@ class MongoDB:
             await self.usersdb.insert_many(musers)
 
         async for chat in self.chatsdb.find():
-            if isinstance(chat.get("_id"), ObjectId):
-                chat_id = int(chat.get("chat_id"))
-            else:
-                chat_id = int(chat.get("_id"))
+            try:
+                if isinstance(chat.get("_id"), ObjectId):
+                    chat_id = int(chat.get("chat_id"))
+                else:
+                    chat_id = int(chat.get("_id"))
+            except ValueError:
+                continue
 
             if chat_id in seen_chats:
                 continue
