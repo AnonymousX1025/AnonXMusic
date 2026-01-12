@@ -294,52 +294,62 @@ class MongoDB:
             self.users.extend([user["_id"] async for user in self.usersdb.find()])
         return self.users
 
-
     async def migrate_coll(self) -> None:
         from bson import ObjectId
+
         logger.info("Migrating users and chats from old collections...")
 
-        musers, mchats, done = [], [], []
-        ulist = [user async for user in self.db.tgusersdb.find()]
-        ulist.extend([user async for user in self.usersdb.find()])
+        musers = []
+        mchats = []
 
-        for user in ulist:
+        seen_users = set()
+        seen_chats = set()
+
+        async for user in self.db.tgusersdb.find():
             if isinstance(user.get("_id"), ObjectId):
-                user_id = int(user["user_id"])
-                if user_id in done:
-                    continue
-                done.append(user_id)
-                musers.append(user)
+                user_id = int(user.get("user_id"))
             else:
-                user_id = int(user["_id"])
-                if user_id in done:
-                    continue
-                done.append(user_id)
-                musers.append({"_id": user_id})
+                user_id = int(user.get("_id"))
+
+            if user_id in seen_users:
+                continue
+
+            seen_users.add(user_id)
+            musers.append({"_id": user_id})
+
+        async for user in self.usersdb.find():
+            user_id = int(user.get("_id"))
+            if user_id in seen_users:
+                continue
+
+            seen_users.add(user_id)
+            musers.append({"_id": user_id})
+
         await self.usersdb.drop()
         await self.db.tgusersdb.drop()
+
         if musers:
             await self.usersdb.insert_many(musers)
 
         async for chat in self.chatsdb.find():
             if isinstance(chat.get("_id"), ObjectId):
-                chat_id = int(chat["chat_id"])
-                if chat_id in mchats:
-                    continue
-                done.append(chat_id)
-                mchats.append(chat)
+                chat_id = int(chat.get("chat_id"))
             else:
-                chat_id = int(chat["_id"])
-                if chat_id in done:
-                    continue
-                done.append(chat_id)
-                mchats.append({"_id": chat_id})
+                chat_id = int(chat.get("_id"))
+
+            if chat_id in seen_chats:
+                continue
+
+            seen_chats.add(chat_id)
+            mchats.append({"_id": chat_id})
+
         await self.chatsdb.drop()
+
         if mchats:
             await self.chatsdb.insert_many(mchats)
 
         await self.cache.insert_one({"_id": "migrated"})
-        logger.info("Migration completed.")
+        logger.info("Migration completed successfully.")
 
     async def load_cache(self) -> None:
         doc = await self.cache.find_one({"_id": "migrated"})
