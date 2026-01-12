@@ -296,16 +296,13 @@ class MongoDB:
 
     async def migrate_coll(self) -> None:
         from bson import ObjectId
-
         logger.info("Migrating users and chats from old collections...")
 
-        musers = []
-        mchats = []
+        users = musers = mchats = []
+        seen_chats = seen_users = set()
+        users.extend([self.db.tgusersdb.find() + self.usersdb.find()])
 
-        seen_users = set()
-        seen_chats = set()
-
-        async for user in self.db.tgusersdb.find():
+        async for user in users:
             if isinstance(user.get("_id"), ObjectId):
                 user_id = int(user.get("user_id"))
             else:
@@ -313,21 +310,11 @@ class MongoDB:
 
             if user_id in seen_users:
                 continue
-
-            seen_users.add(user_id)
-            musers.append({"_id": user_id})
-
-        async for user in self.usersdb.find():
-            user_id = int(user.get("_id"))
-            if user_id in seen_users:
-                continue
-
             seen_users.add(user_id)
             musers.append({"_id": user_id})
 
         await self.usersdb.drop()
         await self.db.tgusersdb.drop()
-
         if musers:
             await self.usersdb.insert_many(musers)
 
@@ -339,12 +326,10 @@ class MongoDB:
 
             if chat_id in seen_chats:
                 continue
-
             seen_chats.add(chat_id)
             mchats.append({"_id": chat_id})
 
         await self.chatsdb.drop()
-
         if mchats:
             await self.chatsdb.insert_many(mchats)
 
