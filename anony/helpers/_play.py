@@ -97,7 +97,7 @@ def checkUB(play):
                 except errors.InviteRequestSent:
                     await asyncio.sleep(2)
                     try:
-                        await client.approve_chat_join_request(chat_id, client.id)
+                        await app.approve_chat_join_request(chat_id, client.id)
                     except errors.HideRequesterMissing:
                         pass
                     except Exception as ex:
