@@ -294,22 +294,21 @@ class MongoDB:
             self.users.extend([user["_id"] async for user in self.usersdb.find()])
         return self.users
 
+
     async def migrate_coll(self) -> None:
         from bson import ObjectId
         logger.info("Migrating users and chats from old collections...")
 
         users, musers, mchats = [], [], []
         seen_chats, seen_users = set(), set()
-        users.extend([self.db.tgusersdb.find() + self.usersdb.find()])
+        users.extend([user async for user in self.usersdb.find()])
+        users.extend([user async for user in self.db.tgusersdb.find()])
 
-        async for user in users:
-            try:
-                if isinstance(user.get("_id"), ObjectId):
-                    user_id = int(user.get("user_id"))
-                else:
-                    user_id = int(user.get("_id"))
-            except ValueError:
-                continue
+        for user in users:
+            if isinstance(user.get("_id"), ObjectId):
+                user_id = int(user.get("user_id"))
+            else:
+                user_id = int(user.get("_id"))
 
             if user_id in seen_users:
                 continue
@@ -322,13 +321,10 @@ class MongoDB:
             await self.usersdb.insert_many(musers)
 
         async for chat in self.chatsdb.find():
-            try:
-                if isinstance(chat.get("_id"), ObjectId):
-                    chat_id = int(chat.get("chat_id"))
-                else:
-                    chat_id = int(chat.get("_id"))
-            except ValueError:
-                continue
+            if isinstance(chat.get("_id"), ObjectId):
+                chat_id = int(chat.get("chat_id"))
+            else:
+                chat_id = int(chat.get("_id"))
 
             if chat_id in seen_chats:
                 continue
