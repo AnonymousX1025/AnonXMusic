@@ -1,10 +1,10 @@
-aiohttp~=3.13.2
+aiohttp~=3.13.3
 kurigram>=2.2.17
-pillow~=12.0.0
+pillow~=12.1.0
 psutil~=7.2.1
-pymongo>=4.15.5
+pymongo>=4.16.0
 pytgcrypto>=1.2.11
-py-tgcalls~=2.2.8
-py-yt-search~=0.5.5
+py-tgcalls~=2.2.9
+py-yt-search~=0.5.7
 python-dotenv~=1.2.1
 yt-dlp[default]>=2025.12.8
