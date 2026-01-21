@@ -144,21 +144,21 @@ class Inline:
             ],
             [self.ikb(text=lang["help"], callback_data="help")],
             [
-                self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
-                self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
+                self.ikb(text=lang["Dəstək qrupu"], url=config.SUPPORT_CHAT),
+                self.ikb(text=lang["Bot kanalı"], url=config.SUPPORT_CHANNEL),
             ],
         ]
         if private:
             rows += [
                 [
                     self.ikb(
-                        text=lang["source"],
-                        url="https://github.com/AnonymousX1025/AnonXMusic",
+                        text=lang["Dəstək qrupu 2"],
+                        url="https://t.me/ht_bots_chat_2",
                     )
                 ]
             ]
         else:
-            rows += [[self.ikb(text=lang["language"], callback_data="language")]]
+            rows += [[self.ikb(text=lang["Dil"], callback_data="language")]]
         return self.ikm(rows)
 
     def yt_key(self, link: str) -> types.InlineKeyboardMarkup:
