@@ -26,7 +26,7 @@
         </tr>
         <tr>
             <td>en</td>
-            <td>English</td>
+            <td>Engilsh</td>
             <td><a href=https://t.me/kullaniciadidi>@kullaniciadidi</a></td>
         </tr>
         <tr>
