@@ -42,7 +42,7 @@
         <tr>
             <td>hi</td>
             <td>Hindi</td>
-            <td><a href=https://t.me/kullaniciadidi</a></td>
+            <td><a href=https://t.me/kullaniciadidi>@kullaniciadidi</a></td>
         </tr>
         <tr>
             <td>ja</td>
