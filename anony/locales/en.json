@@ -104,7 +104,7 @@
     "queue_fetching": "Fetching queue...",
     "restarting": "Restarting...",
     "restarted": "Restart in progress. Don't worry, it'll only take a few seconds… maybe.",
-    "start_pm": "Hey {0},\nThis is {1} !\n\nA music player bot with some awesome and useful features.\n\n<b><i>Click on the help button for more info.</i></b>",
+    "start_pm": "Salam! {0},\nThis mən {1} !\n\nA music Möhtəşəm xüsusiyyətləri olan musiqi botuyam!.\n\n<b><i>Daha çox məlumat üçün kömək düyməsini klikləyin.</i></b>",
     "start_gp": "Hey,\nThis is {0}\n\n<u><b>A music player bot with some awesome and useful features.</b></u>",
     "start_settings": "<u><b>{0} settings</b></u>\n\nClick the buttons below to change this chat's current settings.",
     "stats_fetching": "Fetching stats...",
