@@ -152,13 +152,13 @@ class Inline:
             rows += [
                 [
                     self.ikb(
-                        text=lang["Dəstək qrupu 2"],
-                        url="https://t.me/ht_bots_chat_2",
+                        text=lang["Developer🥱"],
+                        url="https://t.me/kullaniciadidi",
                     )
                 ]
             ]
         else:
-            rows += [[self.ikb(text=lang["Dil"], callback_data="language")]]
+            rows += [[self.ikb(text=lang["language"], callback_data="language")]]
         return self.ikm(rows)
 
     def yt_key(self, link: str) -> types.InlineKeyboardMarkup:
