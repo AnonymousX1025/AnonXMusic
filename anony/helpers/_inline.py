@@ -144,8 +144,8 @@ class Inline:
             ],
             [self.ikb(text=lang["help"], callback_data="help")],
             [
-                self.ikb(text=lang["Dəstək qrupu"], url=config.SUPPORT_CHAT),
-                self.ikb(text=lang["Bot kanalı"], url=config.SUPPORT_CHANNEL),
+                self.ikb(text=lang["support"], url=config.SUPPORT_CHAT),
+                self.ikb(text=lang["channel"], url=config.SUPPORT_CHANNEL),
             ],
         ]
         if private:
