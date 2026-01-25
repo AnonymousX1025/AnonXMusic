@@ -5,7 +5,8 @@
 
 from ntgcalls import (ConnectionNotFound, TelegramServerError,
                       RTMPStreamingUnsupported)
-from pyrogram.errors import MessageIdInvalid
+from pyrogram.errors import (ChatSendMediaForbidden, ChatSendPhotosForbidden,
+                             MessageIdInvalid)
 from pyrogram.types import InputMediaPhoto, Message
 from pytgcalls import PyTgCalls, exceptions, types
 from pytgcalls.pytgcalls_session import PyTgCallsSession
@@ -52,7 +53,7 @@ class TgCall(PyTgCalls):
             await thumb.generate(media)
             if isinstance(media, Track)
             else config.DEFAULT_THUMB
-        )
+        ) if config.THUMB_GEN else None
 
         if not media.file_path:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
@@ -87,20 +88,31 @@ class TgCall(PyTgCalls):
                 )
                 keyboard = buttons.controls(chat_id)
                 try:
-                    await message.edit_media(
-                        media=InputMediaPhoto(
-                            media=_thumb,
+                    if _thumb:
+                        await message.edit_media(
+                            media=InputMediaPhoto(
+                                media=_thumb,
+                                caption=text,
+                            ),
+                            reply_markup=keyboard,
+                        )
+                    else:
+                        await message.edit_text(text, reply_markup=keyboard)
+                except (ChatSendMediaForbidden, ChatSendPhotosForbidden, MessageIdInvalid):
+                    if _thumb:
+                        sent = await app.send_photo(
+                            chat_id=chat_id,
+                            photo=_thumb,
                             caption=text,
-                        ),
-                        reply_markup=keyboard,
-                    )
-                except MessageIdInvalid:
-                    media.message_id = (await app.send_photo(
-                        chat_id=chat_id,
-                        photo=_thumb,
-                        caption=text,
-                        reply_markup=keyboard,
-                    )).id
+                            reply_markup=keyboard,
+                        )
+                    else:
+                        sent = await app.send_message(
+                            chat_id=chat_id,
+                            text=text,
+                            reply_markup=keyboard,
+                        )
+                    media.message_id = sent.id
         except FileNotFoundError:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             await self.play_next(chat_id)

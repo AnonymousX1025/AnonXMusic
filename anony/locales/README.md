@@ -70,6 +70,11 @@
             <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
         </tr>
         <tr>
+            <td>tr</td>
+            <td>Turkish</td>
+            <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
+        </tr>
+        <tr>
             <td>zh</td>
             <td>Chinese</td>
             <td><a href=https://github.com/AshokShau>@AshokShau</a></td>
