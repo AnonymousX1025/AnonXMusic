@@ -25,10 +25,10 @@ class Config:
         self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/FallenAssociation")
         self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/DevilsHeavenMF")
 
-        self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", False)
-        self.AUTO_END: bool = getenv("AUTO_END", False)
-        self.THUMB_GEN: bool = getenv("THUMB_GEN", True)
-        self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", True)
+        self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "true"
+        self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
+        self.THUMB_GEN: bool = getenv("THUMB_GEN", "True").lower() == "true"
+        self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "True").lower() == "true"
         self.COOKIES_URL = [
             url for url in getenv("COOKIES_URL", "").split(" ")
             if url and "batbin.me" in url
