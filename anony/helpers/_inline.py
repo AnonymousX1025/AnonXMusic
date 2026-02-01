@@ -6,12 +6,12 @@ import asyncio
 from pyrogram import enums, filters, types
 
 from anony import app, config, db, lang
-# 'from anony.helpers import buttons, utils' sətri circular import yaratdığı üçün buradan silindi.
+from anony.helpers import buttons, utils
+
 
 @app.on_message(filters.command(["help"]) & filters.private & ~app.bl_users)
 @lang.language()
 async def _help(_, m: types.Message):
-    from anony.helpers import buttons # Lokal import əlavə edildi
     await m.reply_text(
         text=m.lang["help_menu"],
         reply_markup=buttons.help_markup(m.lang),
@@ -22,8 +22,6 @@ async def _help(_, m: types.Message):
 @app.on_message(filters.command(["start"]))
 @lang.language()
 async def start(_, message: types.Message):
-    from anony.helpers import buttons, utils # Lokal import əlavə edildi
-    
     if message.from_user.id in app.bl_users and message.from_user.id not in db.notified:
         return await message.reply_text(message.lang["bl_user_notify"])
 
@@ -38,14 +36,6 @@ async def start(_, message: types.Message):
     )
 
     key = buttons.start_key(message.lang, private)
-
-    if private:
-        await app.send_video(
-            chat_id=message.chat.id,
-            video="https://streamable.com/g3z6oj",
-            caption=f"RİCEEE"
-        )
-
     await message.reply_photo(
         photo=config.START_IMG,
         caption=_text,
@@ -68,8 +58,6 @@ async def start(_, message: types.Message):
 @app.on_message(filters.command(["playmode", "settings"]) & filters.group & ~app.bl_users)
 @lang.language()
 async def settings(_, message: types.Message):
-    from anony.helpers import buttons # Lokal import əlavə edildi
-    
     admin_only = await db.get_play_mode(message.chat.id)
     cmd_delete = await db.get_cmd_delete(message.chat.id)
     _language = await db.get_lang(message.chat.id)
@@ -85,8 +73,6 @@ async def settings(_, message: types.Message):
 @app.on_message(filters.new_chat_members, group=7)
 @lang.language()
 async def _new_member(_, message: types.Message):
-    from anony.helpers import utils # Lokal import əlavə edildi
-    
     if message.chat.type != enums.ChatType.SUPERGROUP:
         return await message.chat.leave()
 
@@ -97,4 +83,3 @@ async def _new_member(_, message: types.Message):
                 return
             await utils.send_log(message, True)
             await db.add_chat(message.chat.id)
-            
