@@ -36,6 +36,14 @@ async def start(_, message: types.Message):
     )
 
     key = buttons.start_key(message.lang, private)
+
+    if private:
+        await app.send_video(
+            chat_id=message.chat.id,
+            video="https://streamable.com/g3z6oj",
+            caption=f"RİCEEEEEEEEEE"
+        )
+
     await message.reply_photo(
         photo=config.START_IMG,
         caption=_text,
