@@ -79,8 +79,14 @@ async def update_timer(length=10):
                 if remaining < 10:
                     remove = True
                 else:
+                    if config.THUMB_GEN:
+                        timer = f"{time.strftime('%M:%S', time.gmtime(played))} | {timer} | -{time.strftime('%M:%S', time.gmtime(remaining))}"
+                    else:
+                        timer = None
                     remove = False
-                    timer = f"{time.strftime('%M:%S', time.gmtime(played))} | {timer} | -{time.strftime('%M:%S', time.gmtime(remaining))}"
+
+                if not timer and not remove:
+                    continue
 
                 await app.edit_message_reply_markup(
                     chat_id=chat_id,
