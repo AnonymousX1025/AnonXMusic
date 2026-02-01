@@ -24,6 +24,21 @@ class Telegram:
     def get_media(self, msg: types.Message) -> bool:
         return any([msg.video, msg.audio, msg.document, msg.voice])
 
+    async def cancel(self, query: types.CallbackQuery):
+        event = self.events.get(query.message.id)
+        task = self.active_tasks.pop(query.message.id, None)
+        if event:
+            event.set()
+
+        if task and not task.done():
+            task.cancel()
+        if event or task:
+            await query.edit_message_text(
+                query.lang["dl_cancel"].format(query.from_user.mention)
+            )
+        else:
+            await query.answer(query.lang["dl_not_found"], show_alert=True)
+
     async def download(self, msg: types.Message, sent: types.Message) -> Media | None:
         msg_id = sent.id
         event = asyncio.Event()
@@ -107,17 +122,13 @@ class Telegram:
             self.last_edit.pop(msg_id, None)
             self.active = [f for f in self.active if f != file_id]
 
-    async def cancel(self, query: types.CallbackQuery):
-        event = self.events.get(query.message.id)
-        task = self.active_tasks.pop(query.message.id, None)
-        if event:
-            event.set()
 
-        if task and not task.done():
-            task.cancel()
-        if event or task:
-            await query.edit_message_text(
-                query.lang["dl_cancel"].format(query.from_user.mention)
-            )
-        else:
-            await query.answer(query.lang["dl_not_found"], show_alert=True)
+    async def process_m3u8(self, url: str, msg_id: int, video: bool) -> Media:
+        return Media(
+            id=str(msg_id),
+            file_path=url,
+            message_id=msg_id,
+            url=url,
+            title="M3U8 Stream",
+            video=video,
+        )

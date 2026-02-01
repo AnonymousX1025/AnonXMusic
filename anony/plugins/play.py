@@ -41,7 +41,10 @@ async def play_hndlr(
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
     tracks = []
 
-    if url:
+    if m3u8:
+        file = await tg.process_m3u8(url, sent.id, video)
+
+    elif url:
         if "playlist" in url:
             await sent.edit_text(m.lang["playlist_fetch"])
             tracks = await yt.playlist(
@@ -83,7 +86,7 @@ async def play_hndlr(
         )
 
     if await db.is_logger():
-        await utils.play_log(m, file.title, file.duration)
+        await utils.play_log(m, sent.link, file.title, file.duration)
 
     file.user = mention
     if force:
