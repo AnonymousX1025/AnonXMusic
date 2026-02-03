@@ -46,12 +46,12 @@ class YouTube:
     async def save_cookies(self, urls: list[str]) -> None:
         logger.info("Saving cookies from urls...")
         async with aiohttp.ClientSession() as session:
-            for i, url in enumerate(urls):
-                path = f"{self.cookie_dir}/cookie_{i}.txt"
-                link = "https://batbin.me/api/v2/paste/" + url.split("/")[-1]
+            for url in urls:
+                name = url.split("/")[-1]
+                link = "https://batbin.me/raw/" + name
                 async with session.get(link) as resp:
                     resp.raise_for_status()
-                    with open(path, "wb") as fw:
+                    with open(f"{self.cookie_dir}/{name}.txt", "wb") as fw:
                         fw.write(await resp.read())
         logger.info(f"Cookies saved in {self.cookie_dir}.")
 

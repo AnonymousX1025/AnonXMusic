@@ -22,7 +22,7 @@ async def _queue_func(_, m: types.Message):
         await thumb.generate(_media)
         if isinstance(_media, Track)
         else config.DEFAULT_THUMB
-    )
+    ) if config.THUMB_GEN else None
     _text = m.lang["queue_curr"].format(
         _media.url,
         _media.title[:50],
@@ -42,14 +42,21 @@ async def _queue_func(_, m: types.Message):
         _text += "</blockquote>"
 
     _playing = await db.playing(m.chat.id)
-    await _reply.edit_media(
-        media=types.InputMediaPhoto(
-            media=_thumb,
-            caption=_text,
-        ),
-        reply_markup=buttons.queue_markup(
+    _buttons = buttons.queue_markup(
             m.chat.id,
             m.lang["playing"] if _playing else m.lang["paused"],
             _playing,
-        ),
-    )
+        )
+    if thumb:
+        await _reply.edit_media(
+            media=types.InputMediaPhoto(
+                media=_thumb,
+                caption=_text,
+            ),
+            reply_markup=_buttons,
+        )
+    else:
+        await _reply.edit_text(
+            text=_text,
+            reply_markup=_buttons,
+        )
