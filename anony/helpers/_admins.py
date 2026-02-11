@@ -75,7 +75,7 @@ async def is_admin(chat_id: int, user_id: int) -> bool:
             enums.ChatMemberStatus.ADMINISTRATOR,
             enums.ChatMemberStatus.OWNER,
         ]
-    except:
+    except Exception:
         raise StopPropagation
 
 
@@ -89,5 +89,5 @@ async def reload_admins(chat_id: int) -> list[int]:
             if not admin.user.is_bot
         ]
         return [admin.user.id for admin in admins]
-    except:
+    except Exception:
         return []

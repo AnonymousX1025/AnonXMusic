@@ -36,7 +36,7 @@ class TgCall(PyTgCalls):
 
         try:
             await client.leave_call(chat_id, close=False)
-        except:
+        except Exception:
             pass
 
 
@@ -150,7 +150,7 @@ class TgCall(PyTgCalls):
                     revoke=True,
                 )
                 media.message_id = 0
-        except:
+        except Exception:
             pass
 
         if not media:

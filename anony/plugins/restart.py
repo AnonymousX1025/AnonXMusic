@@ -56,6 +56,6 @@ async def _restart(_, m: types.Message):
     await asyncio.sleep(2)
 
     try: os.remove("log.txt")
-    except: pass
+    except Exception: pass
 
     os.execl(sys.executable, sys.executable, "-m", "anony")

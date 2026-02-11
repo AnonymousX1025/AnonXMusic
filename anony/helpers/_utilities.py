@@ -76,7 +76,7 @@ class Utilities:
                     return await app.get_users(m.group(0))
                 if m := re.search(r"\b\d{6,15}\b", msg.text):
                     return await app.get_users(int(m.group(0)))
-            except:
+            except Exception:
                 pass
 
         return None

@@ -53,5 +53,5 @@ class Thumbnail:
             image.save(output)
             os.remove(temp)
             return output
-        except:
+        except Exception:
             config.DEFAULT_THUMB

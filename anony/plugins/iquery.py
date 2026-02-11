@@ -53,5 +53,5 @@ async def inline_query_handler(_, query: types.InlineQuery):
 
         if answers:
             await app.answer_inline_query(query.id, results=answers, cache_time=5)
-    except:
+    except Exception:
         pass

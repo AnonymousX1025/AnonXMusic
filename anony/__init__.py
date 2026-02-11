@@ -66,7 +66,7 @@ async def stop() -> None:
         task.cancel()
         try:
             await task
-        except:
+        except Exception:
             pass
 
     await app.exit()

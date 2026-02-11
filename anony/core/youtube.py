@@ -95,7 +95,7 @@ class YouTube:
                     video=video,
                 )
                 tracks.append(track)
-        except:
+        except Exception:
             pass
         return tracks
 

@@ -58,7 +58,7 @@ def checkUB(play):
                         await app.unban_chat_member(
                             chat_id=chat_id, user_id=client.id
                         )
-                    except:
+                    except Exception:
                         return await m.reply_text(
                             m.lang["play_banned"].format(
                                 app.name,
@@ -74,7 +74,7 @@ def checkUB(play):
                     invite_link = m.chat.username
                     try:
                         await client.resolve_peer(invite_link)
-                    except:
+                    except Exception:
                         pass
                 else:
                     try:
@@ -116,7 +116,7 @@ def checkUB(play):
         if await db.get_cmd_delete(chat_id):
             try:
                 await m.delete()
-            except:
+            except Exception:
                 pass
 
         return await play(_, m, force, m3u8, video, url)

@@ -74,7 +74,7 @@ async def _controls(_, query: types.CallbackQuery):
                 chat_id=chat_id, message_ids=[m_id, media.message_id], revoke=True
             )
             media.message_id = None
-        except:
+        except Exception:
             pass
 
         msg = await app.send_message(chat_id=chat_id, text=query.lang["play_next"])
@@ -112,7 +112,7 @@ async def _controls(_, query: types.CallbackQuery):
         await query.edit_message_text(
             f"{mtext}\n\n<blockquote>{reply}</blockquote>", reply_markup=keyboard
         )
-    except:
+    except Exception:
         pass
 
 
@@ -131,8 +131,8 @@ async def _help(_, query: types.CallbackQuery):
         try:
             await query.message.delete()
             return await query.message.reply_to_message.delete()
-        except:
-            pass
+        except Exception:
+            return
 
     await query.edit_message_text(
         text=query.lang[f"help_{data[1]}"],

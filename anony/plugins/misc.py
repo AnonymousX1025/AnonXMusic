@@ -35,12 +35,12 @@ async def auto_leave():
                         continue
                     if chat.id in [app.logger, -1001686672798, -1001549206010]:
                         continue
-                    if chat_id in db.active_calls:
+                    if chat.id in db.active_calls:
                         continue
-                    await ub.leave_chat(chat_id)
+                    await ub.leave_chat(chat.id)
                     left += 1
                     await asyncio.sleep(5)
-            except:
+            except Exception:
                 continue
 
 

@@ -20,7 +20,7 @@ async def _blacklist(_, m: types.Message):
             chat_id = int(chat_id)
         else:
             chat_id = (await app.get_chat(chat_id)).id
-    except:
+    except Exception:
         return await m.reply_text(m.lang["bl_invalid"])
 
     if m.command[0] == "blacklist":

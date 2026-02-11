@@ -51,7 +51,7 @@ async def _listsudo(_, m: types.Message):
         try:
             user = (await app.get_users(user_id)).mention
             txt += f"\n- {user}"
-        except:
+        except Exception:
             continue
 
     await sent.edit_text(txt)
