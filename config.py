@@ -27,8 +27,12 @@ class Config:
 
         self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "true"
         self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
+    
         self.THUMB_GEN: bool = getenv("THUMB_GEN", "True").lower() == "true"
         self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "True").lower() == "true"
+
+        self.LANG_CODE = getenv("LANG_CODE", "en")
+
         self.COOKIES_URL = [
             url for url in getenv("COOKIES_URL", "").split(" ")
             if url and "batbin.me" in url

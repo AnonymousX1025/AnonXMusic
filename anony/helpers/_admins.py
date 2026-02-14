@@ -19,13 +19,16 @@ def admin_check(func):
             else:
                 return await update.answer(text, show_alert=True)
 
-        chat_id = (
-            update.chat.id
+        chat = (
+            update.chat
             if isinstance(update, types.Message)
-            else update.message.chat.id
+            else update.message.chat
         )
+        if chat.type == enums.ChatType.PRIVATE:
+            return await func(_, update, *args, **kwargs)
+
         user_id = update.from_user.id
-        admins = await db.get_admins(chat_id)
+        admins = await db.get_admins(chat.id)
 
         if user_id in app.sudoers:
             return await func(_, update, *args, **kwargs)
