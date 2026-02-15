@@ -5,7 +5,7 @@
 
 import re
 
-from pyrogram import filters, types
+from pyrogram import errors, filters, types
 
 from anony import anon, app, db, lang, queue, tg, yt
 from anony.helpers import admin_check, buttons, can_manage_vc
@@ -28,7 +28,14 @@ async def _controls(_, query: types.CallbackQuery):
     user = query.from_user.mention
 
     if not await db.get_call(chat_id):
-        return await query.answer(query.lang["not_playing"], show_alert=True)
+        try:
+            return await query.answer(query.lang["not_playing"], show_alert=True)
+        except errors.QueryIdInvalid:
+            try:
+                await query.message.delete()
+            except Exception:
+                pass
+            return
 
     if action == "status":
         return await query.answer()

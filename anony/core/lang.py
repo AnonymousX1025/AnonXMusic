@@ -76,6 +76,8 @@ class Language:
                 elif hasattr(fallen, "message"):
                     chat = fallen.message.chat
 
+                if not chat: return
+
                 if chat.id in db.blacklisted:
                     logger.warning(f"Chat {chat.id} is blacklisted, leaving...")
                     return await chat.leave()
@@ -86,9 +88,18 @@ class Language:
                 setattr(fallen, "lang", lang_dict)
                 try:
                     return await func(*args, **kwargs)
-                except (errors.Forbidden, errors.exceptions.Forbidden):
+                except (errors.ChannelPrivate, errors.MessageIdInvalid, errors.MessageNotModified):
+                    return
+                except (
+                    errors.Forbidden, errors.exceptions.Forbidden,
+                    errors.ChatWriteForbidden, errors.exceptions.ChatWriteForbidden,
+                ):
                     logger.warning(f"Cannot write to chat {chat.id}, leaving...")
-                    return await chat.leave()
+                    try:
+                        await chat.leave()
+                    except Exception:
+                        pass
+                    return
 
             return wrapper
 

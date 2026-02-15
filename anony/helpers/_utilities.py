@@ -53,7 +53,10 @@ class Utilities:
                     link = entity.url
                     break
                 elif entity.type == enums.MessageEntityType.URL:
-                    link = message.text[entity.offset: entity.offset + entity.length]
+                    text = message.text or message.caption
+                    if not text:
+                        continue
+                    link = text[entity.offset: entity.offset + entity.length]
                     break
 
         if link:
