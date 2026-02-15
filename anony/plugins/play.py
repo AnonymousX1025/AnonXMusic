@@ -41,7 +41,11 @@ async def play_hndlr(
     media = tg.get_media(m.reply_to_message) if m.reply_to_message else None
     tracks = []
 
-    if m3u8:
+    if media:
+        setattr(sent, "lang", m.lang)
+        file = await tg.download(m.reply_to_message, sent)
+
+    elif m3u8:
         file = await tg.process_m3u8(url, sent.id, video)
 
     elif url:
@@ -72,10 +76,6 @@ async def play_hndlr(
             return await sent.edit_text(
                 m.lang["play_not_found"].format(config.SUPPORT_CHAT)
             )
-
-    elif media:
-        setattr(sent, "lang", m.lang)
-        file = await tg.download(m.reply_to_message, sent)
 
     if not file:
         return await sent.edit_text(m.lang["play_usage"])
