@@ -4,6 +4,7 @@
 
 
 import time
+import asyncio
 import logging
 from logging.handlers import RotatingFileHandler
 
@@ -24,7 +25,7 @@ logging.getLogger("pytgcalls").setLevel(logging.ERROR)
 logger = logging.getLogger(__name__)
 
 
-__version__ = "3.0.1"
+__version__ = "3.0.2"
 
 from config import Config
 
@@ -66,7 +67,7 @@ async def stop() -> None:
         task.cancel()
         try:
             await task
-        except Exception:
+        except asyncio.exceptions.CancelledError:
             pass
 
     await app.exit()
