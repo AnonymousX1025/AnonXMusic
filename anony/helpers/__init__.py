@@ -12,5 +12,4 @@ from ._thumbnails import Thumbnail
 from ._utilities import Utilities
 
 buttons = Inline()
-thumb = Thumbnail()
 utils = Utilities()

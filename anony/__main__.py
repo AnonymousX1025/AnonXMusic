@@ -8,8 +8,8 @@ import signal
 import importlib
 from contextlib import suppress
 
-from anony import (anon, app, config, db,
-                   logger, stop, userbot, yt)
+from anony import (anon, app, config, db, logger,
+                   stop, thumb, userbot, yt)
 from anony.plugins import all_modules
 
 
@@ -27,6 +27,7 @@ async def main():
     await app.boot()
     await userbot.boot()
     await anon.boot()
+    await thumb.start()
 
     for module in all_modules:
         importlib.import_module(f"anony.plugins.{module}")
