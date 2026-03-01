@@ -34,6 +34,8 @@ async def auto_leave():
                         continue
                     await ub.leave_chat(chat)
                     await asyncio.sleep(5)
+            except asyncio.CancelledError:
+                raise
             except Exception:
                 continue
 
@@ -90,6 +92,8 @@ async def update_timer(length=10):
                         chat_id=chat_id, timer=timer, remove=remove
                     ),
                 )
+            except asyncio.CancelledError:
+                raise
             except Exception:
                 pass
 

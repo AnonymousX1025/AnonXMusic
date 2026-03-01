@@ -33,6 +33,7 @@ class TgCall(PyTgCalls):
         client = await db.get_assistant(chat_id)
         queue.clear(chat_id)
         await db.remove_call(chat_id)
+        await db.set_loop(chat_id, 0)
 
         try:
             await client.leave_call(chat_id, close=False)
@@ -137,10 +138,15 @@ class TgCall(PyTgCalls):
         media = queue.get_current(chat_id)
         _lang = await lang.get_lang(chat_id)
         msg = await app.send_message(chat_id=chat_id, text=_lang["play_again"])
+        media.message_id = msg.id
         await self.play_media(chat_id, msg, media)
 
 
     async def play_next(self, chat_id: int) -> None:
+        if loop := await db.get_loop(chat_id):
+            await db.set_loop(chat_id, loop - 1)
+            return await self.replay(chat_id)
+
         media = queue.get_next(chat_id)
         try:
             if media.message_id:

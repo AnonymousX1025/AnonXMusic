@@ -24,6 +24,7 @@ class MongoDB:
         self.admin_play = []
         self.blacklisted = []
         self.cmd_delete = []
+        self.loop = {}
         self.notified = []
         self.cache = self.db.cache
         self.logger = False
@@ -83,6 +84,12 @@ class MongoDB:
         if chat_id not in self.admin_list or reload:
             self.admin_list[chat_id] = await reload_admins(chat_id)
         return self.admin_list[chat_id]
+
+    async def get_loop(self, chat_id: int) -> int:
+        return self.loop.get(chat_id, 0)
+
+    async def set_loop(self, chat_id: int, count: int) -> None:
+        self.loop[chat_id] = count
 
     # AUTH METHODS
     async def _get_auth(self, chat_id: int) -> set[int]:
