@@ -5,10 +5,10 @@ load_dotenv()
 
 class Config:
     def __init__(self):
-        self.API_ID = int(getenv("API_ID", 0))
-        self.API_HASH = getenv("API_HASH")
+        self.API_ID = int(getenv("38359283", 0))
+        self.API_HASH = getenv("edc63eb8c81523994fbba9f8501cecc9")
 
-        self.BOT_TOKEN = getenv("BOT_TOKEN")
+        self.BOT_TOKEN = getenv("8256012080:AAHk9mD8lM9Sp_yLsMIwfRopy-MDWGUO6h8")
         self.MONGO_URL = getenv("MONGO_URL")
 
         self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
