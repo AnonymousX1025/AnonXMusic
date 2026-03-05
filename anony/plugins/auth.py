@@ -30,6 +30,20 @@ async def _auth(_, m: types.Message):
         await m.reply_text(m.lang["auth_removed"].format(user.mention))
 
 
+@app.on_message(filters.command(["authlist"]) & filters.group & ~app.bl_users)
+@lang.language()
+@admin_check
+async def _authlist(_, m: types.Message):
+    auth = await db._get_auth(m.chat.id)
+    if not auth:
+        return await m.reply_text(m.lang["auth_empty"])
+
+    auth_txt = m.lang["auth_list"].format(m.chat.title)
+    for i, user in enumerate(auth, start=1):
+        auth_txt += f"\n{i}. <a href=tg://user?id={user}>{user}</a>"
+    await m.reply_text(auth_txt)
+
+
 rel_hist = {}
 
 @app.on_message(filters.command(["admincache", "reload"]) & filters.group & ~app.bl_users)

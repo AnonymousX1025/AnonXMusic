@@ -6,6 +6,8 @@
     "admin_cache_reloaded": "Cache administrateur actualisé avec succès !",
     "auth_added": "{0} a été ajouté à la liste des utilisateurs autorisés.",
     "auth_removed": "{0} a été supprimé de la liste des utilisateurs autorisés.",
+    "auth_empty": "La liste des utilisateurs autorisés est vide.",
+    "auth_list": "<u><b>Liste des utilisateurs autorisés dans {0} :</b></u>\n",
     "auth_is_admin": "L'utilisateur est déjà un <b>administrateur</b> et ne peut pas être ajouté aux utilisateurs autorisés.",
     "auto_left": "J'ai attendu, j'ai regardé, j'ai bâillé... puis j'ai quitté le chat vidéo.",
     "bl_usage": "<b>Utilisation :</b>\n\n/{0} [chat_id|user_id]",

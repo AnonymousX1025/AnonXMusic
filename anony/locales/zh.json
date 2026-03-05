@@ -6,6 +6,8 @@
     "admin_cache_reloaded": "管理员缓存已成功刷新!",
     "auth_added": "已将 {0} 添加到授权用户列表。",
     "auth_removed": "已将 {0} 从授权用户列表中删除。",
+    "auth_empty": "授权用户列表为空。",
+    "auth_list": "<u><b>{0} 中的授权用户列表：</b></u>\n",
     "auth_is_admin": "该用户已经是<b>管理员</b>, 无法添加到授权用户中。",
     "auto_left": "我等了, 我看了, 我打了个哈欠……然后我离开了视频聊天。",
     "bl_usage": "<b>用法: </b>\n\n/{0} [chat_id|user_id]",

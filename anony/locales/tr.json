@@ -6,6 +6,8 @@
     "admin_cache_reloaded": "Yönetici önbelleği başarıyla yenilendi!",
     "auth_added": "{0}, yetkili kullanıcılar listesine eklendi.",
     "auth_removed": "{0}, yetkili kullanıcılar listesinden kaldırıldı.",
+    "auth_empty": "Yetkili kullanıcılar listesi boş.",
+    "auth_list": "<u><b>{0} içindeki yetkili kullanıcıların listesi:</b></u>\n",
     "auth_is_admin": "Bu kullanıcı zaten bir <b>yönetici</b> ve yetkili kullanıcılara eklenemez.",
     "auto_left": "Bekledim, izledim, esnedim... ve sonra görüntülü sohbetten ayrıldım.",
     "bl_usage": "<b>Kullanım:</b>\n\n/{0} [chat_id|user_id]",
