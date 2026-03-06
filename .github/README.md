@@ -41,7 +41,36 @@ Built with Python, Pyrogram, and Py-TgCalls, it’s optimized for reliability an
 <h3>✔️ Prerequisites</h3>
 
 - <a href="https://www.python.org">Python 3.10+</a> installed  
-- <a href="https://deno.com/">deno</a> & <a href="https://ffmpeg.org//">ffmpeg</a> installed on your system  
+- <a href="https://deno.com/">Deno</a> & <a href="https://ffmpeg.org//">FFmpeg</a> installed on your system  
+
+#### Installing Deno and FFmpeg
+
+**On Ubuntu/Debian:**
+```bash
+# Update package list
+sudo apt update
+
+# Install FFmpeg
+sudo apt install -y ffmpeg
+
+# Install Deno
+curl -fsSL https://deno.land/install.sh | sh
+# Add Deno to PATH (restart shell or run: export PATH="$HOME/.deno/bin:$PATH")
+```
+
+**On macOS (using Homebrew):**
+```bash
+# Install FFmpeg
+brew install ffmpeg
+
+# Install Deno
+brew install deno
+```
+
+**On Windows:**
+- Download and install FFmpeg from <a href="https://ffmpeg.org/download.html">official site</a>
+- Install Deno from <a href="https://deno.com/">deno.com</a>
+
 - Required variables mentioned in <a href="https://github.com/AnonymousX1025/AnonXMusic/blob/master/sample.env">sample.env</a>
 
 <details>
@@ -148,6 +177,25 @@ This project is licensed under the <b>MIT License</b> — see <a href="https://g
 
 - Inspired by other open-source Telegram music bots.
 - Thanks to all the <a href="https://github.com/AnonymousX1025/AnonXMusic/graphs/contributors">contributors</a>.
+
+<hr>
+
+<h2>🔧 Troubleshooting</h2>
+
+### RuntimeError: Deno and FFmpeg must be installed and accessible in the system PATH.
+- Ensure Deno and FFmpeg are installed as per the Prerequisites section.
+- On Linux, after installing Deno, restart your shell or run `export PATH="$HOME/.deno/bin:$PATH"` to add it to PATH.
+- Verify installation: `which deno && which ffmpeg`
+
+### Import errors or missing dependencies
+- Install Python dependencies: `pip3 install -U -r requirements.txt`
+- Ensure Python 3.10+ is used.
+
+### Bot not responding or connection issues
+- Check your `.env` file for correct API credentials.
+- Ensure the bot is added to the group and promoted to admin.
+
+For more help, join the <a href="https://DevilsHeavenMF.t.me">Support group</a>.
 
 <hr>
 
