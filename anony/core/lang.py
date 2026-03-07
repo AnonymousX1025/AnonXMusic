@@ -79,7 +79,7 @@ class Language:
                 if not chat: return
 
                 if chat.id in db.blacklisted:
-                    logger.warning(f"Chat {chat.id} is blacklisted, leaving...")
+                    logger.info(f"Chat {chat.id} is blacklisted, leaving...")
                     return await chat.leave()
 
                 lang_code = await db.get_lang(chat.id)
@@ -94,11 +94,6 @@ class Language:
                     errors.Forbidden, errors.exceptions.Forbidden,
                     errors.ChatWriteForbidden, errors.exceptions.ChatWriteForbidden,
                 ):
-                    logger.warning(f"Cannot write to chat {chat.id}, leaving...")
-                    try:
-                        await chat.leave()
-                    except Exception:
-                        pass
                     return
 
             return wrapper
