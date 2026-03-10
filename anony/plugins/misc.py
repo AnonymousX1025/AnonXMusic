@@ -20,7 +20,7 @@ async def _watcher_vc(_, m: types.Message):
 
 async def auto_leave():
     while True:
-        await asyncio.sleep(1800)
+        await asyncio.sleep(3600)
         for ub in userbot.clients:
             try:
                 chats = [dialog.chat.id async for dialog in ub.get_dialogs()
@@ -33,7 +33,7 @@ async def auto_leave():
                     if chat in db.active_calls:
                         continue
                     await ub.leave_chat(chat)
-                    await asyncio.sleep(5)
+                    await asyncio.sleep(7)
             except asyncio.CancelledError:
                 raise
             except Exception:
