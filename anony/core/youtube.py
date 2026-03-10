@@ -59,8 +59,11 @@ class YouTube:
         return bool(re.match(self.regex, url))
 
     async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
-        _search = VideosSearch(query, limit=1, with_live=False)
-        results = await _search.next()
+        try:
+            _search = VideosSearch(query, limit=1, with_live=False)
+            results = await _search.next()
+        except Exception:
+            return None
         if results and results["result"]:
             data = results["result"][0]
             return Track(
