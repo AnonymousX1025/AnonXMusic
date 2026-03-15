@@ -75,5 +75,6 @@ async def stop() -> None:
     await userbot.exit()
     await db.close()
     await thumb.close()
+    if yt.api: await yt.api.session.close()
 
     logger.info("Stopped.\n")

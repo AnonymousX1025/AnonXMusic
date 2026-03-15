@@ -25,6 +25,9 @@ class Config:
         self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/fallenx")
         self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/DevilsHeavenMF")
 
+        self.API_URL = getenv("API_URL", "https://api.fallenapi.fun")
+        self.API_KEY = getenv("API_KEY", None) # Get this value from @FallenApiBot by sending /apikey
+
         self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "true"
         self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
     

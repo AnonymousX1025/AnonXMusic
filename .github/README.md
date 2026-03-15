@@ -50,7 +50,7 @@ Built with Python, Pyrogram, and Py-TgCalls, it’s optimized for reliability an
     </summary>
 
 ```bash
-git clone https://github.com/AnonymousX1025/AnonXMusic && cd AnonXMusic
+git clone https://github.com/AnonymousX1025/AnonXMusic -b api && cd AnonXMusic
 
 # Install dependencies
 pip3 install -U -r requirements.txt
@@ -91,6 +91,7 @@ OWNER_ID=123456789
 LOGGER_ID=-1001234567890
 MONGO_URL=mongodb+srv://
 SESSION=BQgfh...AA
+API_KEY=xyz
 ```
 
 > 📝 Check <a href="https://github.com/AnonymousX1025/AnonXMusic/blob/master/config.py">config.py</a> for all available options.

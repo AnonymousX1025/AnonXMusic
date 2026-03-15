@@ -1,3 +1,4 @@
+aiofiles~=25.1.0
 aiohttp~=3.13.3
 kurigram>=2.2.17
 pillow~=12.1.0

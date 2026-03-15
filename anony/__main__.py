@@ -35,6 +35,7 @@ async def main():
 
     if config.COOKIES_URL:
         await yt.save_cookies(config.COOKIES_URL)
+    if yt.api: await yt.api.get_session()
 
     sudoers = await db.get_sudoers()
     app.sudoers.update(sudoers)
