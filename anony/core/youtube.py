@@ -29,6 +29,11 @@ class YouTube:
             r"(youtube\.com/(watch\?v=|shorts/|playlist\?list=)|youtu\.be/)"
             r"([A-Za-z0-9_-]{11}|PL[A-Za-z0-9_-]+)([&?][^\s]*)?"
         )
+        self.iregex = re.compile(
+            r"https?://(?:www\.|m\.|music\.)?(?:youtube\.com|youtu\.be)"
+            r"(?!/(watch\?v=[A-Za-z0-9_-]{11}|shorts/[A-Za-z0-9_-]{11}"
+            r"|playlist\?list=PL[A-Za-z0-9_-]+|[A-Za-z0-9_-]{11}))\S*"
+        )
 
     def get_cookies(self):
         if not self.checked:
@@ -57,6 +62,9 @@ class YouTube:
 
     def valid(self, url: str) -> bool:
         return bool(re.match(self.regex, url))
+
+    def invalid(self, url: str) -> bool:
+        return bool(re.match(self.iregex, url))
 
     async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
         try:
