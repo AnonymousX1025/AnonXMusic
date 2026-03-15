@@ -116,6 +116,21 @@ async def _controls(_, query: types.CallbackQuery):
         pass
 
 
+@app.on_callback_query(filters.regex("close_msg") & ~app.bl_users)
+async def close_msg_handler(_, query: types.CallbackQuery):
+    try:
+        chat_id = query.message.chat.id
+        await query.message.delete()
+        
+        # Qrupa mesaj göndəririk
+        await app.send_message(chat_id, "✅ Uğurla Silindi")
+        
+        if query.message.reply_to_message:
+            await query.message.reply_to_message.delete()
+    except:
+        pass
+
+
 @app.on_callback_query(filters.regex("help") & ~app.bl_users)
 @lang.language()
 async def _help(_, query: types.CallbackQuery):
