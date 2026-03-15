@@ -168,7 +168,7 @@ class TgCall(PyTgCalls):
         if not media.file_path:
             media.file_path = await yt.download(media.id, video=media.video)
             if not media.file_path:
-                await self.stop(chat_id)
+                await self.play_next(chat_id)
                 return await msg.edit_text(
                     _lang["error_no_file"].format(config.SUPPORT_CHAT)
                 )

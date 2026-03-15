@@ -147,7 +147,6 @@ class YouTube:
                 try:
                     ydl.download([url])
                 except (yt_dlp.utils.DownloadError, yt_dlp.utils.ExtractorError):
-                    if cookie: self.cookies.remove(cookie)
                     return None
                 except Exception as ex:
                     logger.warning("Download failed: %s", ex)
