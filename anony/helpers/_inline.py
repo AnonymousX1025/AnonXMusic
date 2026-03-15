@@ -35,6 +35,7 @@ class Inline:
             )
 
         if not remove:
+            # Pult düymələri
             keyboard.append(
                 [
                     self.ikb(text="▷", callback_data=f"controls resume {chat_id}"),
@@ -42,6 +43,13 @@ class Inline:
                     self.ikb(text="⥁", callback_data=f"controls replay {chat_id}"),
                     self.ikb(text="‣‣I", callback_data=f"controls skip {chat_id}"),
                     self.ikb(text="▢", callback_data=f"controls stop {chat_id}"),
+                ]
+            )
+            
+            # m.
+            keyboard.append(
+                [
+                    self.ikb(text="Bağla🗑️ ", callback_data="close_msg")
                 ]
             )
         return self.ikm(keyboard)
