@@ -140,7 +140,8 @@ async def _help(_, query: types.CallbackQuery):
         return await query.answer(url=f"https://t.me/{app.username}?start=help")
 
     if data[1] == "back":
-        return await query.edit_message_reply_markup(
+        return await query.edit_message_text(
+            text=query.lang.get("help_menu", "‎"),
             reply_markup=buttons.help_markup(query.lang)
         )
 
@@ -151,7 +152,6 @@ async def _help(_, query: types.CallbackQuery):
         except:
             return
 
-    # 🔥 BURDA PROBLEMİ HƏLL EDİRİK
     key = f"help_{data[1]}"
     text = query.lang[key] if key in query.lang else "‎"
 
