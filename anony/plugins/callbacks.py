@@ -151,16 +151,14 @@ async def _help(_, query: types.CallbackQuery):
         except:
             return
 
-    # ƏMR İCRA OLUNUR (amma text yoxdur)
-    try:
-        text = query.lang.get(f"help_{data[1]}", "‎")  # yoxdursa boş
-    except:
-        text = "‎"
+    # 🔥 BURDA PROBLEMİ HƏLL EDİRİK
+    key = f"help_{data[1]}"
+    text = query.lang[key] if key in query.lang else "‎"
 
     return await query.edit_message_text(
         text=text,
         reply_markup=buttons.help_markup(query.lang, True)
-        )
+    )
 
 
 @app.on_callback_query(filters.regex("settings") & ~app.bl_users)
