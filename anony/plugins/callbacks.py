@@ -140,8 +140,7 @@ async def _help(_, query: types.CallbackQuery):
         return await query.answer(url=f"https://t.me/{app.username}?start=help")
 
     if data[1] == "back":
-        return await query.edit_message_text(
-            text="‎",  # boş mesaj
+        return await query.edit_message_reply_markup(
             reply_markup=buttons.help_markup(query.lang)
         )
 
@@ -152,8 +151,16 @@ async def _help(_, query: types.CallbackQuery):
         except:
             return
 
-    # m
-    return await query.answer()  # m
+    # ƏMR İCRA OLUNUR (amma text yoxdur)
+    try:
+        text = query.lang.get(f"help_{data[1]}", "‎")  # yoxdursa boş
+    except:
+        text = "‎"
+
+    return await query.edit_message_text(
+        text=text,
+        reply_markup=buttons.help_markup(query.lang, True)
+        )
 
 
 @app.on_callback_query(filters.regex("settings") & ~app.bl_users)
