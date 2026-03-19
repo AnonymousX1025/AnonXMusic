@@ -96,12 +96,12 @@ class Inline:
         return self.ikm(
             [
                 [
-                    # Bu birinci düymədir (İndi səsləndir)
+                    # (İndi səsləndir)
                     self.ikb(
                         text=_text, callback_data=f"controls force {chat_id} {item_id}"
                     ),
-                    # Bu isə ikinci düymədir (Zibil qutusu)
-                    # Eyni mötərizə [] içində olduqları üçün YAN-YANA duracaqlar
+                    # (Zibil qutusu)
+                    # m
                     self.ikb(text="Bağla🗑️", callback_data="close_msg")
                 ]
             ]
