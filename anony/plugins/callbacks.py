@@ -122,9 +122,6 @@ async def close_msg_handler(_, query: types.CallbackQuery):
         chat_id = query.message.chat.id
         await query.message.delete()
         
-        # Qrupa mesaj göndəririk
-        await app.send_message(chat_id, "✅ Uğurla Silindi")
-        
         if query.message.reply_to_message:
             await query.message.reply_to_message.delete()
     except:
