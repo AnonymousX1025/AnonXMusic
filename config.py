@@ -22,8 +22,8 @@ class Config:
         self.SESSION2 = getenv("SESSION2", None)
         self.SESSION3 = getenv("SESSION3", None)
 
-        self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/fallenx")
-        self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/DevilsHeavenMF")
+        self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/+fljV1wy5wek0YWQ1")
+        self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/+fljV1wy5wek0YWQ1")
 
         self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "true"
         self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
