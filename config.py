@@ -39,7 +39,7 @@ class Config:
         ]
         self.DEFAULT_THUMB = getenv("DEFAULT_THUMB", "https://te.legra.ph/file/3e40a408286d4eda24191.jpg")
         self.PING_IMG = getenv("PING_IMG", "https://files.catbox.moe/haagg2.png")
-        self.START_IMG = getenv("START_IMG", "https://files.catbox.moe/zvziwk.jpg")
+        self.START_IMG = getenv("START_IMG", "https://silabotov.ru/img/fe830ce1-4f48-4ec3-af2f-5f86a9278f3a.jpg")
 
     def check(self):
         missing = [
