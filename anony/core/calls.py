@@ -48,16 +48,8 @@ class TgCall(PyTgCalls):
     ) -> None:
         client = await db.get_assistant(chat_id)
         _lang = await lang.get_lang(chat_id)
-        _thumb = (
-            await thumb.generate(media)
-            if isinstance(media, Track)
-            else config.DEFAULT_THUMB
-        ) if config.THUMB_GEN else None
-
-        if not media or not media.file_path:
-            await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
-            return await self.play_next(chat_id)
-
+        
+        # Assistant ko join karwane ke liye stream taiyar karna
         stream = types.MediaStream(
             media_path=media.file_path,
             audio_parameters=types.AudioQuality.HIGH,
@@ -77,87 +69,51 @@ class TgCall(PyTgCalls):
                 config=types.GroupCallConfig(auto_start=False),
             )
             if not seek_time:
-                media.time = 1
                 await db.add_call(chat_id)
-                text = _lang["play_media"].format(
-                    media.url,
-                    media.title,
-                    media.duration,
-                    media.user,
-                )
+                text = f"🎵 **Now Playing:** [{media.title}]({media.url})\n👤 **By:** {media.user if hasattr(media, 'user') else 'User'}"
                 keyboard = buttons.controls(chat_id)
-                try:
-                    if _thumb:
-                        await message.edit_media(
-                            media=InputMediaPhoto(media=_thumb, caption=text),
-                            reply_markup=keyboard,
-                        )
-                    else:
-                        await message.edit_text(text, reply_markup=keyboard)
-                except (ChatSendMediaForbidden, ChatSendPhotosForbidden, MessageIdInvalid):
-                    if _thumb:
-                        sent = await app.send_photo(chat_id=chat_id, photo=_thumb, caption=text, reply_markup=keyboard)
-                    else:
-                        sent = await app.send_message(chat_id=chat_id, text=text, reply_markup=keyboard)
-                    media.message_id = sent.id
-        except FileNotFoundError:
-            await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
+                if message:
+                    try:
+                        await message.edit_text(text, reply_markup=keyboard, disable_web_page_preview=True)
+                    except:
+                        pass
+        except Exception as e:
+            logger.error(f"Play Error: {e}")
             await self.play_next(chat_id)
-        except exceptions.NoActiveGroupCall:
-            await self.stop(chat_id)
-            await message.edit_text(_lang["error_no_call"])
-        except exceptions.NoAudioSourceFound:
-            await message.edit_text(_lang["error_no_audio"])
-            await self.play_next(chat_id)
-        except (ConnectionError, ConnectionNotFound, TelegramServerError):
-            await self.stop(chat_id)
-            await message.edit_text(_lang["error_tg_server"])
-        except RTMPStreamingUnsupported:
-            await self.stop(chat_id)
-            await message.edit_text(_lang["error_rtmp"])
-
-    async def replay(self, chat_id: int) -> None:
-        if not await db.get_call(chat_id):
-            return
-        media = queue.get_current(chat_id)
-        _lang = await lang.get_lang(chat_id)
-        msg = await app.send_message(chat_id=chat_id, text=_lang["play_again"])
-        media.message_id = msg.id
-        await self.play_media(chat_id, msg, media)
 
     async def play_next(self, chat_id: int) -> None:
+        # Loop check karo pehle
         if loop := await db.get_loop(chat_id):
             await db.set_loop(chat_id, loop - 1)
-            return await self.replay(chat_id)
-
-        media = queue.get_next(chat_id)
+            media = queue.get_current(chat_id)
+        else:
+            # Agla gaana queue se uthao
+            media = queue.get_next(chat_id)
         
+        # --- AGAR QUEUE KHALI HAI TOH AUTOPLAY TRIGGER KARO ---
         if not media:
             if await db.is_autoplay_mode(chat_id):
+                logger.info(f"Autoplay trigger ho raha hai chat: {chat_id}")
                 media = await yt.get_next_autoplay_video(chat_id)
                 if not media:
                     return await self.stop(chat_id)
             else:
                 return await self.stop(chat_id)
 
-        try:
-            if media.message_id:
-                await app.delete_messages(chat_id=chat_id, message_ids=media.message_id, revoke=True)
-                media.message_id = 0
-        except Exception:
-            pass
+        # DIRECT STREAMING: Download ke bina seedha link nikaalo
+        stream_url = await yt.get_stream_link(media.id, video=media.video)
+        if not stream_url:
+            logger.warning(f"Stream link missing for {media.title}, skipping...")
+            return await self.play_next(chat_id)
 
-        _lang = await lang.get_lang(chat_id)
-        msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"])
+        media.file_path = stream_url
         
-        if media and not media.file_path:
-            media.file_path = await yt.download(media.id, video=media.video)
-            if not media.file_path:
-                await msg.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
-                return await self.play_next(chat_id)
-
-        media.message_id = msg.id
-        await self.play_media(chat_id, msg, media)
+        try:
+            msg = await app.send_message(chat_id, f"🔄 **Autoplay Next:**\nTrack: **{media.title}**")
+            await self.play_media(chat_id, msg, media)
+        except Exception as e:
+            logger.error(f"Play Next Error: {e}")
+            await self.play_next(chat_id)
 
     async def boot(self) -> None:
         PyTgCallsSession.notice_displayed = True
@@ -169,9 +125,9 @@ class TgCall(PyTgCalls):
             @client.on_update()
             async def update_handler(_, update: types.Update) -> None:
                 if isinstance(update, types.StreamEnded):
-                    if update.stream_type == types.StreamEnded.Type.AUDIO:
-                        await self.play_next(update.chat_id)
+                    # Gaana khatam hote hi play_next call hoga
+                    await self.play_next(update.chat_id)
                 elif isinstance(update, types.ChatUpdate):
                     if update.status in [types.ChatUpdate.Status.KICKED, types.ChatUpdate.Status.LEFT_GROUP, types.ChatUpdate.Status.CLOSED_VOICE_CHAT]:
                         await self.stop(update.chat_id)
-        logger.info("PyTgCalls client(s) started.")
+        logger.info("Assistant(s) Started with Autoplay support.")
