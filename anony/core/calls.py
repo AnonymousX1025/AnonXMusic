@@ -34,7 +34,6 @@ class TgCall(PyTgCalls):
         queue.clear(chat_id)
         await db.remove_call(chat_id)
         await db.set_loop(chat_id, 0)
-
         try:
             await client.leave_call(chat_id, close=False)
         except Exception:
@@ -90,28 +89,16 @@ class TgCall(PyTgCalls):
                 try:
                     if _thumb:
                         await message.edit_media(
-                            media=InputMediaPhoto(
-                                media=_thumb,
-                                caption=text,
-                            ),
+                            media=InputMediaPhoto(media=_thumb, caption=text),
                             reply_markup=keyboard,
                         )
                     else:
                         await message.edit_text(text, reply_markup=keyboard)
                 except (ChatSendMediaForbidden, ChatSendPhotosForbidden, MessageIdInvalid):
                     if _thumb:
-                        sent = await app.send_photo(
-                            chat_id=chat_id,
-                            photo=_thumb,
-                            caption=text,
-                            reply_markup=keyboard,
-                        )
+                        sent = await app.send_photo(chat_id=chat_id, photo=_thumb, caption=text, reply_markup=keyboard)
                     else:
-                        sent = await app.send_message(
-                            chat_id=chat_id,
-                            text=text,
-                            reply_markup=keyboard,
-                        )
+                        sent = await app.send_message(chat_id=chat_id, text=text, reply_markup=keyboard)
                     media.message_id = sent.id
         except FileNotFoundError:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
@@ -132,7 +119,6 @@ class TgCall(PyTgCalls):
     async def replay(self, chat_id: int) -> None:
         if not await db.get_call(chat_id):
             return
-
         media = queue.get_current(chat_id)
         _lang = await lang.get_lang(chat_id)
         msg = await app.send_message(chat_id=chat_id, text=_lang["play_again"])
@@ -146,29 +132,17 @@ class TgCall(PyTgCalls):
 
         media = queue.get_next(chat_id)
         
-        # --- SAFE AUTOPLAY CHECK ---
         if not media:
-            try:
-                if await db.is_autoplay_mode(chat_id):
-                    # Naye YouTube function ko call karna
-                    media = await yt.get_next_autoplay_video(chat_id)
-                    
-                    # Agar abhi bhi None hai (Search fail), toh stop karo crash mat karo
-                    if not media:
-                        return await self.stop(chat_id)
-                else:
+            if await db.is_autoplay_mode(chat_id):
+                media = await yt.get_next_autoplay_video(chat_id)
+                if not media:
                     return await self.stop(chat_id)
-            except Exception as e:
-                logger.error(f"Autoplay Logic Error: {e}")
+            else:
                 return await self.stop(chat_id)
 
         try:
             if media.message_id:
-                await app.delete_messages(
-                    chat_id=chat_id,
-                    message_ids=media.message_id,
-                    revoke=True,
-                )
+                await app.delete_messages(chat_id=chat_id, message_ids=media.message_id, revoke=True)
                 media.message_id = 0
         except Exception:
             pass
@@ -176,37 +150,14 @@ class TgCall(PyTgCalls):
         _lang = await lang.get_lang(chat_id)
         msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"])
         
-        # Safe check for file_path to avoid NoneType error
         if media and not media.file_path:
             media.file_path = await yt.download(media.id, video=media.video)
             if not media.file_path:
-                await msg.edit_text(
-                    _lang["error_no_file"].format(config.SUPPORT_CHAT)
-                )
+                await msg.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
                 return await self.play_next(chat_id)
 
         media.message_id = msg.id
         await self.play_media(chat_id, msg, media)
-
-    async def ping(self) -> float:
-        pings = [client.ping for client in self.clients]
-        if not pings:
-            return 0.0
-        return round(sum(pings) / len(pings), 2)
-
-    async def decorators(self, client: PyTgCalls) -> None:
-        @client.on_update()
-        async def update_handler(_, update: types.Update) -> None:
-            if isinstance(update, types.StreamEnded):
-                if update.stream_type == types.StreamEnded.Type.AUDIO:
-                    await self.play_next(update.chat_id)
-            elif isinstance(update, types.ChatUpdate):
-                if update.status in [
-                    types.ChatUpdate.Status.KICKED,
-                    types.ChatUpdate.Status.LEFT_GROUP,
-                    types.ChatUpdate.Status.CLOSED_VOICE_CHAT,
-                ]:
-                    await self.stop(update.chat_id)
 
     async def boot(self) -> None:
         PyTgCallsSession.notice_displayed = True
@@ -214,5 +165,13 @@ class TgCall(PyTgCalls):
             client = PyTgCalls(ub, cache_duration=100)
             await client.start()
             self.clients.append(client)
-            await self.decorators(client)
+            
+            @client.on_update()
+            async def update_handler(_, update: types.Update) -> None:
+                if isinstance(update, types.StreamEnded):
+                    if update.stream_type == types.StreamEnded.Type.AUDIO:
+                        await self.play_next(update.chat_id)
+                elif isinstance(update, types.ChatUpdate):
+                    if update.status in [types.ChatUpdate.Status.KICKED, types.ChatUpdate.Status.LEFT_GROUP, types.ChatUpdate.Status.CLOSED_VOICE_CHAT]:
+                        await self.stop(update.chat_id)
         logger.info("PyTgCalls client(s) started.")
