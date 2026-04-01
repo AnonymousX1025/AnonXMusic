@@ -7,4 +7,4 @@ pytgcrypto>=1.2.11
 py-tgcalls~=2.2.10
 py-yt-search~=0.5.7
 python-dotenv~=1.2.1
-yt-dlp
+yt-dlp>=2025.01.15
