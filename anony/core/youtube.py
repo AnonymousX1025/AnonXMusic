@@ -2,7 +2,6 @@
 # Licensed under the MIT License.
 # This file is part of AnonXMusic
 
-
 import os
 import re
 import yt_dlp
@@ -112,24 +111,16 @@ class YouTube:
             pass
         return tracks
 
-    # --- AUTOPLAY METHOD START ---
     async def get_next_autoplay_video(self, chat_id: int) -> Track | None:
-        """Dhoondta hai agla related video autoplay ke liye"""
         from anony import queue
-        
         current = queue.get_current(chat_id)
         if not current:
             return None
-
         try:
-            # Current title ke base par related videos dhoondna
             _search = VideosSearch(f"related to {current.title}", limit=2)
             results = await _search.next()
-            
             if results and results.get("result"):
-                # Pehla result aksar wahi hota hai jo abhi chal raha hai, isliye 2nd wala lete hain
                 data = results["result"][1] if len(results["result"]) > 1 else results["result"][0]
-                
                 return Track(
                     id=data.get("id"),
                     channel_name=data.get("channel", {}).get("name"),
@@ -137,7 +128,7 @@ class YouTube:
                     duration_sec=utils.to_seconds(data.get("duration")),
                     title=data.get("title")[:25],
                     thumbnail=data.get("thumbnails", [{}])[-1].get("url").split("?")[0],
-                    url=data.get("link"),
+                    url=f"https://www.youtube.com/watch?v={data.get('id')}",
                     user="Autoplay 🚀",
                     view_count=data.get("viewCount", {}).get("short"),
                     video=current.video,
@@ -145,7 +136,6 @@ class YouTube:
         except Exception as e:
             logger.error(f"Autoplay Search Error: {e}")
             return None
-    # --- AUTOPLAY METHOD END ---
 
     async def download(self, video_id: str, video: bool = False) -> str | None:
         url = self.base + video_id
@@ -165,6 +155,8 @@ class YouTube:
             "overwrites": False,
             "nocheckcertificate": True,
             "cookiefile": cookie,
+            # User-Agent add kiya taaki bot block na ho
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
         }
 
         if video:
@@ -183,8 +175,6 @@ class YouTube:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 try:
                     ydl.download([url])
-                except (yt_dlp.utils.DownloadError, yt_dlp.utils.ExtractorError):
-                    return None
                 except Exception as ex:
                     logger.warning("Download failed: %s", ex)
                     return None
