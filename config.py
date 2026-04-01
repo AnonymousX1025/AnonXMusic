@@ -23,20 +23,32 @@ class Config:
         self.SESSION3 = getenv("SESSION3", None)
 
         self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/+gD6eD6JN3G42OTM9")
-        self.SUPPORT_CHAT = getenv("OWNER/SUPPORT", "https://t.me/rajfflive")
+        self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/rajfflive")
 
-        self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "False"
-        self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
+        self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "false").lower() == "true"
+        self.AUTO_END: bool = getenv("AUTO_END", "true").lower() == "true"
     
-        self.THUMB_GEN: bool = getenv("THUMB_GEN", "True").lower() == "true"
-        self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "True").lower() == "true"
+        self.THUMB_GEN: bool = getenv("THUMB_GEN", "true").lower() == "true"
+        self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "true").lower() == "true"
+
+        # --- FIX: Quality aur Format Handling ---
+        self.STREAM_QUALITY = getenv("STREAM_QUALITY", "high") 
+        self.YTDL_OPTS = {
+            "format": "bestaudio/best",
+            "quiet": True,
+            "no_warnings": True,
+        }
+        # ----------------------------------------
 
         self.LANG_CODE = getenv("LANG_CODE", "en")
 
+        # Cookies handling updated for batbin
+        raw_cookies = getenv("COOKIES_URL", "")
         self.COOKIES_URL = [
-            url for url in getenv("COOKIES_URL", "").split(" ")
+            url.strip() for url in raw_cookies.split(" ")
             if url and "batbin.me" in url
         ]
+        
         self.DEFAULT_THUMB = getenv("DEFAULT_THUMB", "https://te.legra.ph/file/3e40a408286d4eda24191.jpg")
         self.PING_IMG = getenv("PING_IMG", "https://files.catbox.moe/haagg2.png")
         self.START_IMG = getenv("START_IMG", "https://silabotov.ru/img/5a52040b-83da-47ec-8927-faae141f126e.jpg")
