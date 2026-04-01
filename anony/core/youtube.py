@@ -37,6 +37,8 @@ class YouTube:
 
     def get_cookies(self):
         if not self.checked:
+            if not os.path.exists(self.cookie_dir):
+                os.makedirs(self.cookie_dir)
             for file in os.listdir(self.cookie_dir):
                 if file.endswith(".txt"):
                     self.cookies.append(f"{self.cookie_dir}/{file}")
@@ -109,6 +111,41 @@ class YouTube:
         except Exception:
             pass
         return tracks
+
+    # --- AUTOPLAY METHOD START ---
+    async def get_next_autoplay_video(self, chat_id: int) -> Track | None:
+        """Dhoondta hai agla related video autoplay ke liye"""
+        from anony import queue
+        
+        current = queue.get_current(chat_id)
+        if not current:
+            return None
+
+        try:
+            # Current title ke base par related videos dhoondna
+            _search = VideosSearch(f"related to {current.title}", limit=2)
+            results = await _search.next()
+            
+            if results and results.get("result"):
+                # Pehla result aksar wahi hota hai jo abhi chal raha hai, isliye 2nd wala lete hain
+                data = results["result"][1] if len(results["result"]) > 1 else results["result"][0]
+                
+                return Track(
+                    id=data.get("id"),
+                    channel_name=data.get("channel", {}).get("name"),
+                    duration=data.get("duration"),
+                    duration_sec=utils.to_seconds(data.get("duration")),
+                    title=data.get("title")[:25],
+                    thumbnail=data.get("thumbnails", [{}])[-1].get("url").split("?")[0],
+                    url=data.get("link"),
+                    user="Autoplay 🚀",
+                    view_count=data.get("viewCount", {}).get("short"),
+                    video=current.video,
+                )
+        except Exception as e:
+            logger.error(f"Autoplay Search Error: {e}")
+            return None
+    # --- AUTOPLAY METHOD END ---
 
     async def download(self, video_id: str, video: bool = False) -> str | None:
         url = self.base + video_id
