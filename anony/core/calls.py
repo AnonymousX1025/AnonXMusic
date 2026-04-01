@@ -55,7 +55,7 @@ class TgCall(PyTgCalls):
             else config.DEFAULT_THUMB
         ) if config.THUMB_GEN else None
 
-        if not media.file_path:
+        if not media or not media.file_path:
             await message.edit_text(_lang["error_no_file"].format(config.SUPPORT_CHAT))
             return await self.play_next(chat_id)
 
@@ -146,16 +146,20 @@ class TgCall(PyTgCalls):
 
         media = queue.get_next(chat_id)
         
-        # --- AUTOPLAY CHECK ---
+        # --- SAFE AUTOPLAY CHECK ---
         if not media:
             try:
-                # Ye tumhare naye mongo.py function ko call karega
                 if await db.is_autoplay_mode(chat_id):
+                    # Naye YouTube function ko call karna
                     media = await yt.get_next_autoplay_video(chat_id)
+                    
+                    # Agar abhi bhi None hai (Search fail), toh stop karo crash mat karo
+                    if not media:
+                        return await self.stop(chat_id)
                 else:
                     return await self.stop(chat_id)
             except Exception as e:
-                logger.error(f"Autoplay Error: {e}")
+                logger.error(f"Autoplay Logic Error: {e}")
                 return await self.stop(chat_id)
 
         try:
@@ -171,19 +175,23 @@ class TgCall(PyTgCalls):
 
         _lang = await lang.get_lang(chat_id)
         msg = await app.send_message(chat_id=chat_id, text=_lang["play_next"])
-        if not media.file_path:
+        
+        # Safe check for file_path to avoid NoneType error
+        if media and not media.file_path:
             media.file_path = await yt.download(media.id, video=media.video)
             if not media.file_path:
-                await self.play_next(chat_id)
-                return await msg.edit_text(
+                await msg.edit_text(
                     _lang["error_no_file"].format(config.SUPPORT_CHAT)
                 )
+                return await self.play_next(chat_id)
 
         media.message_id = msg.id
         await self.play_media(chat_id, msg, media)
 
     async def ping(self) -> float:
         pings = [client.ping for client in self.clients]
+        if not pings:
+            return 0.0
         return round(sum(pings) / len(pings), 2)
 
     async def decorators(self, client: PyTgCalls) -> None:
