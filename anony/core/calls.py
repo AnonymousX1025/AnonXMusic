@@ -147,12 +147,12 @@ class TgCall(PyTgCalls):
         media = queue.get_next(chat_id)
         
         if not media:
-            if await db.is_autoplay_mode(chat_id):
-                try:
+            try:
+                if await db.is_autoplay_mode(chat_id):
                     media = await yt.get_next_autoplay_video(chat_id)
-                except Exception:
+                else:
                     return await self.stop(chat_id)
-            else:
+            except Exception:
                 return await self.stop(chat_id)
 
         try:
