@@ -5,7 +5,7 @@ import random
 import asyncio
 from py_yt import VideosSearch
 from anony import logger
-from anony.helpers import Track, utils
+from anony.helpers import Track
 
 class YouTube:
     def __init__(self):
@@ -20,21 +20,6 @@ class YouTube:
                     cookies.append(f"{self.cookie_dir}/{file}")
         return random.choice(cookies) if cookies else None
 
-    async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
-        try:
-            _search = VideosSearch(query, limit=1)
-            results = await _search.next()
-            if results and results["result"]:
-                data = results["result"][0]
-                return Track(
-                    id=data.get("id"),
-                    title=data.get("title")[:25],
-                    url=data.get("link"),
-                    video=video,
-                )
-        except Exception:
-            return None
-
     async def get_stream_link(self, video_id: str, video: bool = False) -> str | None:
         url = self.base + video_id
         cookie = self.get_cookies()
@@ -43,7 +28,8 @@ class YouTube:
             "format": "bestaudio/best" if not video else "best[height<=720]",
             "cookiefile": cookie,
             "nocheckcertificate": True,
-            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+            # Naya User Agent Challenge bypass karne ke liye
+            "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
         }
         def _extract():
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -55,9 +41,17 @@ class YouTube:
                     return None
         return await asyncio.to_thread(_extract)
 
-    # --- YE WALA FUNCTION MISSING THA JISSE ERROR AA RAHA HAI ---
     async def download(self, video_id, video=False):
         return await self.get_stream_link(video_id, video)
+
+    async def search(self, query: str, m_id: int, video: bool = False) -> Track | None:
+        try:
+            _search = VideosSearch(query, limit=1)
+            results = await _search.next()
+            if results and results["result"]:
+                data = results["result"][0]
+                return Track(id=data.get("id"), title=data.get("title")[:25], url=data.get("link"), video=video)
+        except: return None
 
     async def get_next_autoplay_video(self, chat_id: int) -> Track | None:
         from anony import queue
@@ -68,13 +62,5 @@ class YouTube:
             results = await _search.next()
             if results and results.get("result"):
                 data = results["result"][1] if len(results["result"]) > 1 else results["result"][0]
-                return Track(
-                    id=data.get("id"),
-                    title=data.get("title")[:25],
-                    url=f"https://www.youtube.com/watch?v={data.get('id')}",
-                    user="Autoplay 🚀",
-                    video=current.video,
-                )
-        except Exception as e:
-            logger.error(f"Autoplay Search Error: {e}")
-            return None
+                return Track(id=data.get("id"), title=data.get("title")[:25], url=f"https://www.youtube.com/watch?v={data.get('id')}", user="ᴀᴜᴛᴏᴘʟᴀʏ 🚀", video=current.video)
+        except: return None
