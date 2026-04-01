@@ -1,5 +1,4 @@
 from os import getenv
-# Ise use karne ke liye 'pip install python-dotenv' hona chahiye
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -36,7 +35,7 @@ class Config:
         self.LANG_CODE = getenv("LANG_CODE", "en")
 
         # --- FIX: YouTube Format & Quality Handling ---
-        # Isse 'Requested format is not available' error solve hoga
+        # Isse 'Requested format' wala panga khatam hoga
         self.STREAM_QUALITY = getenv("STREAM_QUALITY", "high") 
         self.YTDL_OPTS = {
             "format": "bestaudio/best",
@@ -45,10 +44,10 @@ class Config:
             "geo_bypass": True,
             "nocheckcertificate": True,
             "outtmpl": "downloads/%(id)s.%(ext)s",
+            "cookiesfrombrowser": (), # Isse conflict nahi hoga
         }
 
         # --- Cookies Handling ---
-        # Isse cookies batbin se sahi load hongi
         raw_cookies = getenv("COOKIES_URL", "")
         self.COOKIES_URL = [
             url.strip() for url in raw_cookies.split(" ")
