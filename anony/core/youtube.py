@@ -1,5 +1,4 @@
 import os
-import re
 import yt_dlp
 import random
 import asyncio
@@ -28,8 +27,11 @@ class YouTube:
             "format": "bestaudio/best" if not video else "best[height<=720]",
             "cookiefile": cookie,
             "nocheckcertificate": True,
-            # Naya User Agent Challenge bypass karne ke liye
-            "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+            "http_headers": {
+                "Accept": "*/*",
+                "Accept-Language": "en-US,en;q=0.9",
+            }
         }
         def _extract():
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -37,7 +39,7 @@ class YouTube:
                     info = ydl.extract_info(url, download=False)
                     return info.get("url")
                 except Exception as e:
-                    logger.error(f"Stream Error: {e}")
+                    logger.error(f"YouTube Error: {e}")
                     return None
         return await asyncio.to_thread(_extract)
 
