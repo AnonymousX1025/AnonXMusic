@@ -1,6 +1,7 @@
 from pyrogram import filters
 from anony import app
-from anony.utils.database import is_autoplay_mode, autoplay_on, autoplay_off
+# Yahan 'utils' hata kar direct 'database' se import kar rahe hain
+from database import is_autoplay_mode, autoplay_on, autoplay_off
 
 @app.on_message(filters.command(["autoplay"]))
 async def autoplay_mnt(_, message):
@@ -10,7 +11,7 @@ async def autoplay_mnt(_, message):
     state = message.text.split(None, 1)[1].strip().lower()
     if state == "enable":
         await autoplay_on(message.chat.id)
-        await message.reply_text("✅ Autoplay Enabled! Ab queue khatam hone par gaane apne aap chalenge.")
+        await message.reply_text("✅ Autoplay Enabled!")
     elif state == "disable":
         await autoplay_off(message.chat.id)
         await message.reply_text("❌ Autoplay Disabled!")
