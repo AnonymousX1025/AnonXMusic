@@ -17,9 +17,8 @@ def checkUB(play):
             return await m.reply_text(m.lang["play_user_invalid"])
 
         chat_id = m.chat.id
-       # if m.chat.type != enums.ChatType.SUPERGROUP:
-           # await m.reply_text(m.lang["play_chat_invalid"])
-         #   return await app.leave_chat(chat_id)
+        if m.chat.type not in [enums.ChatType.SUPERGROUP, enums.ChatType.GROUP]:
+            return # Yalnız qrup/superqrup deyilsə (məs. Kanaldırsa) dayansın
 
         if not m.reply_to_message and (
             len(m.command) < 2 or (len(m.command) == 2 and m.command[1] == "-f")
