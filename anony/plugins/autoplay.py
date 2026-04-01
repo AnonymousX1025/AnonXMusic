@@ -6,6 +6,7 @@ from anony.core.mongo import mongodb
 @app.on_message(filters.command(["autoplay"]) & filters.group)
 async def autoplay_command(_, message):
     chat_id = message.chat.id
+    # Collection based call to avoid Attribute errors
     is_active = await mongodb.autoplay.find_one({"chat_id": chat_id})
     status = is_active.get("autoplay") if is_active else False
 
