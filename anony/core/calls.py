@@ -146,13 +146,16 @@ class TgCall(PyTgCalls):
 
         media = queue.get_next(chat_id)
         
+        # --- AUTOPLAY CHECK ---
         if not media:
             try:
+                # Ye tumhare naye mongo.py function ko call karega
                 if await db.is_autoplay_mode(chat_id):
                     media = await yt.get_next_autoplay_video(chat_id)
                 else:
                     return await self.stop(chat_id)
-            except Exception:
+            except Exception as e:
+                logger.error(f"Autoplay Error: {e}")
                 return await self.stop(chat_id)
 
         try:
