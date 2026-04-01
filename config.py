@@ -13,14 +13,14 @@ class Config:
         self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
         self.OWNER_ID = int(getenv("OWNER_ID", 0))
 
-        # --- Sessions ---
+        # --- Sessions (Crash Fix for SESSION2/3) ---
         self.SESSION1 = getenv("SESSION1", None)
         self.SESSION2 = getenv("SESSION2", None)
         self.SESSION3 = getenv("SESSION3", None)
         self.SESSION4 = getenv("SESSION4", None)
         self.SESSION5 = getenv("SESSION5", None)
 
-        # --- Limits (FIXED: QUEUE_LIMIT added) ---
+        # --- Limits (Reply Fix for QUEUE_LIMIT) ---
         self.QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", 20))
         self.DURATION_LIMIT = int(getenv("DURATION_LIMIT", 60)) * 60
         self.PLAYLIST_LIMIT = int(getenv("PLAYLIST_LIMIT", 20))
@@ -36,7 +36,7 @@ class Config:
         self.THUMB_GEN = getenv("THUMB_GEN", "true").lower() == "true"
         self.LANG_CODE = getenv("LANG_CODE", "en")
 
-        # --- YouTube Fix ---
+        # --- YouTube Format & Bypass Fix ---
         self.STREAM_QUALITY = getenv("STREAM_QUALITY", "medium") 
         self.YTDL_OPTS = {
             "format": "bestaudio/best",
@@ -45,10 +45,12 @@ class Config:
             "geo_bypass": True,
             "nocheckcertificate": True,
             "outtmpl": "downloads/%(id)s.%(ext)s",
+            # User-agent adding for bypass
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
         }
 
-        # --- Cookies ---
-        raw_cookies = getenv("COOKIES_URL", "")
+        # --- Cookies Handling (Updated with your new link) ---
+        raw_cookies = getenv("COOKIES_URL", "https://batbin.me/raw/crena")
         self.COOKIES_URL = [
             url.strip() for url in raw_cookies.split(" ")
             if url and "batbin.me" in url
@@ -62,7 +64,7 @@ class Config:
     def check(self):
         for var in ["API_ID", "API_HASH", "BOT_TOKEN", "MONGO_URL", "SESSION1"]:
             if not getattr(self, var):
-                raise SystemExit(f"Missing: {var}")
+                raise SystemExit(f"Missing essential variable: {var}")
 
-# Global config object setup
+# Global object initialization
 config = Config()
