@@ -13,15 +13,19 @@ class Config:
         self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
         self.OWNER_ID = int(getenv("OWNER_ID", 0))
 
-        # --- Sessions (FIXED: Added missing sessions) ---
+        # --- Sessions ---
         self.SESSION1 = getenv("SESSION1", None)
         self.SESSION2 = getenv("SESSION2", None)
         self.SESSION3 = getenv("SESSION3", None)
         self.SESSION4 = getenv("SESSION4", None)
         self.SESSION5 = getenv("SESSION5", None)
 
-        # --- Limits & Links ---
+        # --- Limits (FIXED: QUEUE_LIMIT added) ---
+        self.QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", 20))
         self.DURATION_LIMIT = int(getenv("DURATION_LIMIT", 60)) * 60
+        self.PLAYLIST_LIMIT = int(getenv("PLAYLIST_LIMIT", 20))
+
+        # --- Support Links ---
         self.SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/+gD6eD6JN3G42OTM9")
         self.SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/rajfflive")
 
@@ -32,7 +36,7 @@ class Config:
         self.THUMB_GEN = getenv("THUMB_GEN", "true").lower() == "true"
         self.LANG_CODE = getenv("LANG_CODE", "en")
 
-        # --- YouTube Format Fix ---
+        # --- YouTube Fix ---
         self.STREAM_QUALITY = getenv("STREAM_QUALITY", "medium") 
         self.YTDL_OPTS = {
             "format": "bestaudio/best",
@@ -60,5 +64,5 @@ class Config:
             if not getattr(self, var):
                 raise SystemExit(f"Missing: {var}")
 
-# Global config object
+# Global config object setup
 config = Config()
