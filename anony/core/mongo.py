@@ -2,14 +2,10 @@
 # Licensed under the MIT License.
 # This file is part of AnonXMusic
 
-
 from random import randint
 from time import time
-
 from pymongo import AsyncMongoClient
-
 from anony import config, logger, userbot
-
 
 class MongoDB:
     def __init__(self):
@@ -43,13 +39,12 @@ class MongoDB:
 
         self.users = []
         self.usersdb = self.db.users
+        
+        # New Autoplay Cache
+        self.autoplay = []
 
     async def connect(self) -> None:
-        """Check if we can connect to the database.
-
-        Raises:
-            SystemExit: If the connection to the database fails.
-        """
+        """Check if we can connect to the database."""
         try:
             start = time()
             await self.mongo.admin.command("ping")
@@ -63,7 +58,31 @@ class MongoDB:
         await self.mongo.close()
         logger.info("Database connection closed.")
 
-    # CACHE
+    # --- AUTOPLAY METHODS START ---
+    async def is_autoplay_mode(self, chat_id: int) -> bool:
+        if chat_id not in self.autoplay:
+            # We check the 'autoplay' collection in database
+            doc = await self.db.autoplay.find_one({"chat_id": chat_id})
+            if doc and doc.get("autoplay"):
+                self.autoplay.append(chat_id)
+        return chat_id in self.autoplay
+
+    async def set_autoplay_mode(self, chat_id: int, status: bool = False) -> None:
+        if status:
+            if chat_id not in self.autoplay:
+                self.autoplay.append(chat_id)
+        else:
+            if chat_id in self.autoplay:
+                self.autoplay.remove(chat_id)
+        
+        await self.db.autoplay.update_one(
+            {"chat_id": chat_id},
+            {"$set": {"autoplay": status}},
+            upsert=True,
+        )
+    # --- AUTOPLAY METHODS END ---
+
+    # CACHE METHODS
     async def get_call(self, chat_id: int) -> bool:
         return chat_id in self.active_calls
 
@@ -80,7 +99,6 @@ class MongoDB:
 
     async def get_admins(self, chat_id: int, reload: bool = False) -> list[int]:
         from anony.helpers._admins import reload_admins
-
         if chat_id not in self.admin_list or reload:
             self.admin_list[chat_id] = await reload_admins(chat_id)
         return self.admin_list[chat_id]
@@ -130,12 +148,10 @@ class MongoDB:
 
     async def get_assistant(self, chat_id: int):
         from anony import anon
-
         if chat_id not in self.assistant:
             doc = await self.assistantdb.find_one({"_id": chat_id})
             num = doc["num"] if doc else await self.set_assistant(chat_id)
             self.assistant[chat_id] = num
-
         return anon.clients[self.assistant[chat_id] - 1]
 
     async def get_client(self, chat_id: int):
@@ -208,7 +224,8 @@ class MongoDB:
         if delete:
             self.cmd_delete.append(chat_id)
         else:
-            self.cmd_delete.remove(chat_id)
+            if chat_id in self.cmd_delete:
+                self.cmd_delete.remove(chat_id)
         await self.chatsdb.update_one(
             {"_id": chat_id},
             {"$set": {"cmd_delete": delete}},
@@ -260,7 +277,8 @@ class MongoDB:
         if remove and chat_id in self.admin_play:
             self.admin_play.remove(chat_id)
         else:
-            self.admin_play.append(chat_id)
+            if chat_id not in self.admin_play:
+                self.admin_play.append(chat_id)
         await self.chatsdb.update_one(
             {"_id": chat_id},
             {"$set": {"admin_play": not remove}},
@@ -301,56 +319,7 @@ class MongoDB:
             self.users.extend([user["_id"] async for user in self.usersdb.find()])
         return self.users
 
-
-    async def migrate_coll(self) -> None:
-        logger.info("Migrating users and chats from old collections...")
-
-        users, musers, mchats = [], [], []
-        seen_chats, seen_users = set(), set()
-        users.extend([user async for user in self.usersdb.find()])
-        users.extend([user async for user in self.db.tgusersdb.find()])
-
-        for user in users:
-            _id = user.get("_id")
-            if isinstance(_id, int):
-                user_id = _id
-            else:
-                user_id = int(user.get("user_id"))
-
-            if user_id in seen_users:
-                continue
-            seen_users.add(user_id)
-            musers.append({"_id": user_id})
-
-        await self.usersdb.drop()
-        await self.db.tgusersdb.drop()
-        if musers:
-            await self.usersdb.insert_many(musers)
-
-        async for chat in self.chatsdb.find():
-            _id = chat.get("_id")
-            if isinstance(_id, int):
-                chat_id = _id
-            else:
-                chat_id = int(chat.get("chat_id"))
-
-            if chat_id in seen_chats:
-                continue
-            seen_chats.add(chat_id)
-            mchats.append({"_id": chat_id})
-
-        await self.chatsdb.drop()
-        if mchats:
-            await self.chatsdb.insert_many(mchats)
-
-        await self.cache.insert_one({"_id": "migrated"})
-        logger.info("Migration completed successfully.")
-
     async def load_cache(self) -> None:
-        doc = await self.cache.find_one({"_id": "migrated"})
-        if not doc:
-            await self.migrate_coll()
-
         await self.get_chats()
         await self.get_users()
         await self.get_blacklisted(True)
