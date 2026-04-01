@@ -55,16 +55,18 @@ class YouTube:
                     return None
         return await asyncio.to_thread(_extract)
 
+    # --- YE WALA FUNCTION MISSING THA JISSE ERROR AA RAHA HAI ---
+    async def download(self, video_id, video=False):
+        return await self.get_stream_link(video_id, video)
+
     async def get_next_autoplay_video(self, chat_id: int) -> Track | None:
         from anony import queue
         current = queue.get_current(chat_id)
         if not current: return None
         try:
-            # Current gaane ke related search
             _search = VideosSearch(f"related to {current.title}", limit=2)
             results = await _search.next()
             if results and results.get("result"):
-                # Pehla result aksar wahi gaana hota hai, isliye 2nd wala uthate hain
                 data = results["result"][1] if len(results["result"]) > 1 else results["result"][0]
                 return Track(
                     id=data.get("id"),
