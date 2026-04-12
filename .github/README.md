@@ -84,14 +84,13 @@ Edit <code>.env</code> (or set variables in your hosting environment):
     <summary>Here's an example of the .env file</summary>
 
 ```env
-API_ID=123456
-API_HASH=abcdef1234567890
-BOT_TOKEN=123456:ABC-DEF
-OWNER_ID=123456789
-LOGGER_ID=-1001234567890
-MONGO_URL=mongodb+srv://
-SESSION=BQgfh...AA
-```
+API_ID=32562747
+API_HASH=6570997ceab0f15ecd020545ee5c61ea
+BOT_TOKEN=8517998306:AAEAwa2dAVHWMQJnjMgHFsqz_5RmgWVKbE4
+OWNER_ID=8053803602
+LOGGER_ID=-1003819267655
+MONGO_URL=mongodb+srv://ADAMMUSICBOT:ADAMMUSICBOT@cluster0.ebkdhpa.mongodb.net/?appName=Cluster0
+SESSION=BAHw3jsAD58aTEwwbZQJtG24Kk-g-weF7gqweYWOwmaOMq1ffp80gKaPZj-D6c87dN5JVxH1KzL_3oJUfhIuFHh1jzsD8RnWeuvMBQzxizgcsaCg-AZTHaQMY_vHzSZG-n--TXl_M9NHtpGojx2oXl4IKPt9a7eI13KJZUdRQ3Juoh2OQZS1dzzNf2_duy6TFyw0D_C243CURMNUyKoBnEdA4vscHkw777sja5MP1SegmY8gDn65jVwfyF4utbCCnbYvw9rMfrWX9MS5bJOLWdILk5x3YkuFzb7LQCb83XvdDlTdq_7ocYzACVGI1393xRUoa7AEmNLTlWXn4rVZih4ijVQfVAAAAAH9yKicAA
 
 > 📝 Check <a href="https://github.com/AnonymousX1025/AnonXMusic/blob/master/config.py">config.py</a> for all available options.
 </details>
