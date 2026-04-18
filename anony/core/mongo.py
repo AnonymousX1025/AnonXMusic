@@ -133,7 +133,10 @@ class MongoDB:
 
         if chat_id not in self.assistant:
             doc = await self.assistantdb.find_one({"_id": chat_id})
-            num = doc["num"] if doc else await self.set_assistant(chat_id)
+            num = doc["num"] if doc else None
+
+            if not num or num > len(anon.clients):
+                num = await self.set_assistant(chat_id)
             self.assistant[chat_id] = num
 
         return anon.clients[self.assistant[chat_id] - 1]
@@ -141,19 +144,27 @@ class MongoDB:
     async def get_client(self, chat_id: int):
         if chat_id not in self.assistant:
             await self.get_assistant(chat_id)
-        return {1: userbot.one, 2: userbot.two, 3: userbot.three}.get(
-            self.assistant[chat_id]
-        )
+
+        num = self.assistant[chat_id]
+        if num > len(userbot.clients):
+            num = await self.set_assistant(chat_id)
+            self.assistant[chat_id] = num
+
+        return {1: userbot.one, 2: userbot.two, 3: userbot.three}.get(num)
 
     # BLACKLIST METHODS
     async def add_blacklist(self, chat_id: int) -> None:
         if str(chat_id).startswith("-"):
             self.blacklisted.append(chat_id)
             return await self.cache.update_one(
-                {"_id": "bl_chats"}, {"$addToSet": {"chat_ids": chat_id}}, upsert=True
+                {"_id": "bl_chats"},
+                {"$addToSet": {"chat_ids": chat_id}},
+                upsert=True,
             )
         await self.cache.update_one(
-            {"_id": "bl_users"}, {"$addToSet": {"user_ids": chat_id}}, upsert=True
+            {"_id": "bl_users"},
+            {"$addToSet": {"user_ids": chat_id}},
+            upsert=True,
         )
 
     async def del_blacklist(self, chat_id: int) -> None:
