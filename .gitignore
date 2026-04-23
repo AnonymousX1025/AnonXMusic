@@ -3,6 +3,7 @@
 *.txt
 .idea
 .DS_Store
+.venv/
 venv/
 cache/
 downloads/

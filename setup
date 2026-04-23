@@ -1,69 +1,94 @@
 #!/bin/bash
 
+set -o pipefail
+
+[ -n "$BASH_VERSION" ] || { echo "Run with bash"; exit 1; }
+command -v sudo &>/dev/null || { echo "sudo is required"; exit 1; }
+
 pprint() {
     local msg="$1" c="$2" r="\033[0m"
     case "$c" in
         cred) c="\033[0;31m";; cgreen) c="\033[0;32m";;
         cyellow) c="\033[0;33m";; cblue) c="\033[0;34m";;
-        *) c="\033[0;35m";;
+        cmagenta) c="\033[0;35m";; *) c="\033[0;35m";;
     esac
     printf "%b%b%b" "$c" "$msg" "$r"
 }
-color_reset() { printf '\033[0m'; }
-
-[ "$EUID" -ne 0 ] && { pprint "You need sudo privileges. Exiting...\n" "cred"; exit 1; }
-yesnoprompt() {
-    stty raw -echo
-    answer=$(head -c1)
-    stty sane
-    [[ "$answer" =~ [Yy] ]]
-}
 
 update() {
-    pprint "\n\nUpdating package list... "
-    if sudo apt update 2>&1 | grep -q "can be upgraded"; then
-        pprint "Update available. Upgrade (y/n)? " "cyellow"
-        yesnoprompt && { 
-            pprint "\nUpgrading... "
-            if sudo apt upgrade -y &>/dev/null; then
-                pprint "Done.\n\n" "cgreen"
-            else
-                pprint "Failed.\n\n" "cred"
-            fi
-        } || echo
+    pprint "\n\nUpdating system...\n" "cblue"
+
+    if sudo apt-get update -y &>/dev/null && sudo apt-get upgrade -y &>/dev/null; then
+        pprint "Done.\n\n" "cgreen"
     else
-        pprint "Already up-to-date.\n\n" "cgreen"
+        pprint "Failed.\n\n" "cred"
     fi
 }
 
-install_pkg() {
-    command -v "$1" &>/dev/null || { 
-        pprint "$1 not found, installing... "
-        sudo apt install -y "$2" &>/dev/null && pprint "Done.\n\n" "cgreen" || pprint "Failed.\n\n" "cred"
-    }
+install_pkgs() {
+    missing=()
+    for pkg in "$@"; do
+        dpkg -s "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+
+    if [ ${#missing[@]} -gt 0 ]; then
+        pprint "Installing: ${missing[*]}... " "cyellow"
+        if sudo apt-get install -y "${missing[@]}" &>/dev/null; then
+            pprint "Done.\n\n" "cgreen"
+        else
+            pprint "Failed.\n\n" "cred"
+        fi
+    else
+        pprint "All packages already installed.\n\n" "cgreen"
+    fi
 }
 
 install_deno() {
     pprint "\n\nInstalling Deno...\n" "cblue"
+
     if command -v deno &>/dev/null; then
         pprint "Deno already installed.\n" "cgreen"
-    else
-        curl -fsSL https://deno.land/install.sh | sh >/dev/null 2>&1
+        return
+    fi
+
+    if curl -fsSL https://deno.land/install.sh | sh; then
         deno_path="$HOME/.deno/bin"
-        if [[ ":$PATH:" != *":$deno_path:"* ]]; then
-            echo "export DENO_INSTALL=\"$HOME/.deno\"" >> ~/.bashrc
-            echo "export PATH=\"\$DENO_INSTALL/bin:\$PATH\"" >> ~/.bashrc
+
+        if ! grep -q 'DENO_INSTALL' "$HOME/.bashrc"; then
+            {
+                echo 'export DENO_INSTALL="$HOME/.deno"'
+                echo 'export PATH="$DENO_INSTALL/bin:$PATH"'
+            } >> "$HOME/.bashrc"
             pprint "Deno path added to ~/.bashrc\n" "cyellow"
         fi
+
         export DENO_INSTALL="$HOME/.deno"
         export PATH="$DENO_INSTALL/bin:$PATH"
+
         pprint "Deno installation complete.\n" "cgreen"
+    else
+        pprint "Deno installation failed.\n" "cred"
+    fi
+}
+
+install_uv() {
+    if ! command -v uv &>/dev/null; then
+        pprint "\nInstalling uv...\n" "cblue"
+        if curl -Ls https://astral.sh/uv/install.sh | sh; then
+            if ! grep -q '.local/bin' "$HOME/.bashrc"; then
+                echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$HOME/.bashrc"
+            fi
+            export PATH="$HOME/.local/bin:$PATH"
+            pprint "uv installed.\n" "cgreen"
+        else
+            pprint "uv installation failed.\n" "cred"
+        fi
     fi
 }
 
 install_py() {
     pprint "\n\nInstalling Python dependencies...\n"
-    if pip3 install -U pip -q && pip3 install -U -r requirements.txt -q; then
+    if uv sync --frozen -q; then
         pprint "Done.\n" "cgreen"
     else
         pprint "Failed (continuing...)\n" "cred"
@@ -85,19 +110,15 @@ EOF
 }
 
 
-clear
 pprint "Welcome to the AnonXMusic Installation Setup\n\n" "cmagenta"
-sleep 1
 
 update
-install_pkg python3-pip python3-pip
-install_pkg ffmpeg ffmpeg unzip
+install_pkgs python3 python3-venv ffmpeg curl unzip
+install_uv || exit 1
 install_deno
 install_py
 
 pprint "\nAnonXMusic Installation Completed.\n" "cgreen"
-sleep 2
-clear
 
 pprint "\nEnter Your Values Below\n\n\n" "cmagenta"
 read -rp "API ID: " api_id
@@ -110,4 +131,4 @@ read -rp "STRING SESSION: " string_session
 
 save_env_vars "$api_id" "$api_hash" "$bot_token" "$mongo_db" "$logger" "$string_session" "$ownid"
 
-pprint "\nYour variables have been saved! Start bot with: bash start\n" "cgreen"
+pprint "\nSetup complete! Start the bot using:\n\n  bash start\n\n" "cgreen"

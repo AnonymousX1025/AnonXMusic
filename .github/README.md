@@ -41,7 +41,7 @@ Built with Python, Pyrogram, and Py-TgCalls, it’s optimized for reliability an
 <h3>✔️ Prerequisites</h3>
 
 - <a href="https://www.python.org">Python 3.10+</a> installed  
-- <a href="https://deno.com/">deno</a> & <a href="https://ffmpeg.org//">ffmpeg</a> installed on your system  
+- <a href="https://deno.com/">deno</a> & <a href="https://ffmpeg.org/">ffmpeg</a> installed on your system  
 - Required variables mentioned in <a href="https://github.com/AnonymousX1025/AnonXMusic/blob/master/sample.env">sample.env</a>
 
 <details>
@@ -49,11 +49,18 @@ Built with Python, Pyrogram, and Py-TgCalls, it’s optimized for reliability an
         <h3>Local / VPS Setup</h3>
     </summary>
 
+
+<h4>🐧 Linux/macOS</h4>
+
 ```bash
 git clone https://github.com/AnonymousX1025/AnonXMusic && cd AnonXMusic
 
+# Install uv
+curl -Ls https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+
 # Install dependencies
-pip3 install -U -r requirements.txt
+uv sync --frozen
 
 # Rename and configure environment variables
 mv sample.env .env
@@ -62,6 +69,28 @@ mv sample.env .env
 # Start the bot
 bash start
 ```
+
+<h4>🪟 Windows (PowerShell)</h4>
+
+```bash
+git clone https://github.com/AnonymousX1025/AnonXMusic && cd AnonXMusic
+
+# Install uv
+irm https://astral.sh/uv/install.ps1 | iex
+
+# Install dependencies
+uv sync --frozen
+
+# Rename and configure environment variables
+mv sample.env .env
+# Edit .env with your credentials
+
+# Start the bot
+uv run python3 -m anony
+
+> ⭐ or use Git Bash or WSL to run `bash start`.
+```
+
 </details>
 
 <details>

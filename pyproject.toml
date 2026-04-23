@@ -1,0 +1,19 @@
+[project]
+name = "anonxmusic"
+version = "3.0.3"
+description = "Telegram Group Calls Streaming bot with some useful features."
+readme = ".github/README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    "aiohttp~=3.13.5",
+    "kurigram>=2.2.21",
+    "pillow~=12.2.0",
+    "psutil~=7.2.2",
+    "py-tgcalls~=2.2.11",
+    "py-yt-search~=0.6.2",
+    "pymongo>=4.16.0",
+    "pytgcrypto>=1.2.11",
+    "python-dotenv~=1.2.1",
+    "yt-dlp[default]>=2026.3.17",
+]

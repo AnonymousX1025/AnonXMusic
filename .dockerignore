@@ -3,6 +3,7 @@
 log.txt
 .DS_Store
 venv/
+.venv/
 cache/
 downloads/
 __pycache__/

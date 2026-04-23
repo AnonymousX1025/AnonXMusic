@@ -25,7 +25,7 @@ logging.getLogger("pytgcalls").setLevel(logging.ERROR)
 logger = logging.getLogger(__name__)
 
 
-__version__ = "3.0.2"
+__version__ = "3.0.3"
 
 from config import Config
 
