@@ -73,4 +73,4 @@ class Thumbnail:
             except Exception: pass
             return output
         except Exception:
-            config.DEFAULT_THUMB
+            return config.DEFAULT_THUMB
