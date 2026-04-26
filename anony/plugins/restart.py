@@ -52,8 +52,8 @@ async def _restart(_, m: types.Message):
         shutil.rmtree(directory, ignore_errors=True)
 
     await sent.edit_text(m.lang["restarted"])
-    asyncio.create_task(stop())
-    await asyncio.sleep(2)
+    task = asyncio.create_task(stop())
+    await task
 
     try: os.remove("log.txt")
     except Exception: pass

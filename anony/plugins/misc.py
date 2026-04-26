@@ -33,7 +33,7 @@ async def auto_leave():
                     if chat in db.active_calls:
                         continue
                     await ub.leave_chat(chat)
-                    await asyncio.sleep(7)
+                    await asyncio.sleep(12)
             except asyncio.CancelledError:
                 raise
             except Exception:
@@ -52,19 +52,21 @@ async def track_time():
             media.time += 1
 
 
-async def update_timer(length=10):
+async def update_timer(length=10, sleep=12):
     while True:
-        await asyncio.sleep(7)
+        await asyncio.sleep(sleep)
         for chat_id in list(db.active_calls):
             if not await db.playing(chat_id):
                 continue
             try:
                 media = queue.get_current(chat_id)
+                if not media:
+                    continue
                 duration, message_id = media.duration_sec, media.message_id
                 if not duration or not message_id or not media.time:
                     continue
                 played = media.time
-                remaining = duration - played
+                remaining = max(duration - played, 0)
                 pos = min(int((played / duration) * length), length - 1)
                 timer = "—" * pos + "◉" + "—" * (length - pos - 1)
 
@@ -104,6 +106,8 @@ async def vc_watcher(sleep=15):
         for chat_id in list(db.active_calls):
             client = await db.get_assistant(chat_id)
             media = queue.get_current(chat_id)
+            if not media:
+                continue
             participants = await client.get_participants(chat_id)
             if len(participants) < 2 and media.time > 30:
                 _lang = await lang.get_lang(chat_id)
