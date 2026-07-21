@@ -8,7 +8,7 @@ requires-python = ">=3.10"
 dependencies = [
     "aiohttp~=3.14.1",
     "kurigram>=2.2.21",
-    "pillow~=12.2.0",
+    "pillow~=12.3.0",
     "psutil~=7.2.2",
     "py-tgcalls~=2.2.11",
     "py-yt-search~=0.6.2",
