@@ -55,7 +55,9 @@ async def start(_, message: types.Message):
         await db.add_chat(message.chat.id)
 
 
-@app.on_message(filters.command(["playmode", "settings"]) & filters.group & ~app.bl_users)
+@app.on_message(
+    filters.command(["playmode", "settings"]) & filters.group & ~app.bl_users
+)
 @lang.language()
 async def settings(_, message: types.Message):
     admin_only = await db.get_play_mode(message.chat.id)
@@ -70,16 +72,25 @@ async def settings(_, message: types.Message):
     )
 
 
-@app.on_message(filters.new_chat_members, group=7)
+@app.on_chat_member_updated(group=7)
 @lang.language()
-async def _new_member(_, message: types.Message):
-    if message.chat.type != enums.ChatType.SUPERGROUP:
-        return await message.chat.leave()
+async def _bot_membership_update(_, update: types.ChatMemberUpdated) -> None:
+    new = update.new_chat_member
 
-    await asyncio.sleep(3)
-    for member in message.new_chat_members:
-        if member.id == app.id:
-            if await db.is_chat(message.chat.id):
-                return
-            await utils.send_log(message, True)
-            await db.add_chat(message.chat.id)
+    # Only care about updates to the bot's own membership, not other users'
+    if new is None or new.user.id != app.id:
+        return
+
+    if update.chat.type != enums.ChatType.SUPERGROUP:
+        return await update.chat.leave()
+
+    is_active_chat = not (await db.is_chat(update.chat.id))
+
+    if new.status in (enums.ChatMemberStatus.LEFT, enums.ChatMemberStatus.BANNED):
+        if not is_active_chat:
+            await db.rm_chat(update.chat.id)
+        return
+
+    if is_active_chat:
+        await utils.send_log(update, True)
+        await db.add_chat(update.chat.id)
