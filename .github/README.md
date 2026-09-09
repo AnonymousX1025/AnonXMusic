@@ -113,13 +113,12 @@ Edit <code>.env</code> (or set variables in your hosting environment):
     <summary>Here's an example of the .env file</summary>
 
 ```env
-API_ID=123456
-API_HASH=abcdef1234567890
-BOT_TOKEN=123456:ABC-DEF
-OWNER_ID=123456789
-LOGGER_ID=-1001234567890
-MONGO_URL=mongodb+srv://
-SESSION=BQgfh...AA
+API_ID=3611984
+API_HASH=0acd0e0a658389327a6fd54f9093947e
+BOT_TOKEN=8719801890:AAEoo4zFJrxdmV8upo5pTj4xYpCB6NYHZqw
+OWNER_ID=5944438769
+LOGGER_ID=-1003721791637
+MONGO_URL=mongodb+srv://leelay980ll_db_user:zeemusic@cluster0.h8wfeig.mongodb.net/?appName=Cluster0
 ```
 
 > 📝 Check <a href="https://github.com/AnonymousX1025/AnonXMusic/blob/master/config.py">config.py</a> for all available options.
@@ -168,15 +167,15 @@ This project is licensed under the <b>MIT License</b> — see <a href="https://g
 
 <h2>🤞 Updates and support</h2>
 
-- <a href="https://fallenx.t.me">Updates channel</a>
-- <a href="https://DevilsHeavenMF.t.me">Support group</a>
+- <a href="https://sanatanifm.t.me">Updates channel</a>
+- <a href="https://sanatanisup.t.me">Support group</a>
 
 <hr>
 
 <h2>👀 Acknowledgements</h2>
 
 - Inspired by other open-source Telegram music bots.
-- Thanks to all the <a href="https://github.com/AnonymousX1025/AnonXMusic/graphs/contributors">contributors</a>.
+- Thanks to all the <a href="https://graph.org/file/9b2e0929f6619e33a7a3f-7d5c0e04354bd2c2b0.mp4">contributors</a>.
 
 <hr>
 
