@@ -14,10 +14,10 @@ from anony.helpers._play import checkUB
 
 def playlist_to_queue(chat_id: int, tracks: list) -> str:
     text = "<blockquote expandable>"
-    for track in tracks:
+    for track in tracks[:30]:
         pos = queue.add(chat_id, track)
         text += f"<b>{pos}.</b> {track.title}\n"
-    text = text[:1948] + "</blockquote>"
+    text += "</blockquote>"
     return text
 
 @app.on_message(
@@ -117,7 +117,7 @@ async def play_hndlr(
 
     if not file.file_path:
         fname = f"downloads/{file.id}.{'mp4' if video else 'webm'}"
-        if Path(fname).exists():
+        if Path(fname).exists() and not Path(fname + ".part").exists():
             file.file_path = fname
         else:
             await sent.edit_text(m.lang["play_downloading"])
