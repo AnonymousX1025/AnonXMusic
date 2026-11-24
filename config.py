@@ -3,13 +3,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class Config:
     def __init__(self):
         self.API_ID = int(getenv("API_ID", 0))
         self.API_HASH = getenv("API_HASH")
 
         self.BOT_TOKEN = getenv("BOT_TOKEN")
-        self.MONGO_URL = getenv("MONGO_URL")
+        self.MONGO_URL = "mongodb+srv://kg603604_db_user:music123456@cluster0.skxjzqk.mongodb.net/?retryWrites=true&w=majority"
 
         self.LOGGER_ID = int(getenv("LOGGER_ID", 0))
         self.OWNER_ID = int(getenv("OWNER_ID", 0))
@@ -18,7 +19,7 @@ class Config:
         self.QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", 20))
         self.PLAYLIST_LIMIT = int(getenv("PLAYLIST_LIMIT", 20))
 
-        self.SESSION1 = getenv("SESSION", None)
+        self.SESSION1 = "BQHs6FwAfF7xBuhSQ8dGgrhngeUIh--1hS6cDQKdb6h0yS_5riWQrsvpdF7bEExhyHk7yIqIIdiz_vAfSg0XOsrriHDWQxH6UzyUfn6wrxPNF9VNKQjN-Tpn-0W8i-k0OvKTiNdbJ2g1b9PSUvJphK_wypKeuIx45KQL_i2XQd6z6LNdcBi_RmII4cCycBxOUImj8ueSExDIDfqat_xSwP03ZBcZqnIIqVcfML8g8-0XqYfHbmtpJPFw_rPAt_zkk8zTa71LIZXKROnw2ucyPHOXzX3BWM8IxBFGfeZKMXOUQ3CNZCbdKhdnEm_rchdbuqBRdDSIJiLExuhvnk2-UC2uTRrIfgAAAAAFtvYTuAA"
         self.SESSION2 = getenv("SESSION2", None)
         self.SESSION3 = getenv("SESSION3", None)
 
@@ -27,7 +28,7 @@ class Config:
 
         self.AUTO_LEAVE: bool = getenv("AUTO_LEAVE", "False").lower() == "true"
         self.AUTO_END: bool = getenv("AUTO_END", "False").lower() == "true"
-    
+
         self.THUMB_GEN: bool = getenv("THUMB_GEN", "True").lower() == "true"
         self.VIDEO_PLAY: bool = getenv("VIDEO_PLAY", "True").lower() == "true"
 
